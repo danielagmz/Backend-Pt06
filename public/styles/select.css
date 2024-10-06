@@ -1,0 +1,29 @@
+
+.article{
+    position: relative;
+}
+
+.article::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px; /* Ancho de la imagen */
+    height: 150px; /* Alto de la imagen */
+    background-image: url('../assets/cruz.svg'); /* Ruta de la imagen */
+    background-size: contain; 
+    background-repeat: no-repeat;
+    opacity: 0; /* Oculta la imagen por defecto */
+    transform: translate(-50%, -50%); /* Centra la imagen en el contenedor */
+    transition: opacity 0.3s ease; /* Transición suave para la aparición */
+}
+
+.article:hover::before {
+    opacity: 1;
+}
+
+.busqueda__resultados .article:hover{
+    background-color: rgba(212, 22, 22, 0.109);
+    border-color: rgb(224, 48, 48);
+}
+

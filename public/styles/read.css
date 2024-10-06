@@ -1,0 +1,10 @@
+.article::before {
+    background-image: url('../assets/libro-abierto.svg'); /* Ruta de la imagen */
+    width: 100px; /* Ancho de la imagen */
+    height: 100px; /* Alto de la imagen */
+}
+
+.busqueda__resultados .article:hover{
+    background-color: rgb(164, 164, 164);
+    border-color: rgb(48, 86, 224);
+}

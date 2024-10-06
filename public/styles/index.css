@@ -1,0 +1,416 @@
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+/* Daniela gamez */
+/* 
+#f2f7ff fondo 
+#c5d3f9 menu
+#51459e iconos
+*/
+
+/* ⭐ Css compartido entre las diferentes paginas */
+
+/* contenedor principal de todas las paginas */
+.container {
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: #f2f7ff;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 'menu content';
+}
+
+/* menu de navegacion */
+
+/* contenedor grid del nav */
+
+.nav-grid{
+    grid-area: menu;
+    min-height: 100vh;
+    background-color: #c5d3f9;
+    display: flex;
+}
+
+/* menu de elementos con posicion fija dentro del nav) */
+
+.menu {
+    /* posicion que baja con la vista */
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    font-size: 30px;
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+/*links a las paginas */
+.menu__item {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 0.5rem;
+    background-color: #fdfdfd;
+    width: fit-content;
+}
+
+.menu__item:hover {
+    background-color: #51459e;
+}
+
+.menu__item:hover i {
+    color: white;
+}
+
+.fi--active {
+    background-color: #51459e;
+}
+/* contenido principal */
+.content {
+    padding: 2rem;
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(#d6d6d6 15%, transparent 16%), repeating-linear-gradient(0deg, transparent 6.5%, #f2f7ff 7%, #f2f7ff 9%, transparent 10%), linear-gradient(45deg, transparent 49%, #d6d6d6 49%, #d6d6d6 51%, transparent 51%), linear-gradient(-45deg, transparent 49%, #d6d6d6 49%, #d6d6d6 51%, transparent 51%);
+    background-size: 10em 10em;
+    background-color: #f2f7ff;
+    opacity: 1
+}
+
+.content__title {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 1rem;
+    background-color: rgb(206, 248, 248);
+    border-radius: 10px;
+    padding: 0rem 3rem;
+
+}
+
+.content__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+/* modificador de filas */
+.content__body--row {
+    display: flex;
+    gap: 1rem;
+}
+
+/* articulo */
+
+.article {
+    border: 4px solid #000;
+    background-color: #fff;
+    padding: 1.5rem;
+    box-shadow: 10px 10px 0 #000;
+    font-family: "Arial", sans-serif;
+}
+
+.article__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1rem;
+}
+
+.article__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    padding: 0.5rem;
+}
+
+.article__title {
+    font-weight: 900;
+    color: #000;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.article__body {
+    margin-top: 1em;
+    color: #000;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding-bottom: 1em;
+}
+/* call to action */
+.cta{
+    min-height: 50vh;
+    min-width: min-content;
+    max-width: 40%;
+    align-self: center;
+    
+}
+/* estilos globales de formularios */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.form__textarea {
+    resize: vertical;
+    min-height: 10rem;
+    min-width: 20rem;
+    padding: 0.5rem;
+}
+
+.form__input {
+    padding: 0.5rem;
+}
+
+.form__button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 3px solid #000;
+    background-color: #fff;
+    color: #000;
+    position: relative;
+    transition: all 0.2s ease;
+    box-shadow: 5px 5px 0 #000;
+    overflow: hidden;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.form__button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: all 0.6s;
+}
+
+.form__button:hover::before {
+    left: 100%;
+}
+
+.form__button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #000;
+}
+
+.form__button:active {
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.form__button--mark:hover {
+    background-color: #4278b1;
+    border-color: #296fbb;
+    color: #fff;
+    box-shadow: 7px 7px 0 #004280;
+}
+/* separador de area del formulario */
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+/* area de mensajes del formulario */
+.form-info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border: 1px solid #737373;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    position: relative;
+    text-align: left;
+
+}
+/* icono del area de mensajes */
+.form-info::after{
+    content: '';
+    font-size: 2rem;
+    z-index: 2;
+    position: absolute;
+    top:-1.4rem;
+    right: -1rem;
+}
+
+.form-info--error::after{
+    content: '⚠️';
+}
+
+.form-info--success::after{
+    content: '✅';
+}
+.form-info--warning::after{
+    content: 'ℹ';
+    background-color: rgb(181, 181, 181);
+    padding: 0.1rem 0.9rem;
+    border-radius: 10px;
+    right: -1rem;
+    top: -0.7rem;
+}
+/* resaltado del campo en el area de mensajes */
+.campo{
+    display: inline-block;
+    background-color: #cf919182; 
+    color: #100f0f; 
+    padding: 3px 5px; 
+    border-radius: 3px; 
+    font-family: monospace; 
+    font-size: 16px;
+}
+
+/* colores de mensaje */
+.form-info--error{
+    background-color: rgba(212, 22, 22, 0.109);
+}
+
+.form-info--warning{
+    background-color: rgba(95, 95, 95, 0.109);
+}
+
+.form-info--success{
+    background-color: rgba(22, 212, 22, 0.109);
+}
+/* barra de busqueda */
+.busqueda__barra{
+    border-radius: 0.5rem;
+    border: 2px solid #737373;
+    padding: 0.5rem;
+    
+}
+/* boton de lupa */
+.form__button--search{
+    width: auto;
+    padding: 0.5em;
+    border-radius: 0.5rem;
+    border: 1px solid #737373;
+}
+
+.busqueda__input{
+    padding: 0.5rem;
+    border: 1px solid #737373;
+    border-radius: 0.5rem;
+}
+
+.busqueda__input--page{
+    padding: 0.5rem;
+    border: 1px solid #737373;
+    all: unset;
+    border: 1px solid #737373;
+    border-radius: 0.5rem;
+    width: 3rem;
+    text-align: center;
+}
+.cabeceras{
+    display: flex;
+    gap: 1rem;
+}
+/* sin media query */
+.cabeceras--paginacion{
+    display: flex;
+    gap: 1rem;
+}
+.paginacion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.num--pages{
+    padding: 0.2rem 0.5rem;
+    background-color: #c5d3f9;
+}
+.page--active.num--pages{
+    background-color: #51459e;
+    color: #fff;
+}
+.button--page{
+    background-color: rgb(211, 210, 210) ;
+    padding: 0.2rem 0.1rem;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+}
+
+.button--page--right{
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
+}
+
+.busqueda {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+
+.busqueda__resultados{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+    min-width: 100%;
+}
+.busqueda__resultados .article{
+    cursor: pointer;
+}
+
+.span2c{
+    grid-column: span 2;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .busqueda__resultados{
+        grid-template-columns: 1fr;
+    }
+    .cabeceras{
+        flex-direction: column;
+    }
+}
+
+img{
+    display: block;
+    max-width: 100%;
+}
+
+.reading__body{
+    border: 4px solid #000;
+    border-radius: 30px;
+    background-color: #fff;
+    padding: 1.5rem;
+    box-shadow: 10px 10px 0 #000;
+    height: 100%;
+    width: 90%;
+    font-family: "Arial", sans-serif;
+}
+
+
+
+
+
+
