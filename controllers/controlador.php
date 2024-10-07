@@ -125,6 +125,12 @@ function read_one($id, $action)
             case 'read':
                 include_once 'views/secundarias/reading.php';
                 break;
+            case 'read-anonimo':
+                include_once 'views/secundarias/reading-anonimo.php';
+            break;
+            default:
+                include_once 'views/error/404.php';
+            break;
         }
     }
 }
