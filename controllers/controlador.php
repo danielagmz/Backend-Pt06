@@ -39,7 +39,7 @@ function create($title, $content)
         // si hay errores se muestran los errores en el formulario
         $response = '<div class="form-info form-info--error">' . $response . '</div>';
     }
-    include_once 'views/insert.php';
+    include_once 'views/principales/insert.php';
 }
 
 
@@ -108,7 +108,7 @@ function read_one($id, $action)
     $id = test_input($id);
     $id = id_exists($id);
     if ($id == 0) {
-        include_once 'views/404.php';
+        include_once 'views/error/404.php';
         return;
     } else {
         $article = read_article($id);
@@ -117,13 +117,13 @@ function read_one($id, $action)
 
         switch ($action) {
             case 'update':
-                include_once 'views/updating.php';
+                include_once 'views/secundarias/updating.php';
                 break;
             case 'delete':
-                include_once 'views/deleting.php';
+                include_once 'views/secundarias/deleting.php';
                 break;
             case 'read':
-                include_once 'views/reading.php';
+                include_once 'views/secundarias/reading.php';
                 break;
         }
     }
@@ -294,7 +294,7 @@ function delete($id)
 {
     $id = id_exists($id);
     if ($id == 0) {
-        include_once 'views/404.php';
+        include_once 'views/error/404.php';
         return;
     } else {
         // llamamos al modelo para borrar el articulo
@@ -305,7 +305,7 @@ function delete($id)
         } else {
             $response = '<p class="form-info form-info--error"> No s\'ha pogut esborrar l\'article</p>';
         }
-        include_once 'views/deleting.php';
+        include_once 'views/secundarias/deleting.php';
     }
 }
 
@@ -322,7 +322,7 @@ function update($id, $title, $content)
     $id = id_exists($id);
     // si el id no existe se redirige a la vista de 404
     if ($id == 0) {
-        include_once 'views/404.php';
+        include_once 'views/error/404.php';
         return;
     }
     $title = test_input($title);
@@ -356,7 +356,7 @@ function update($id, $title, $content)
     } else {
         $response = '<div class="form-info form-info--error">' . $response . '</div>';
     }
-    include_once 'views/updating.php';
+    include_once 'views/secundarias/updating.php';
 }
 
 // ⭐  funciones de validación

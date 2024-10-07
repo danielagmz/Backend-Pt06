@@ -12,13 +12,13 @@
     <!-- Daniela Gamez -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include('global/estilos.php')?>
+    <?php include('views/global/estilos.php')?>
     <script type="module" src="public/javascripts/update.js"></script>
     <title>Modificar article</title>
 </head>
 <body>
     <div class="container">
-        <?php include('global/nav.php')?>
+        <?php include('views/global/nav.php')?>
         
         <main class="content">
             <div class="content__title"> Modificant "<?= isset($title) ? $title: 'l\'article' ?>"</div>

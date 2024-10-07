@@ -13,13 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     switch ($action) {
 
         case 'create':
-            include 'views/insert.php';
+            include 'views/principales/insert.php';
             break;
         case 'delete':
-            include 'views/delete.php';
+            include 'views/principales/delete.php';
             break;
         case 'update':
-            include 'views/update.php';
+            include 'views/principales/update.php';
             break;
         case 'updating':
             read_one($_GET['id'], 'update');
@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             read_one($_GET['id'], 'read');
             break;
         case 'login': 
-            include 'views/login.php';
+            include 'views/secundarias/login.php';
         break;
         case 'register': 
-            include 'views/register.php';
+            include 'views/secundarias/register.php';
         break;
         default:
-            include 'views/read.php';
+            include 'views/principales/read.php';
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_GET['action'])) {
