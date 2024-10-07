@@ -193,6 +193,7 @@
     overflow: hidden;
     text-decoration: none;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 .form__button::before {
