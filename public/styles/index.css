@@ -335,6 +335,7 @@
 .cabeceras--paginacion{
     display: flex;
     gap: 1rem;
+    justify-content: space-between;
 }
 .paginacion{
     display: flex;
