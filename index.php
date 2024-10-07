@@ -30,6 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'reading':
             read_one($_GET['id'], 'read');
             break;
+        case 'login': 
+            include 'views/login.php';
+        break;
+        case 'register': 
+            include 'views/register.php';
+        break;
         default:
             include 'views/read.php';
     }
