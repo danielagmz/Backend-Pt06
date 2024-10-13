@@ -1,11 +1,14 @@
 <!-- Daniela Gamez -->
 <?php
 require_once 'model/db.php';
+// require_once './model/db/insertarUsuarios.php';
 require_once 'insert.php';
 require_once 'read.php';
 require_once 'pagination.php';
 require_once 'delete.php';
 require_once 'update.php';
+require_once 'login.php';
+
 
 // ⭐  funciones de validación
 

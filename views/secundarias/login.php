@@ -15,7 +15,7 @@
         <main class="content">
             <div class="content__title">Logar-se</div>
             <div class="content__body">
-                <form class="form article" action="login" method="POST">
+                <form class="form article" action="index.php?action=login" method="POST">
                     <div class="form__group">
                         <label class="form__label" for="username">Username</label>
                         <input class="form__input" placeholder="patato123" type="text" name="username" id="username" required />
@@ -24,6 +24,7 @@
                         <label class="form__label" for="password">Password</label>
                         <input class="form__input" placeholder="••••••••" type="password" name="password" id="password" required />
                     </div>
+                    <?= isset($response) ? $response : ''   ?>
                     <div class="form__group">
                         <input class="form__button form__button--mark" type="submit" value="Logar-se" />
                     </div>

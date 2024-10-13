@@ -7,6 +7,8 @@ require_once 'read.php';
 require_once 'pagination.php';
 require_once 'update.php';
 require_once 'delete.php';
+require_once 'login.php';
+require_once 'register.php';
 
 //⭐ Funciones de comprobación
 /**
@@ -31,6 +33,30 @@ function article_exists($value){
         return $result['id'];
     } catch (PDOException $e) {
         return -1;
+    }
+}
+
+/**
+ * Comprueba si existe un usuario con el nombre de usuario proporcionado.
+ *
+ * @param string $value Nombre de usuario del usuario a comprobar
+ *
+ * @return int true si existe, false si no existe o si se ha producido un error
+ */
+function username_exists($value){
+    global $conn;
+
+    try {
+        $sql = "SELECT * FROM usuaris WHERE usuario = :value";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':value' => $value));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return false;
+        }
+        return true;
+    } catch (PDOException $e) {
+        return false;
     }
 }
 
