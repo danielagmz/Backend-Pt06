@@ -8,6 +8,7 @@
 
 .content {
     min-height: 100vh;
+    padding: 0.5rem 2rem;
 }
 
 .nav-grid {

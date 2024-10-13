@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-    <?php include('views/global/nav-anonimo.php') ?>
+    <?php $accion = 'Logar-se'; $url = 'login'; include('views/global/nav-anonimo.php') ?>
         <main class="content">
             <div class="content__title">Enregistrar-se</div>
             <div class="content__body">
@@ -30,7 +30,6 @@
                     </div>
                     <div class="form__group">
                         <input class="form__button form__button--mark" type="submit" value="Engistrar-se" />
-                        <a class="form__button form__button--mark" href="index.php?action=login">Logar-se</a>
                     </div>
                     
                 </form>
