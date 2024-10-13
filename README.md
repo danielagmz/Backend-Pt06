@@ -177,4 +177,14 @@ La intencion al hacer un nuevo componente global es cambiar la menor cantidad de
 La logica es la misma, principalmente solo se ha sustituido el uso de la funcion read() por la funcion paginate() y se ha agregado la barra de paginacion usando crear_links().
 
 ## ➡️Cambios con respecto a la version anterior en la nueva pt04
+
+Se ha modificado la base de datos para agregar usuarios y autores a los articulos
+
+-> usuarios de muestra en la base de datos:
+
+* `admin` - `admin@admin` - `iI2dF3bB`
+* `roger_51` - `4hogrlwp4@talk21.com` - `eP1oC2rG`
+* `luisangel_72` - `ivl77yaca@lycos.es` - `kH5kB1cO`
+* `martin_71` - `47vjms9v@talk21.com` - `mC1eJ2fB`
+
 ### 🧐👆Justificacion de los cambios

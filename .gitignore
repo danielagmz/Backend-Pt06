@@ -4,3 +4,8 @@ test.*
 .idea
 a.*
 settings.json
+db-inicial.sql
+addusers.php 
+views\secundarias\addusers.php
+insertarUsuarios.php
+perfil_usuario.json
