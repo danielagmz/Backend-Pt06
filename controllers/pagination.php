@@ -1,5 +1,6 @@
 <?php 
 
+require_once 'model/pagination.php';
 // variables para paginacion
 define('PAGE', 1);
 define('LIMIT', 5);

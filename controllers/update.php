@@ -1,5 +1,5 @@
 <?php 
-
+require_once 'model/update.php';
 
 /**
  * Funcion que se encarga de modificar un articulo de la base de datos

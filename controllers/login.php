@@ -1,4 +1,5 @@
 <?php
+require_once 'model/login.php';
 /**
  * Comprueba si el usuario y la contrasenya son correctos, 
  * si es asi, loguea al usuario y redirige a la pagina principal

@@ -1,49 +1,79 @@
 <?php
 // Daniela Gamez 
-require_once 'controllers/controlador.php';
+require_once 'controllers/verificaciones.php';
+require_once 'model/verificaciones.php';
+require_once 'model/connect.php';
+ini_set('session.gc_maxlifetime', 40 * 60);
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
     } else {
-        $action = 'read-anonimo';
+        $action = 'read';
     }
+    // var_dump($_SESSION);
 
-    switch ($action) {
+    if (isset($_SESSION['id'])) {
+        switch ($action) {
+            case 'create':
+                require_once 'controllers/insert.php';
+                include 'views/principales/insert.php';
+                break;
+            case 'delete':
+                require_once 'controllers/delete.php';
+                include 'views/principales/delete.php';
+                break;
+            case 'update':
+                require_once 'controllers/update.php';
+                include 'views/principales/update.php';
+                break;
+            case 'updating':
+                require_once 'controllers/read.php';
+                read_one($_GET['id'], 'update');
+                break;
+            case 'deleting':
+                require_once 'controllers/read.php';
+                read_one($_GET['id'], 'delete');
+                break;
+            case 'reading':
+                require_once 'controllers/read.php';
+                read_one($_GET['id'], 'read');
+                break;
+            case 'read':
+                require_once 'controllers/read.php';
+                include 'views/principales/read.php';
+                break;
+                // case 'addusers':
+                //     include 'views/secundarias/addusers.php';
+                //     break;
+            default:
+                require_once 'controllers/read.php';
+                include 'views/principales/read.php';
+        }
+    } else {
+        switch ($action) {
+                //🛠️ faltara implementar el register
+                //🛠️ falta que se filtren los articulos por el usuario en edit,delete y la casita action=own?
 
-        case 'create':
-            include 'views/principales/insert.php';
-            break;
-        case 'delete':
-            include 'views/principales/delete.php';
-            break;
-        case 'update':
-            include 'views/principales/update.php';
-            break;
-        case 'updating':
-            read_one($_GET['id'], 'update');
-            break;
-        case 'deleting':
-            read_one($_GET['id'], 'delete');
-            break;
-        case 'reading':
-            read_one($_GET['id'], 'read');
-            break;
-        case 'reading-anonimo':
-            read_one($_GET['id'], 'read-anonimo');
-        break;
-        case 'login': 
-            include 'views/secundarias/login.php';
-        break;
-        case 'register': 
-            include 'views/secundarias/register.php';
-        break;
-        case 'read':
-            include 'views/principales/read.php';
-        break;
-        default:
-            include 'views/principales/read-anonimo.php';
+            case 'login':
+                require_once 'controllers/login.php';
+                include 'views/secundarias/login.php';
+                break;
+            case 'register':
+                require_once 'controllers/register.php';
+                include 'views/secundarias/register.php';
+                break;
+
+            case 'reading-anonimo':
+                require_once 'controllers/read.php';
+                read_one($_GET['id'], 'read-anonimo');
+                break;
+            default:
+                require_once 'controllers/read.php';
+                include 'views/principales/read-anonimo.php';
+        }
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_GET['action'])) {
@@ -51,13 +81,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     switch ($action) {
         case 'create':
+            require_once 'controllers/insert.php';
             create($_POST['title'], $_POST['content']);
             break;
         case 'updating':
+            require_once 'controllers/update.php';
             update($_GET['id'], $_POST['title'], $_POST['content']);
             break;
         case 'deleting':
+            require_once 'controllers/delete.php';
             delete($_GET['id']);
             break;
+        case 'login':
+            require_once 'controllers/login.php';
+            login($_POST['username'], $_POST['password']);
+            break;
+        case 'register':
+            require_once 'controllers/register.php';
+            register($_POST['username'],$_POST['email'],$_POST['password'],$_POST['verifypassword']);
+            break;
+        case 'logout':
+            require_once 'controllers/logout.php';
+            logout();
+            break;
+        case 'addusers':
+            addusers();
+        break;
     }
 }

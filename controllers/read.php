@@ -1,4 +1,5 @@
 <?php 
+include_once 'model/read.php';
 /**
  * Funcion que se encarga de leer los articulos de la base de datos
  * y mostrarlos 

@@ -1,14 +1,6 @@
 <!-- Daniela Gamez -->
 
 <?php
-require_once 'connect.php';
-require_once 'create.php';
-require_once 'read.php';
-require_once 'pagination.php';
-require_once 'update.php';
-require_once 'delete.php';
-require_once 'login.php';
-require_once 'register.php';
 
 //⭐ Funciones de comprobación
 /**
@@ -50,6 +42,23 @@ function username_exists($value){
         $sql = "SELECT * FROM usuaris WHERE usuario = :value";
         $stmt = $conn->prepare($sql);
         $stmt->execute(array(':value' => $value));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return false;
+        }
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function email_exists($email){
+    global $conn;
+
+    try {
+        $sql = "SELECT * FROM usuaris WHERE email = :email";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':email' => $email));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if($result == null){
             return false;

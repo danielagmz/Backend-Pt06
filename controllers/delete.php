@@ -1,4 +1,5 @@
 <?php 
+require_once 'model/delete.php';
 /**
  * Funcion que se encarga de eliminar un articulo de la base de datos
  * y mostrar el resultado de la operacion

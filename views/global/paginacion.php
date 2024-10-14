@@ -1,3 +1,4 @@
+<?php require_once('controllers/pagination.php');?>
 <div class="cabeceras">
 
     <div class="busqueda__barra cabeceras--filtrado content__body--row">

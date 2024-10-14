@@ -1,4 +1,6 @@
 <?php
+
+require_once 'model/create.php';
 /**
  * Funcion que se encarga de crear un nuevo articulo
  * @param string $title Titulo del articulo
