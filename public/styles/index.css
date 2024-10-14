@@ -57,6 +57,10 @@
     line-height: 0.8rem;
 }
 
+.button--logout{
+    all: unset;
+}
+
 .menu__item:hover {
     background-color: #51459e;
 }
@@ -101,6 +105,13 @@
 .content__body--row {
     display: flex;
     gap: 1rem;
+}
+.content__body--40W{
+    min-width: 30%;
+}
+
+.content__body--40W .form-info--error{
+    text-align: center;
 }
 
 /* articulo */
