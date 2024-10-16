@@ -1,12 +1,12 @@
 <!-- Daniela Gamez -->
 <?php
 $servername = "localhost";
-$username = "root";
+$user_bd = "root";
 $password = "";
 $DB = "pt04_daniela_gamez";
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$DB", $username, $password);
+  $conn = new PDO("mysql:host=$servername;dbname=$DB", $user_bd, $password);
 } catch(PDOException $e) {
   $conn = null;
 }

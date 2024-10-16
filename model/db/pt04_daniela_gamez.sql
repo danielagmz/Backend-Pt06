@@ -104,7 +104,7 @@ TRUNCATE TABLE `usuaris`;
 --
 
 INSERT INTO `usuaris` (`id`, `usuario`, `email`, `pass`) VALUES
-(1, 'admin', 'admin@admin.com', '$2y$10$ilxLGStxXHzSyDlCl4tj2O9dRcvX9vKG2.zuU2ekJwp4tkxYKXZCq'),
+(1, 'admin', 'admin@admin.com', '$2y$10$BIleDgvtDHkssNv53xw2aO13VwBTYJ1FZmKD4GlQrMCUbk1rtDcBe'),
 (2, 'roger_51', '4hogrlwp4@talk21.com', '$2y$10$hJ5Vz8XeYuSfBfbOihK95.jkcSDeI1FX4ECIj3Y5IBUTwOsNfBzaW'),
 (3, 'luisangel_72', 'ivl77yaca@lycos.es', '$2y$10$TO3VRIrEOBFVnshlgG0oYOzfdZFMJ9A1OjnpQ7tIeBLeU1CYshZCS'),
 (4, 'martin_71', '47vjms9v@talk21.com', '$2y$10$R2aFxfkatEfZn3.Z3hsRJeDlaZWb6syKgfDK/04R1LqT3SwDnmYqO'),
