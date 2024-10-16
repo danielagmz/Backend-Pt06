@@ -25,10 +25,12 @@
                 <i class="fi fi-rr-edit"></i>
             </div>
         </a>
-        <form action="index.php?action=logout" class="menu__item" method="post">
-            <button type="submit" class="menu__item-link button--logout">
-                <i class="fi fi-rr-sign-out-alt"></i>
-            </button>
+        <form action="index.php?action=logout" class="cursor--pointer" method="post">
+            <div class="menu__item">
+                <button type="submit" class="menu__item-link button--logout">
+                    <i class="fi fi-rr-sign-out-alt"></i>
+                </button>
+            </div>
         </form>
     </aside>
 </div>

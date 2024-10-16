@@ -110,6 +110,10 @@
     min-width: 30%;
 }
 
+.cursor--pointer{
+    cursor: pointer;
+}
+
 .content__body--40W .form-info--error{
     text-align: center;
 }
