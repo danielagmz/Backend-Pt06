@@ -28,12 +28,13 @@ function article_exists($value){
     }
 }
 
+
 /**
- * Comprueba si existe un usuario con el nombre de usuario proporcionado.
+ * Comprueba si existe un usuario con el nombre proporcionado.
  *
- * @param string $value Nombre de usuario del usuario a comprobar
+ * @param string $value Nombre del usuario a comprobar
  *
- * @return int true si existe, false si no existe o si se ha producido un error
+ * @return bool true si existe, false si no existe o si se ha producido un error
  */
 function username_exists($value){
     global $conn;
@@ -52,6 +53,13 @@ function username_exists($value){
     }
 }
 
+/**
+ * Comprueba si existe un usuario con el email proporcionado.
+ *
+ * @param string $email Email del usuario a comprobar
+ *
+ * @return bool true si existe, false si no existe o si se ha producido un error
+ */
 function email_exists($email){
     global $conn;
 

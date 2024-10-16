@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     } else {
         switch ($action) {
-                //🛠️ faltara implementar el register
                 //🛠️ falta que se filtren los articulos por el usuario en edit,delete y la casita action=own?
 
             case 'login':
@@ -65,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 require_once 'controllers/register.php';
                 include 'views/secundarias/register.php';
                 break;
-
             case 'reading-anonimo':
                 require_once 'controllers/read.php';
                 read_one($_GET['id'], 'read-anonimo');

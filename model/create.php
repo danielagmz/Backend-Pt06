@@ -21,8 +21,11 @@ function create_article($title, $content)
         $sql = "INSERT INTO articles (titol, cos) VALUES (:titol, :cos)";
         $stmt = $conn->prepare($sql);
         $stmt->execute(array(':titol' => $title, ':cos' => $content));
-
-        return $conn->lastInsertId(); 
+        $result = $conn->lastInsertId();
+        if ($result == null) {
+            return -1;
+        }
+        return $result; 
 
     } catch (PDOException $e) {
         return -1;

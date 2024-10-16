@@ -18,11 +18,11 @@
                 <form class="form article" action="index.php?action=login" method="POST">
                     <div class="form__group">
                         <label class="form__label" for="username">Username</label>
-                        <input class="form__input" placeholder="patato123" type="text" name="username" id="username" required />
+                        <input class="form__input" value="<?= isset($username) ? $username : '' ?>" placeholder="patato123" type="text" name="username" id="username" required />
                     </div>
                     <div class="form__group">
                         <label class="form__label" for="password">Password</label>
-                        <input class="form__input" placeholder="••••••••" type="password" name="password" id="password" required />
+                        <input class="form__input" value="<?= isset($password) ? $password : '' ?>" placeholder="••••••••" type="password" name="password" id="password" required />
                     </div>
                     <?= isset($response) ? $response : ''   ?>
                     <div class="form__group">
