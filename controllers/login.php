@@ -27,7 +27,7 @@ function login($username, $password) {
     }else{
         // si hay errores se muestran los errores en el formulario
         $response = '<div class="form-info form-info--error">' . $response . '</div>';
-        include_once 'views/secundarias/login.php';
+        include_once 'views/principales/login.php';
     }
 
 

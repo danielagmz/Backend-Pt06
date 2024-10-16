@@ -45,24 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 require_once 'controllers/read.php';
                 include 'views/principales/read.php';
                 break;
-                // case 'addusers':
-                //     include 'views/secundarias/addusers.php';
-                //     break;
             default:
                 require_once 'controllers/read.php';
                 include 'views/principales/read.php';
         }
     } else {
         switch ($action) {
-                //🛠️ falta que se filtren los articulos por el usuario en edit,delete y la casita action=own?
 
             case 'login':
                 require_once 'controllers/login.php';
-                include 'views/secundarias/login.php';
+                include 'views/principales/login.php';
                 break;
             case 'register':
                 require_once 'controllers/register.php';
-                include 'views/secundarias/register.php';
+                include 'views/principales/register.php';
                 break;
             case 'reading-anonimo':
                 require_once 'controllers/read.php';

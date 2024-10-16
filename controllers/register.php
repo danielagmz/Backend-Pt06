@@ -30,7 +30,7 @@ function register($username, $email, $password, $verifypassword)
     // Si hay errores, muestra los mensajes de error
     if (!is_empty($response)) {
         $response = '<div class="form-info form-info--error">' . $response . '</div>';
-        include_once 'views/secundarias/register.php';
+        include_once 'views/principales/register.php';
     }
 }
 
