@@ -17,8 +17,8 @@
     <div class="container">
         <?php include('views/global/nav.php') ?>
         <main class="content">
-            <div class="content__title">Articles</div>
-            <?php include('views/global/paginacion.php') ?>
+            <div class="content__title">Els meus articles</div>
+            <?php include('views/global/user_paginacion.php');?>
         </main>
     </div>
 </body>

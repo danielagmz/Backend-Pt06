@@ -42,8 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 read_one($_GET['id'], 'read');
                 break;
             case 'read':
-                require_once 'controllers/read.php';
                 include 'views/principales/read.php';
+                break;
+            case 'all':
+                include 'views/principales/readAll.php';
                 break;
             default:
                 require_once 'controllers/read.php';
@@ -92,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             break;
         case 'register':
             require_once 'controllers/register.php';
-            register($_POST['username'],$_POST['email'],$_POST['password'],$_POST['verifypassword']);
+            register($_POST['username'], $_POST['email'], $_POST['password'], $_POST['verifypassword']);
             break;
         case 'logout':
             require_once 'controllers/logout.php';
@@ -100,6 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             break;
         case 'addusers':
             addusers();
-        break;
+            break;
     }
 }

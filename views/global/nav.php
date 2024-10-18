@@ -5,7 +5,7 @@
                 <i class="fi fi-rr-home"></i>
             </div>
         </a>
-        <a class="menu__item" href="index.php?action=read">
+        <a class="menu__item" href="index.php?action=all">
             <div class="menu__item-link">
                 <i class="fi fi-rr-book-alt"></i>
             </div>

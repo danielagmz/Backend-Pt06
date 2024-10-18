@@ -6,21 +6,23 @@ define('PAGE', 1);
 define('LIMIT', 5);
 define('MIN_LIMIT', 2);
 define('FILTER', '.');
+define('USER_ID', $_SESSION['id']);
+
 
 
 
 /**
- * Funcion que se encarga de paginar los articulos de la base de datos
+ * Función que se encarga de paginar los artículos de un usuario
  *
  * @param int $page Número de página actual
  * @param int $limit Número de artículos a mostrar por página
- * @param string $filter Filtro opcional para buscar articulos
+ * @param string $filter Filtro opcional para buscar artículos
  *
- * @return string El html con todos los articulos paginados
+ * @return string El html con todos los artículos paginados
  */
-function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
+function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
 {
-    $total = obtener_total();
+    $total = obtener_total_user(USER_ID);
     $art = '';
 
     // Validar que el límite esté entre 2 y el total de artículos
@@ -30,7 +32,7 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
     $page = is_number($page) && $page > 0 ? $page : PAGE;
 
     $offset = ($page - 1) * $limit;
-    $articulos = obtener_articulos($limit, $offset, $filter);
+    $articulos = obtener_articulos_usuario($limit, $offset, $filter, USER_ID);
     if ($articulos == -1) {
         $art = '<article class="article cta span2C">  
         <div class="article__header">
@@ -52,17 +54,17 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
                     <div class="article__icon"></div>
                     <div class="article__title">%s</div>
                 </div>
-                <p class="article__body">%s...</p>  
-                 <div class="article__footer">
+                <p class="article__body">%s...</p>
+                <div class="article__footer">
                     <span class="article__created"><i class="fi fi-rr-add-document icon"></i>%s</span>
-                    <span class="article__author"><i class="fi fi-rr-user icon"></i>%s</span>
-                </div>
+                    <span class="article__updated"><i class="fi fi-rr-edit icon"></i>%s</span>
+                </div>  
             </article>',
             $article['id'],
             $article['titol'],
             substr($article['cos'], 0, 200),
             $article['data_creacio'],
-            username_from_id($article['autor'])
+            $article['data_modificacio']
 
         );
     }
@@ -70,18 +72,19 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
 }
 
 
+
 /**
- * Crea los enlaces de paginación para la vista de artículos
+ * Crea los enlaces de paginación para la vista de artículos de un usuario.
  *
- * @param int $limit Número de artículos a mostrar por página
- * @param int $page Número de página actual
- * @param string $filter Filtro opcional para buscar artículos
+ * @param int $limit Número de artículos a mostrar por página.
+ * @param int $page Número de página actual.
+ * @param string $filter Filtro opcional para buscar artículos.
  *
- * @return string El html con los enlaces de las páginas
+ * @return string El HTML con los enlaces de las páginas.
  */
-function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
+function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
 {
-    $total = obtener_total($filter);
+    $total = obtener_total_user(USER_ID);
     // Validar que el límite esté entre 2 y el total de artículos
     $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
 
@@ -153,14 +156,15 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
 
 
 
+
 /**
- * Devuelve el número total de artículos en la base de datos.
+ * Devuelve el número total de artículos del usuario actual.
  *
- * @return int Número de artículos.
+ * @return int Número de artículos del usuario actual.
  */
-function max_articles()
+function max_articles_user()
 {
-    $total = obtener_total();
+    $total = obtener_total_user(USER_ID);
     return $total;
 }
 

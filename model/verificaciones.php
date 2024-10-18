@@ -13,6 +13,10 @@
 function article_exists($value){
     global $conn;
 
+    if ($conn == null) {
+        return -1;
+    };
+
     try {
         $sql = "SELECT * FROM articles WHERE titol = :value";
         $stmt = $conn->prepare($sql);
@@ -39,6 +43,10 @@ function article_exists($value){
 function username_exists($value){
     global $conn;
 
+    if ($conn == null) {
+        return false;
+    };
+
     try {
         $sql = "SELECT * FROM usuaris WHERE usuario = :value";
         $stmt = $conn->prepare($sql);
@@ -53,6 +61,48 @@ function username_exists($value){
     }
 }
 
+function id_from_username($value){
+    global $conn;
+
+    if ($conn == null) {
+        return -1;
+    };
+
+    try {
+        $sql = "SELECT id FROM usuaris WHERE usuario = :value";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':value' => $value));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return -1;
+        }
+        return $result['id'];
+    } catch (PDOException $e) {
+        return -1;
+    }
+}
+
+function username_from_id($value){
+    global $conn;
+
+    if ($conn == null) {
+        return -1;
+    };
+
+    try {
+        $sql = "SELECT usuario FROM usuaris WHERE id = :value";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':value' => $value));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return -1;
+        }
+        return $result['usuario'];
+    } catch (PDOException $e) {
+        return -1;
+    }
+}
+
 /**
  * Comprueba si existe un usuario con el email proporcionado.
  *
@@ -62,6 +112,10 @@ function username_exists($value){
  */
 function email_exists($email){
     global $conn;
+
+    if ($conn == null) {
+        return false;
+    };
 
     try {
         $sql = "SELECT * FROM usuaris WHERE email = :email";
@@ -86,6 +140,10 @@ function email_exists($email){
  */
 function id_exists($id){
     global $conn;
+
+    if ($conn == null) {
+        return -1;
+    };
 
     try {
         $sql = "SELECT * FROM articles WHERE id = :id";

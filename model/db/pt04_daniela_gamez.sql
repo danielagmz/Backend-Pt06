@@ -36,7 +36,7 @@ CREATE TABLE `articles` (
   `cos` varchar(2504) NOT NULL,
   `data_creacio` timestamp NOT NULL DEFAULT current_timestamp(),
   `data_modificacio` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `autor` int(10) UNSIGNED DEFAULT NULL
+  `autor` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -70,7 +70,7 @@ INSERT INTO `articles` (`id`, `titol`, `cos`, `data_creacio`, `data_modificacio`
 (13, 'Las Bases de la Programación Funcional', 'La programación funcional simplifica el código.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 3),
 (14, 'Colonización de Marte', 'El sueño de colonizar Marte está más cerca de convertirse en realidad gracias a avances como el cohete Starship de SpaceX. Sin embargo, la idea de establecer una colonia en el planeta rojo plantea numerosos desafíos. Desde la radiación espacial hasta la falta de agua líquida, los futuros colonos necesitarán soluciones tecnológicas innovadoras para sobrevivir en un entorno tan hostil. Aun así, la humanidad parece decidida a expandir sus fronteras más allá de la Tierra.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 4),
 (15, 'Realidad Virtual en la Educación', 'La realidad virtual (RV) está abriendo nuevas posibilidades en el ámbito educativo, proporcionando a los estudiantes experiencias de aprendizaje inmersivas. Imagina estudiar historia mientras caminas por una recreación del antiguo Egipto, o aprender anatomía explorando el cuerpo humano en 3D. Esta tecnología tiene el potencial de cambiar radicalmente la forma en que aprendemos, haciendo que el conocimiento sea más accesible y atractivo para todos.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 5),
-(16, 'Razones por las que deberia aprobar', 'Ta guapa la pagina, verdad?.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 5),
+(16, 'Razones por las que deberia aprobar', 'Ta guapa la pagina, verdad?.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 1),
 (17, 'Robótica en la Industria Moderna', 'La robótica ha transformado el sector industrial, permitiendo una automatización avanzada en procesos de manufactura. Gracias a los robots, se ha logrado incrementar la eficiencia y reducir los costos operativos, además de mejorar la seguridad en el lugar de trabajo. Los robots colaborativos o \"cobots\" están diseñados para trabajar junto con humanos, abriendo nuevas posibilidades en el campo de la producción y la logística.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 2),
 (18, 'Los Secretos del ADN', 'El ADN es el manual de instrucciones de la vida.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 3),
 (19, 'La Impresión 3D en la Arquitectura', 'La impresión 3D está comenzando a revolucionar la forma en que construimos edificios. Esta tecnología permite la creación de estructuras más rápidas, baratas y sostenibles que los métodos tradicionales. Además, está facilitando el diseño de formas arquitectónicas complejas que antes eran imposibles de realizar. Aunque todavía en sus primeras etapas, la impresión 3D promete transformar radicalmente la industria de la construcción en las próximas décadas.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 4),

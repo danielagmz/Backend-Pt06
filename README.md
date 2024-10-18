@@ -182,7 +182,7 @@ Se ha modificado la base de datos para agregar usuarios y autores a los articulo
 
 -> usuarios de muestra en la base de datos:
 
-* `admin` - `admin@admin` - `iI2dF3bB`
+* `admin` - `admin@admin.com` - `admin`
 * `roger_51` - `4hogrlwp4@talk21.com` - `eP1oC2rG`
 * `luisangel_72` - `ivl77yaca@lycos.es` - `kH5kB1cO`
 * `martin_71` - `47vjms9v@talk21.com` - `mC1eJ2fB`

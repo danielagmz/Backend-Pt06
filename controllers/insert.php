@@ -1,6 +1,7 @@
 <?php
 
 require_once 'model/create.php';
+define('USER_ID', $_SESSION['id']);
 /**
  * Funcion que se encarga de crear un nuevo articulo
  * @param string $title Titulo del articulo
@@ -25,7 +26,7 @@ function create($title, $content)
     }
     // si no hay errores se intenta insertar el articulo
     if (is_empty($response)) {
-        $id = create_article($title, $content);
+        $id = create_article($title, $content, USER_ID);
         if ($id == -1) {
             $response =  '<p class="form-info form-info--error">No hem pogut inserir l\'article</p>';
         } else {

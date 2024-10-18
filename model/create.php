@@ -2,15 +2,17 @@
 //⭐ create
 
 
+
 /**
- * Crea un nou article en la base de dades.
+ * Crea un nuevo articulo en la base de datos.
  *
- * @param string $title Titol de l'article
- * @param string $content Contingut de l'article
+ * @param string $title Titulo del articulo.
+ * @param string $content Contenido del articulo.
+ * @param int $user_id Identificador del usuario que crea el articulo.
  *
- * @return int ID de l'article creat, -1 si error
+ * @return int Identificador del articulo creado. Devuelve -1 si ha habido un error.
  */
-function create_article($title, $content)
+function create_article($title, $content,$user_id)
 {
     global $conn;
     if ($conn == null) {
@@ -18,9 +20,9 @@ function create_article($title, $content)
     };
 
     try {
-        $sql = "INSERT INTO articles (titol, cos) VALUES (:titol, :cos)";
+        $sql = "INSERT INTO articles (titol, cos,autor) VALUES (:titol, :cos, :autor)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute(array(':titol' => $title, ':cos' => $content));
+        $stmt->execute(array(':titol' => $title, ':cos' => $content, ':autor' => $user_id));
         $result = $conn->lastInsertId();
         if ($result == null) {
             return -1;

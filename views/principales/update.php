@@ -18,7 +18,7 @@
         
         <main class="content">
             <div class="content__title"> Selecciona l'article per modificar</div>
-            <?php include('views/global/paginacion.php') ?>
+            <?php include('views/global/user_paginacion.php') ?>
         </main>
     </div>
 </body>
