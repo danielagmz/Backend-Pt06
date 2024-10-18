@@ -160,5 +160,27 @@ function id_exists($id){
     }
 }
 
+function is_user_author($id_user,$id_article){
+    global $conn;
+
+    if ($conn == null) {
+        return -1;
+    };
+
+    try {
+        $sql = "SELECT * FROM articles WHERE id = :id AND autor = :id_user";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':id' => $id_article,':id_user' => $id_user));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // retorna el id si existe 
+        if($result == null){
+            return 0;
+        }
+        return $result['id'];
+    } catch (PDOException $e) {
+        return -1;
+    }
+}
+
 
 ?>

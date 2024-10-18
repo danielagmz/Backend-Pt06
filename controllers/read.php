@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once 'model/read.php';
 /**
  * Funcion que se encarga de leer los articulos de la base de datos
@@ -63,6 +63,11 @@ function read_one($id, $action)
 {
     $id = test_input($id);
     $id = id_exists($id);
+    // se puede leer pero no actualizar o borrar un articulo si no se es el autor
+    if ($action != "read") {
+        $id = is_user_author($_SESSION['id'], $id);
+    }
+
     if ($id == 0) {
         include_once 'views/error/404.php';
         return;
@@ -83,13 +88,10 @@ function read_one($id, $action)
                 break;
             case 'read-anonimo':
                 include_once 'views/secundarias/reading-anonimo.php';
-            break;
+                break;
             default:
                 include_once 'views/error/404.php';
-            break;
+                break;
         }
     }
 }
-
-
-?>
