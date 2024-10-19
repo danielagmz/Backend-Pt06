@@ -13,6 +13,11 @@ require_once 'model/register.php';
 function register($username, $email, $password, $verifypassword)
 {
     $response = '';
+    $username = test_input($username);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $password = test_input($password);
+    $verifypassword = test_input($verifypassword);
+
 
     // Validaciones de usuario y email
     $response .= validate_username($username);

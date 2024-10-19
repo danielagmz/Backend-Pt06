@@ -10,6 +10,8 @@ require_once 'model/login.php';
  */
 function login($username, $password) {
     $response = '';
+    $username = test_input($username);
+    $password = test_input($password);
     $usuari = login_from_username($username);
 
     if ($usuari == -1) {
