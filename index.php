@@ -47,6 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             case 'all':
                 include 'views/principales/readAll.php';
                 break;
+            case 'change_password':
+                include 'views/secundarias/change_password.php';
+                break;
             default:
                 require_once 'controllers/read.php';
                 include 'views/principales/read.php';
@@ -99,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'logout':
             require_once 'controllers/logout.php';
             logout();
+            break;
+        case 'change_password':
+            require_once 'controllers/change_password.php';
+            change_password($_POST['oldPassword'], $_POST['newPassword'], $_POST['verifyPassword']);
             break;
         case 'addusers':
             addusers();

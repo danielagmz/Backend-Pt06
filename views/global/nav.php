@@ -25,6 +25,11 @@
                 <i class="fi fi-rr-edit"></i>
             </div>
         </a>
+        <a class="menu__item" href="index.php?action=change_password">
+            <div class="menu__item-link">
+                <i class="fi fi-rr-settings"></i>
+            </div>
+        </a>
         <form action="index.php?action=logout" class="cursor--pointer" method="post">
             <div class="menu__item">
                 <button type="submit" class="menu__item-link button--logout">
