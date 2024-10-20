@@ -20,6 +20,6 @@ document.querySelector(".busqueda__input--page").addEventListener('change', (eve
     const newUrl = window.location.pathname + '?' + params.toString();
     window.history.pushState({}, '', newUrl);
 
-    // Opción adicional: redirigir a la nueva URL (opcional)
+    // Redirigir
     window.location.href = newUrl; 
 });

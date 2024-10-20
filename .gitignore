@@ -10,3 +10,4 @@ views\secundarias\addusers.php
 insertarUsuarios.php
 perfil_usuario.json
 gitLink.txt
+env.php

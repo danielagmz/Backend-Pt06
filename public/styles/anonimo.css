@@ -54,3 +54,8 @@
     margin-top: 1em;
     padding: 0.5rem 2rem;
 }
+
+.limit-p{
+    max-width: 400px;
+    word-break: break-word;
+}

@@ -180,11 +180,36 @@ La logica es la misma, principalmente solo se ha sustituido el uso de la funcion
 
 Se ha modificado la base de datos para agregar usuarios y autores a los articulos
 
--> usuarios de muestra en la base de datos:
+-> Usuarios de muestra en la base de datos:
 
 * `admin` - `admin@admin.com` - `admin`
 * `roger_51` - `4hogrlwp4@talk21.com` - `eP1oC2rG`
 * `luisangel_72` - `ivl77yaca@lycos.es` - `kH5kB1cO`
 * `martin_71` - `47vjms9v@talk21.com` - `mC1eJ2fB`
 
+-> Se ha reestructurado el proyecto para que funcione con un controlador y un modelo fraccionado en diferentes archivos, e incluirlos cuando se necesiten
+
+![reestructuracion](assets/indexReestructuracion.png)
+-> Se han agrupado las vistas principales y las secundarias en subcarpetas dentro de views
+
+![subcarpetas](assets/subcarpetas.png)
+
+->Se ha implementado una validación dentro del `index.php` que distingue entre usuarios logueados y anónimos, permitiendo que cada uno acceda únicamente a las rutas correspondientes. 
+
+
+![validacion](assets/validacion.png)
+
+Como usuario anonimo puedes ver todos los articulos de la base de datos e iniciar sesion o registrarte
+
+Como usuario logueado puedes crear, editar o eliminar articulos que sean de tu autoria. Ademas de leer todos los articulos que estan en la aplicacion.
+
+-> Se ha agregado la funcionalidad para cambiar la contraseña del usuario logueado
+
+-> Se ha agregado la funcionalidad de guardar la ultima pagina visitada
+
+
 ### 🧐👆Justificacion de los cambios
+
+Para el login y el logout he usado session porque a la hora de manejar credenciales sensibles es mas seguro almacenarlas en el servidor, ademas de que tienen persistencia aun si se redirecciona.
+
+He usado cookies para guardar el limit o la pagina en la que se quedo el usuario porque son datos que puedo obtener desde javascript, son especificos de cada usuario y ademas no necesitan seguridad extra.
