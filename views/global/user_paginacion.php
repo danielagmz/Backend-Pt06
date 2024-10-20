@@ -16,6 +16,7 @@
                     isset($_GET['page']) ? $_GET['page'] : PAGE,// Si no hay página, usa 1
                     isset($_GET['filter']) ? $_GET['filter'] : '' // Si hay filtro usa el filtro vacio
                 ) ?>
+                
             </div>
         </div>
         

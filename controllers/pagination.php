@@ -1,9 +1,15 @@
-<?php 
+<?php
 
 require_once 'model/pagination.php';
-// variables para paginacion
-define('PAGE', 1);
-define('LIMIT', 5);
+require_once 'controllers/cookies.php';
+// si el usuario ha iniciado sesion se establecen las variables de paginacion y si no se establecen en 1 y 5
+if (isset($_SESSION['id'])) {
+    define('PAGE', isset($_COOKIE['pagina']) ? obtener_cookie('pagina') : 1);
+    define('LIMIT',isset($_COOKIE['limite_usuario']) ? obtener_cookie('limite_usuario') : 5);
+}else {
+    define('PAGE', 1);
+    define('LIMIT', 5);
+}
 define('MIN_LIMIT', 2);
 define('FILTER', '.');
 
@@ -40,6 +46,7 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
         </div>
         </article>';
         return $art;
+        
     }
 
     // por cada articulo se crea el html correspondiente y se agrega a "art"
@@ -53,7 +60,7 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
                     <div class="article__title">%s</div>
                 </div>
                 <p class="article__body">%s...</p>  
-                 <div class="article__footer">
+                <div class="article__footer">
                     <span class="article__created"><i class="fi fi-rr-add-document icon"></i>%s</span>
                     <span class="article__author"><i class="fi fi-rr-user icon"></i>%s</span>
                 </div>
@@ -70,18 +77,26 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
 }
 
 
+
 /**
- * Crea los enlaces de paginación para la vista de artículos
+ * Crea los enlaces de paginación para la vista de artículos.
  *
- * @param int $limit Número de artículos a mostrar por página
- * @param int $page Número de página actual
- * @param string $filter Filtro opcional para buscar artículos
+ * @param int $limit Número de artículos a mostrar por página.
+ * @param int $page Número de página actual.
+ * @param string $filter Filtro opcional para buscar artículos.
  *
- * @return string El html con los enlaces de las páginas
+ * @return string El HTML con los enlaces de las páginas.
  */
 function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
 {
     $total = obtener_total($filter);
+    // se registran loc cambios en las cookies
+    if (isset($_SESSION['id'])) {
+        guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
+        guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30);
+    }
+    // guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
+
     // Validar que el límite esté entre 2 y el total de artículos
     $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
 
@@ -117,6 +132,8 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
             $url_parts['path'],
             http_build_query($query_params)
         );
+    }else{
+        $links .= '<a role="button" class="desactivado button--page"><i class="fi fi-rr-caret-left"></i></a>';
     }
 
     // bucle para los enlaces de las páginas
@@ -146,6 +163,8 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
             $url_parts['path'],
             http_build_query($query_params)
         );
+    }else{
+        $links .= '<a role="button" class="desactivado button--page"><i class="fi fi-rr-caret-right"></i></a>';
     }
 
     return $links;
@@ -164,4 +183,14 @@ function max_articles()
     return $total;
 }
 
-?>
+function articles_pagina_user()
+{
+    if (isset($_SESSION['id'])) {
+        return sprintf(
+            '<input class="busqueda__input--page" id="page" type="number" min="2" max="%d" name="pages" step="1" value="%d">',
+            max_articles(),
+            isset($_GET['limit']) ? $_GET['limit'] : LIMIT
+        );
+    }
+    return '';
+}

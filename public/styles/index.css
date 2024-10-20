@@ -96,6 +96,26 @@
 
 }
 
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.recover{
+    font-size: 14px;
+    color: #51459e;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.desactivado{
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 .content__body {
     display: flex;
     flex-direction: column;

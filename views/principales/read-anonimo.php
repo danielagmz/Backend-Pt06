@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="public\styles\read.css">
     <script type="module" src="public/javascripts/filter.js"></script>
     <script type="module" src="public/javascripts/read-anonimo.js"></script>
-    <script type="module" src="public/javascripts/paginacion.js"></script>
     <title>Home</title>
 </head>
 

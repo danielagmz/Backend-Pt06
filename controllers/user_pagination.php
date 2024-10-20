@@ -1,9 +1,10 @@
 <?php 
 
 require_once 'model/pagination.php';
+require_once 'controllers/cookies.php';
 // variables para paginacion
-define('PAGE', 1);
-define('LIMIT', 5);
+define('PAGE', isset($_COOKIE['pagina_usuario']) ? obtener_cookie('pagina_usuario') : 1);
+define('LIMIT',isset($_COOKIE['limite_usuario']) ? obtener_cookie('limite_usuario') : 5);
 define('MIN_LIMIT', 2);
 define('FILTER', '.');
 define('USER_ID', $_SESSION['id']);
@@ -85,6 +86,8 @@ function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
 function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
 {
     $total = obtener_total_user(USER_ID);
+    guardar_cookie('pagina_usuario', $page, time() + 3600 * 24 * 30); 
+    guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30); 
     // Validar que el límite esté entre 2 y el total de artículos
     $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
 
@@ -120,6 +123,8 @@ function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
             $url_parts['path'],
             http_build_query($query_params)
         );
+    }else{
+        $links .= '<a role="button" class="desactivado button--page"><i class="fi fi-rr-caret-left"></i></a>';
     }
 
     // bucle para los enlaces de las páginas
@@ -149,6 +154,8 @@ function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
             $url_parts['path'],
             http_build_query($query_params)
         );
+    } else {
+        $links .= '<a role="button" class="desactivado button--page button--page--right"><i class="fi fi-rr-caret-right"></i></a>';
     }
 
     return $links;

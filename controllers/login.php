@@ -24,7 +24,7 @@ function login($username, $password) {
         // si no hay errores se loguea al usuario
         $_SESSION['id'] = $usuari['id'];
         $_SESSION['username'] = $username;
-
+        ini_set('session.gc_maxlifetime', 40 * 60);
         header('Location: index.php?action=read');
     }else{
         // si hay errores se muestran los errores en el formulario
