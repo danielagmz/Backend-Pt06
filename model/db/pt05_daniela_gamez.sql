@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `pt04_daniela_gamez`
 --
-CREATE DATABASE IF NOT EXISTS `pt04_daniela_gamez` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `pt04_daniela_gamez`;
+CREATE DATABASE IF NOT EXISTS `pt05_daniela_gamez` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `pt05_daniela_gamez`;
 
 -- --------------------------------------------------------
 
