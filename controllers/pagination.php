@@ -6,9 +6,12 @@ require_once 'controllers/cookies.php';
 if (isset($_SESSION['id'])) {
     define('PAGE', isset($_COOKIE['pagina']) ? obtener_cookie('pagina') : 1);
     define('LIMIT',isset($_COOKIE['limite_usuario']) ? obtener_cookie('limite_usuario') : 5);
+    define('ORDER', isset($_COOKIE['order_usuario']) ? obtener_cookie('order_usuario') : "desc");
 }else {
     define('PAGE', 1);
     define('LIMIT', 5);
+    guardar_cookie('default','desc');
+    define('ORDER', isset($_GET['order']) ? $_GET['order'] : "desc");
 }
 define('MIN_LIMIT', 2);
 define('FILTER', '.');
@@ -16,19 +19,20 @@ define('FILTER', '.');
 
 
 /**
- * Funcion que se encarga de paginar los articulos de la base de datos
+ * Función que se encarga de paginar los artículos de la base de datos
  *
  * @param int $page Número de página actual
  * @param int $limit Número de artículos a mostrar por página
- * @param string $filter Filtro opcional para buscar articulos
+ * @param string $filter Filtro opcional para buscar artículos
+ * @param string $order Orden de los artículos (asc o desc)
  *
- * @return string El html con todos los articulos paginados
+ * @return string El html con todos los artículos paginados
  */
 function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
 {
     $total = obtener_total();
     $art = '';
-
+    
     // Validar que el límite esté entre 2 y el total de artículos
     $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
 
@@ -36,7 +40,7 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
     $page = is_number($page) && $page > 0 ? $page : PAGE;
 
     $offset = ($page - 1) * $limit;
-    $articulos = obtener_articulos($limit, $offset, $filter);
+    $articulos = obtener_articulos($limit, $offset, $filter, ORDER);
     if ($articulos == -1) {
         $art = '<article class="article cta span2C">  
         <div class="article__header">
@@ -95,7 +99,6 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
         guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
         guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30);
     }
-    // guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
 
     // Validar que el límite esté entre 2 y el total de artículos
     $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;

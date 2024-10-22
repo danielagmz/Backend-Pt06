@@ -62,23 +62,27 @@ function obtener_total_user($id_user){
 }
 
 
+
 /**
  * Obtiene los artículos de la base de datos con paginación.
  *
  * @param int $limit Número de artículos a obtener.
  * @param int $offset Número de artículos a saltar.
+ * @param string $filter Filtro opcional para buscar artículos por título.
+ * @param string $desc Orden de los artículos, ascendente ("asc") o descendente ("desc").
  *
  * @return array Un array que contiene los artículos con el formato asociativo.
  */
-function obtener_articulos($limit, $offset,$filter = FILTER){
+function obtener_articulos($limit, $offset,$filter = FILTER,$desc = ORDER){
     global $conn;
 
     if ($conn == null) {
         return [];
     };
+    $order = $desc == "desc" ? "DESC" : "ASC";
 
     try {
-        $sql = "SELECT * FROM articles WHERE titol RLIKE :filter ORDER BY id DESC LIMIT :limit OFFSET :offset";
+        $sql = "SELECT * FROM articles WHERE titol RLIKE :filter ORDER BY titol $order LIMIT :limit OFFSET :offset";
         $stmt = $conn->prepare($sql);
         
         // Usamos bindValue para asegurarnos de que estos parámetros sean tratados como enteros
@@ -102,18 +106,19 @@ function obtener_articulos($limit, $offset,$filter = FILTER){
  * @param int $offset Número de artículos a saltar.
  * @param string $filter Filtro opcional para buscar artículos.
  * @param int $id_user Identificador del usuario.
+ * @param string $desc Orden de los artículos, ascendente ("asc") o descendente ("desc").
  *
  * @return array Un array que contiene los artículos
  */
-function obtener_articulos_usuario($limit, $offset,$filter = FILTER,$id_user){
+function obtener_articulos_usuario($limit, $offset,$filter = FILTER,$id_user,$desc = ORDER){
     global $conn;
 
     if ($conn == null) {
         return [];
     };
-
+    $order = $desc == "desc" ? "DESC" : "ASC";
     try {
-        $sql = "SELECT * FROM articles WHERE titol RLIKE :filter AND autor = :user  ORDER BY id DESC LIMIT :limit OFFSET :offset";
+        $sql = "SELECT * FROM articles WHERE titol RLIKE :filter AND autor = :user  ORDER BY titol $order LIMIT :limit OFFSET :offset";
         $stmt = $conn->prepare($sql);
         
         // Usamos bindValue para asegurarnos de que estos parámetros sean tratados como enteros

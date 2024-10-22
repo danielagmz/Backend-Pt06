@@ -1,23 +1,22 @@
 <?php 
 
 require_once 'model/pagination.php';
-require_once 'controllers/cookies.php';
 // variables para paginacion
 define('PAGE', isset($_COOKIE['pagina_usuario']) ? obtener_cookie('pagina_usuario') : 1);
 define('LIMIT',isset($_COOKIE['limite_usuario']) ? obtener_cookie('limite_usuario') : 5);
 define('MIN_LIMIT', 2);
 define('FILTER', '.');
 define('USER_ID', $_SESSION['id']);
-
-
+define('ORDER', isset($_COOKIE['order_usuario']) ? obtener_cookie('order_usuario') : "desc");
 
 
 /**
- * Función que se encarga de paginar los artículos de un usuario
+ * Función que se encarga de paginar los artículos de un usuario en particular
  *
  * @param int $page Número de página actual
  * @param int $limit Número de artículos a mostrar por página
  * @param string $filter Filtro opcional para buscar artículos
+ * @param string $order Orden de los artículos (asc o desc)
  *
  * @return string El html con todos los artículos paginados
  */
@@ -33,7 +32,7 @@ function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
     $page = is_number($page) && $page > 0 ? $page : PAGE;
 
     $offset = ($page - 1) * $limit;
-    $articulos = obtener_articulos_usuario($limit, $offset, $filter, USER_ID);
+    $articulos = obtener_articulos_usuario($limit, $offset, $filter, USER_ID, ORDER);
     if ($articulos == -1) {
         $art = '<article class="article cta span2C">  
         <div class="article__header">
@@ -69,6 +68,7 @@ function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
 
         );
     }
+    
     return $art;
 }
 
@@ -161,9 +161,6 @@ function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
     return $links;
 }
 
-
-
-
 /**
  * Devuelve el número total de artículos del usuario actual.
  *
@@ -174,5 +171,4 @@ function max_articles_user()
     $total = obtener_total_user(USER_ID);
     return $total;
 }
-
 ?>

@@ -55,16 +55,13 @@ function cookieValor(name) {
 // Obtener el parámetro 'order' de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const orderParam = urlParams.get('order');
-const action = urlParams.get('action');
 
 // Si no hay parámetro, intentamos obtenerlo de la cookie
 let ordenFinal;
 
 if (orderParam) {
         ordenFinal = orderParam;
-} else {
-    ordenFinal = cookieValor('order_usuario'); // Obtenemos el valor de la cookie 'order'
-}
+} 
 
 // Seleccionar el radio button correcto basado en el parámetro o la cookie
 if (ordenFinal) {
@@ -86,9 +83,6 @@ document.querySelectorAll('input[name="orden"]').forEach((radio) => {
 
         // Redirigir a la nueva URL
         window.location.href = url.toString();
-
-        // Guardar el valor de la cookie 'order'
-        document.cookie = `order_usuario=${orden}; path=/`;
     });
 });
 
