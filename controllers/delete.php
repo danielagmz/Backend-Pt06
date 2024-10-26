@@ -16,7 +16,7 @@ function delete($id)
         $response = delete_article($id);
         if ($response) {
             $response = '<p class="form-info form-info--success"> Article esborrat correctament 🥳</p>';
-            $button = '<a href="index.php?action=delete" class="form__button form__button--mark">Tornar</a>';
+            $button = '<a href="index.php?action=delete&page=1" class="form__button form__button--mark">Tornar</a>';
         } else {
             $response = '<p class="form-info form-info--error"> No s\'ha pogut esborrar l\'article</p>';
         }

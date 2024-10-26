@@ -13,7 +13,7 @@ function obtener_total($filter = FILTER){
     global $conn;
 
     if ($conn == null) {
-        return 1;
+        return -1;
     }
 
     try {
@@ -23,11 +23,11 @@ function obtener_total($filter = FILTER){
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result['total'] == null) {
-            return 1;
+            return -1;
         }
         return (int)$result['total']; 
     } catch (PDOException $e) {
-        return 1;
+        return -1;
     }
 }
 
@@ -92,7 +92,6 @@ function obtener_articulos($limit, $offset,$filter = FILTER,$desc = ORDER){
         
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         return $result;
     } catch (PDOException $e) {
         return [];

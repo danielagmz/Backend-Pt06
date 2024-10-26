@@ -8,7 +8,7 @@
         </button>
     </div>
     <div class="busqueda__barra cabeceras--paginacion">
-        <input class="busqueda__input--page" id="page" type="number" min="2" max="<?= max_articles_user() ?>" name="pages" step="1" value="<?= isset($_GET['limit']) ? $_GET['limit'] : LIMIT ?>">
+        <input class="busqueda__input--page" id="page" type="number" min="1" max="<?= max_articles_user() ?>" name="pages" step="1" value="<?= isset($_GET['limit']) ? $_GET['limit'] : LIMIT ?>">
         <div class="paginacion">
             <div class="paginacion__links">
                 <?= crear_links_user(

@@ -65,7 +65,9 @@ function read_one($id, $action)
     $id = id_exists($id);
     // se puede leer pero no actualizar o borrar un articulo si no se es el autor
     if ($action != "read") {
-        $id = is_user_author($_SESSION['id'], $id);
+        if (isset($_SESSION['id'])) {
+            $id = is_user_author($_SESSION['id'], $id);
+        }
     }
 
     if ($id == 0) {

@@ -1,5 +1,5 @@
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
-@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
 /* Daniela gamez */
 /* 
 #f2f7ff fondo 
@@ -425,10 +425,12 @@
     grid-template-columns: repeat(1, 1fr); /* Por defecto, 1 columna */
     gap: 1rem;
     align-items: stretch;
+    width: 80%;
 }
 
 .busqueda__resultados:has(> :nth-child(2)) {
     grid-template-columns: repeat(2, 1fr); /* Si tiene más de 1 hijo, 2 columnas */
+    width: 100%;
 }
 .busqueda__resultados .article{
     cursor: pointer;
@@ -491,3 +493,7 @@ img{
     color: #fff;
 }
 
+.disabled{
+    pointer-events: none;
+    cursor: none;
+}

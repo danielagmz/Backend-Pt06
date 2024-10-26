@@ -37,10 +37,10 @@ function update($id, $title, $content)
         // si se ha insertado se limpian los campos y se muestra un mensaje en funcion de la situacion
         if ($updated == 1) {
             $response = '<p class="form-info form-info--success"> Article actualitzat correctament 🥳</p>';
-            $button = '<a href="index.php?action=update" class="form__button form__button--mark">Tornar</a>';
+            $button = '<a href="index.php?action=update&page=1" class="form__button form__button--mark">Tornar</a>';
         } else if ($updated == 0) {
             $response = '<p class="form-info form-info--warning"> Es el mateix article d\'abans</p>';
-            $button = '<a href="index.php?action=update" class="form__button form__button--mark">Tornar</a>';
+            $button = '<a href="index.php?action=update&page=1" class="form__button form__button--mark">Tornar</a>';
         } else {
             $response = '<p class="form-info form-info--error"> No s\'ha pogut actualitzar l\'article</p>';
         }

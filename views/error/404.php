@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include('views/global/estilos.php') ?>
+    <?= isset($_SESSION['id']) ? '': '<link rel="stylesheet" href="public\styles\anonimo.css">'  ?>
     <title>Not found</title>
 </head>
 <body>
 <div class="container">
-<?php include('views/global/nav.php') ?>
+<?php isset($_SESSION['id']) ? include('views/global/nav.php') : include('views/global/nav-anonimo.php')?>
 
 <main class="content">
     <div class="content__title">Not found</div>

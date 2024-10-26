@@ -33,7 +33,7 @@ function create($title, $content)
             // si se ha insertado se limpian los campos y se muestra un mensaje
             $title = $content = '';
             $response = '<p class="form-info form-info--success"> Article inserit correctament 🥳</p>';
-            $button = '<a href="index.php?action=read" class="form__button form__button--mark">Veure articles</a>';
+            $button = '<a href="index.php?action=read&page=1" class="form__button form__button--mark">Veure articles</a>';
         }
     } else {
         // si hay errores se muestran los errores en el formulario

@@ -41,18 +41,16 @@ function is_empty($value)
 }
 
 /**
- * Comprueba si un valor es un numero.
+ * Comprueba si un valor es un número entero positivo.
  *
  * @param mixed $value El valor a comprobar.
- * @return bool TRUE si el valor es un numero, FALSE en caso contrario.
+ * @return bool TRUE si el valor es un número entero positivo, FALSE en caso contrario.
  */
 function is_number($value)
 {
-    if (is_numeric($value)) {
-        return true;
-    }
-    return false;
+    return is_numeric($value);
 }
+
 
 
 /**

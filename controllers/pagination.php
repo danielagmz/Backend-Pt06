@@ -32,17 +32,17 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
 {
     $total = obtener_total();
     $art = '';
-    
     // Validar que el límite esté entre 2 y el total de artículos
-    $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
+    $limit = (is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total) ? $limit : LIMIT;
 
     // Validar que la página esté dentro del rango permitido
-    $page = is_number($page) && $page > 0 ? $page : PAGE;
+    $page = (is_number($page) && $page > 0) ? $page : PAGE;
+
 
     $offset = ($page - 1) * $limit;
-    $articulos = obtener_articulos($limit, $offset, $filter, ORDER);
-    if ($articulos == -1) {
-        $art = '<article class="article cta span2C">  
+    $articulos = obtener_articulos($limit, $offset, $filter);
+    if (!$articulos && $total == -1) {
+        $art = '<article class="article disabled">  
         <div class="article__header">
             <div class="article__t">
             No hi ha articles a la base de dades 😞
@@ -51,6 +51,15 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
         </article>';
         return $art;
         
+    }else if (!$articulos) {
+        $art = '<article class="article disabled">  
+        <div class="article__header">
+            <div class="article__t">
+            No hi ha coincidències 
+            </div>
+        </div>
+        </article>';
+        return $art;
     }
 
     // por cada articulo se crea el html correspondiente y se agrega a "art"
@@ -94,18 +103,23 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
 function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
 {
     $total = obtener_total($filter);
+
+    // guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
+    
+    // Validar que el límite esté entre 2 y el total de artículos
+    $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
+    
+    // Validar que la página esté dentro del rango permitido
+    $page = is_number($page) && $page > 0 ? $page : PAGE;
+    
+    $page = is_number($page) ? $page : 1;
+    $limit = is_number($limit) ? $limit : 5;
+    
     // se registran loc cambios en las cookies
     if (isset($_SESSION['id'])) {
         guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
         guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30);
     }
-
-    // Validar que el límite esté entre 2 y el total de artículos
-    $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
-
-    // Validar que la página esté dentro del rango permitido
-    $page = is_number($page) && $page > 0 ? $page : PAGE;
-
     $totalpages = ceil($total / $limit);
     $links = '';
 

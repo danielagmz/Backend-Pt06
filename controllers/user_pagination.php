@@ -2,10 +2,11 @@
 
 require_once 'model/pagination.php';
 // variables para paginacion
-define('PAGE', isset($_COOKIE['pagina_usuario']) ? obtener_cookie('pagina_usuario') : 1);
-define('LIMIT',isset($_COOKIE['limite_usuario']) ? obtener_cookie('limite_usuario') : 5);
-define('MIN_LIMIT', 2);
-define('FILTER', '.');
+define('PAGE', (isset($_COOKIE['pagina_usuario']) && is_number(obtener_cookie('pagina_usuario'))) ? intval(obtener_cookie('pagina_usuario')) : 1);
+define('LIMIT', (isset($_COOKIE['limite_usuario']) && is_number(obtener_cookie('limite_usuario'))) ? intval(obtener_cookie('limite_usuario')) : 5);
+
+define('MIN_LIMIT', 1);
+define('FILTER', '');
 define('USER_ID', $_SESSION['id']);
 define('ORDER', isset($_COOKIE['order_usuario']) ? obtener_cookie('order_usuario') : "desc");
 
@@ -23,21 +24,41 @@ define('ORDER', isset($_COOKIE['order_usuario']) ? obtener_cookie('order_usuario
 function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
 {
     $total = obtener_total_user(USER_ID);
+    // Validar que el límite esté entre 2 y el total de artículos
+    $limit = (is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total) ? $limit : LIMIT;
+
+    if($limit > $total) {
+        $limit = $total;
+    }
+    $totalpages = ceil($total / $limit);
     $art = '';
 
-    // Validar que el límite esté entre 2 y el total de artículos
-    $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
 
     // Validar que la página esté dentro del rango permitido
-    $page = is_number($page) && $page > 0 ? $page : PAGE;
+    $page = (is_number($page) && $page > 0) ? $page : PAGE;
 
+    if($page > $totalpages) {
+        $page = $totalpages;
+    }else if($page < 1) {
+        $page = PAGE;
+    }
     $offset = ($page - 1) * $limit;
-    $articulos = obtener_articulos_usuario($limit, $offset, $filter, USER_ID, ORDER);
-    if ($articulos == -1) {
-        $art = '<article class="article cta span2C">  
+    $articulos = obtener_articulos_usuario($limit, $offset, $filter, USER_ID);
+    if (!$articulos && $total == -1) {
+        $art = '<article class="article disabled">  
         <div class="article__header">
             <div class="article__t">
             No hi ha articles a la base de dades 😞
+            </div>
+        </div>
+        </article>';
+        return $art;
+        
+    }else if (!$articulos) {
+        $art = '<article class="article disabled">  
+        <div class="article__header">
+            <div class="article__t">
+            No hi ha coincidències 
             </div>
         </div>
         </article>';
@@ -86,15 +107,26 @@ function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
 function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
 {
     $total = obtener_total_user(USER_ID);
+    // Validar que el límite esté entre 2 y el total de artículos
+    $limit = (is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total) ? $limit : LIMIT;
+    
+    // Validar que la página esté dentro del rango permitido
+    $page = (is_number($page) && $page > 0) ? $page : PAGE;
+    
+    $totalpages = ceil($total / $limit);
+    
+    if($page > $totalpages) {
+        $page = $totalpages;
+    }else if($page < 1) {
+        $page = PAGE;
+    }
+    
+    $page = is_number($page) ? $page : 1;
+    $limit = is_number($limit) ? $limit : 5;
+    
     guardar_cookie('pagina_usuario', $page, time() + 3600 * 24 * 30); 
     guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30); 
-    // Validar que el límite esté entre 2 y el total de artículos
-    $limit = is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total ? $limit : LIMIT;
-
-    // Validar que la página esté dentro del rango permitido
-    $page = is_number($page) && $page > 0 ? $page : PAGE;
-
-    $totalpages = ceil($total / $limit);
+    
     $links = '';
 
     // Obtener la URL actual y sus componentes
@@ -104,15 +136,6 @@ function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
     // Si hay query params, parsearlos; si no, iniciar como vacío
     parse_str($url_parts['query'] ?? '', $query_params);
 
-    if ($page < 1 || $page > $totalpages) {
-        // Redirigir a la primera página
-        $query_params['limit'] = $limit;
-        $query_params['page'] = 1;
-        $query_params['filter'] = $filter;
-        header("Location: " . $url_parts['path'] . '?' . http_build_query($query_params));
-        exit();
-    }
-    
     // enlace de la página anterior
     if ($page > 1) {
         $query_params['limit'] = $limit;
@@ -169,6 +192,9 @@ function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
 function max_articles_user()
 {
     $total = obtener_total_user(USER_ID);
+    if($total == -1) {
+        $total = 1;
+    }
     return $total;
 }
 ?>
