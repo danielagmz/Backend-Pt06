@@ -14,7 +14,7 @@
                 <?= crear_links(
                     isset($_GET['limit']) ? $_GET['limit'] : LIMIT, // Si no hay límite usa 4
                     isset($_GET['page']) ? $_GET['page'] : PAGE, // Si no hay página, usa 1
-                    isset($_GET['filter']) ? $_GET['filter'] : '', // Si hay filtro usa el filtro vacio
+                    isset($_GET['filter']) ? $_GET['filter'] : '', // Si no hay filtro usa el filtro vacio
                     isset($_GET['order']) ? $_GET['order'] : ORDER
                 ) ?>
             </div>
@@ -38,7 +38,7 @@
     <?= paginate(
         isset($_GET['page']) ? $_GET['page'] : PAGE,
         isset($_GET['limit']) ? $_GET['limit'] : LIMIT,
-        isset($_GET['filter']) ? $_GET['filter'] : '',  // Pasar el límite desde la URL
+        isset($_GET['filter']) ? $_GET['filter'] : '',  
         isset($_GET['order']) ? $_GET['order'] : ORDER
     ); ?>
 </div>

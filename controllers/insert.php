@@ -11,8 +11,8 @@ function create($title, $content)
 {
     $response = '';
     // sanitizar los datos
-    $title = test_input($title);
-    $content = test_input($content);
+    $title = test_texto($title);
+    $content = test_texto($content);
 
     // los campos tienen que estar llenos y el título no debe existir
     if (is_empty($title)) {

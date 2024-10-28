@@ -127,6 +127,9 @@ function obtener_articulos_usuario($limit, $offset,$filter = FILTER,$id_user,$de
         $stmt->bindValue(':user', $id_user, PDO::PARAM_INT);
         
         $stmt->execute();
+        if ($stmt->rowCount() == 0) {
+            return [];
+        }
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     } catch (PDOException $e) {

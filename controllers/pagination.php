@@ -37,6 +37,9 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
 
     // Validar que la página esté dentro del rango permitido
     $page = (is_number($page) && $page > 0) ? $page : PAGE;
+    
+    $filter = test_texto($filter);
+    guardar_busqueda($filter);
 
 
     $offset = ($page - 1) * $limit;

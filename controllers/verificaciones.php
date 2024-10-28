@@ -27,6 +27,21 @@ function test_input($data)
 }
 
 /**
+ * Sanitiza un string de entrada para que sea seguro para su uso en una
+ * consulta SQL. El string se somete a las siguientes transformaciones:
+ * 1. Se eliminan los espacios en blanco al principio y al final.
+ * 2. Se convierten los caracteres especiales en entidades HTML.
+ * @param string $data El string a sanitizar.
+ * @return string El string sanitizado.
+ */
+function test_texto($data)
+{
+    $data = trim($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+/**
  * Comprueba si un valor esta vacio.
  *
  * @param string $value El valor a comprobar.
