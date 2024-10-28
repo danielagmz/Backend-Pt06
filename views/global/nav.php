@@ -31,11 +31,11 @@
             </div>
         </a>
         <form action="index.php?action=logout" class="cursor--pointer" method="post">
-            <div class="menu__item">
-                <button type="submit" class="menu__item-link button--logout">
+            <button type="submit" class="button--logout menu__item">
+                <div  class="menu__item ">
                     <i class="fi fi-rr-sign-out-alt"></i>
-                </button>
-            </div>
+                </div>
+            </button>
         </form>
     </aside>
 </div>

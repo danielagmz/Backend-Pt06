@@ -2,7 +2,7 @@
 <div class="cabeceras">
 
     <div class="busqueda__barra cabeceras--filtrado content__body--row">
-        <input type="text" value="<?= isset($_GET['filter']) ? $_GET['filter'] : '' ?>" name="busqueda__input" placeholder="Filtar por..." class="busqueda__input" autofocus>
+        <?php include('views/global/barra_busqueda.php');?>
         <button class="form__button--search">
             <i class="fi fi-rr-search"></i>
         </button>
