@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2024 a las 21:40:32
+-- Tiempo de generación: 22-10-2024 a las 21:52:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `pt04_daniela_gamez`
+-- Base de datos: `pt05_daniela_gamez`
 --
 CREATE DATABASE IF NOT EXISTS `pt05_daniela_gamez` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `pt05_daniela_gamez`;
@@ -38,12 +38,6 @@ CREATE TABLE `articles` (
   `data_modificacio` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `autor` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- RELACIONES PARA LA TABLA `articles`:
---   `autor`
---       `usuaris` -> `id`
---
 
 --
 -- Truncar tablas antes de insertar `articles`
@@ -74,7 +68,38 @@ INSERT INTO `articles` (`id`, `titol`, `cos`, `data_creacio`, `data_modificacio`
 (17, 'Robótica en la Industria Moderna', 'La robótica ha transformado el sector industrial, permitiendo una automatización avanzada en procesos de manufactura. Gracias a los robots, se ha logrado incrementar la eficiencia y reducir los costos operativos, además de mejorar la seguridad en el lugar de trabajo. Los robots colaborativos o \"cobots\" están diseñados para trabajar junto con humanos, abriendo nuevas posibilidades en el campo de la producción y la logística.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 2),
 (18, 'Los Secretos del ADN', 'El ADN es el manual de instrucciones de la vida.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 3),
 (19, 'La Impresión 3D en la Arquitectura', 'La impresión 3D está comenzando a revolucionar la forma en que construimos edificios. Esta tecnología permite la creación de estructuras más rápidas, baratas y sostenibles que los métodos tradicionales. Además, está facilitando el diseño de formas arquitectónicas complejas que antes eran imposibles de realizar. Aunque todavía en sus primeras etapas, la impresión 3D promete transformar radicalmente la industria de la construcción en las próximas décadas.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 4),
-(20, 'El Futuro de la Agricultura con IA', 'La inteligencia artificial está siendo aplicada en la agricultura para optimizar el uso de recursos como el agua y los fertilizantes. Con drones y sensores, los agricultores pueden monitorear sus cultivos de manera más eficiente, lo que reduce costos y aumenta la productividad. Además, la IA está ayudando a predecir plagas y enfermedades, lo que permite tomar decisiones más informadas y mejorar la calidad de los alimentos que consumimos.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 5);
+(20, 'El Futuro de la Agricultura con IA', 'La inteligencia artificial está siendo aplicada en la agricultura para optimizar el uso de recursos como el agua y los fertilizantes. Con drones y sensores, los agricultores pueden monitorear sus cultivos de manera más eficiente, lo que reduce costos y aumenta la productividad. Además, la IA está ayudando a predecir plagas y enfermedades, lo que permite tomar decisiones más informadas y mejorar la calidad de los alimentos que consumimos.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 5),
+(21, 'aaa', 'aaaa', '2024-10-21 22:35:21', '2024-10-21 22:35:21', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `busquedas`
+--
+
+DROP TABLE IF EXISTS `busquedas`;
+CREATE TABLE `busquedas` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(10) UNSIGNED NOT NULL,
+  `consulta` varchar(255) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Truncar tablas antes de insertar `busquedas`
+--
+
+TRUNCATE TABLE `busquedas`;
+--
+-- Disparadores `busquedas`
+--
+DROP TRIGGER IF EXISTS `eliminar_busquedas_antiguas`;
+DELIMITER $$
+CREATE TRIGGER `eliminar_busquedas_antiguas` AFTER INSERT ON `busquedas` FOR EACH ROW BEGIN
+    DELETE FROM busquedas WHERE fecha < NOW() - INTERVAL 15 DAY;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -89,10 +114,6 @@ CREATE TABLE `usuaris` (
   `email` varchar(254) NOT NULL,
   `pass` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- RELACIONES PARA LA TABLA `usuaris`:
---
 
 --
 -- Truncar tablas antes de insertar `usuaris`
@@ -123,6 +144,13 @@ ALTER TABLE `articles`
   ADD KEY `fk_articles_usuaris` (`autor`);
 
 --
+-- Indices de la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_busquedas_usuaris` (`usuario_id`);
+
+--
 -- Indices de la tabla `usuaris`
 --
 ALTER TABLE `usuaris`
@@ -137,7 +165,13 @@ ALTER TABLE `usuaris`
 -- AUTO_INCREMENT de la tabla `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuaris`
@@ -154,6 +188,12 @@ ALTER TABLE `usuaris`
 --
 ALTER TABLE `articles`
   ADD CONSTRAINT `fk_articles_usuaris` FOREIGN KEY (`autor`) REFERENCES `usuaris` (`id`);
+
+--
+-- Filtros para la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  ADD CONSTRAINT `fk_busquedas_usuaris` FOREIGN KEY (`usuario_id`) REFERENCES `usuaris` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
