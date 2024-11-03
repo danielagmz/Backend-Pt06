@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Guarda en la sesion la ultima busqueda, solo guarda los ultimos 5 valores
+ *
+ * @param string $valor El valor a guardar
+ */
 function guardar_busqueda($valor)
 {   
     if (isset($_SESSION['id'])) {
@@ -21,6 +26,11 @@ function guardar_busqueda($valor)
 }
 
 
+/**
+ * Crea el datalist para la busqueda de artículos de un usuario con sus busquedas anteriores
+ *
+ * @return string El HTML con los options para el datalist
+ */
 function crear_datalist_user()
 {
 

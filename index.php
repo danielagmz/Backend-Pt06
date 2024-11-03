@@ -4,8 +4,12 @@ require_once 'controllers/verificaciones.php';
 require_once 'model/verificaciones.php';
 require_once 'model/connect.php';
 require_once 'controllers/cookies.php';
+require 'controllers/env.php';
 ini_set('session.gc_maxlifetime', 40 * 60);
 session_start();
+if (!isset($_SESSION['intentos'])) {
+    $_SESSION['intentos'] = 3; // valor inicial
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -94,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             break;
         case 'login':
             require_once 'controllers/login.php';
-            login($_POST['username'], $_POST['password']);
+            login($_POST['username'], $_POST['password'],isset($_POST['g-recaptcha-response'])?$_POST['g-recaptcha-response']:'');
             break;
         case 'register':
             require_once 'controllers/register.php';

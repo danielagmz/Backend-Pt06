@@ -37,6 +37,7 @@ function register($username, $email, $password, $verifypassword)
             $_SESSION['id'] = $id;
             $_SESSION['username'] = $username;
             header('Location: index.php?action=read');
+            exit();
         } else {
             $response = '<p class="form-info form-info--error">No hem pogut registrar l\'usuari</p>';
         }
