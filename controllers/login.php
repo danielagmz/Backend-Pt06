@@ -8,14 +8,12 @@ require_once 'model/login.php';
  * @param string $password La contrasenya
  * @return void
  */
-function login($username, $password, $recaptcha)
+function login($username, $password,$remember ,$recaptcha)
 {
     $response = '';
     $username = test_input($username);
     $password = test_input($password);
     $usuari = login_from_username($username);
-    var_dump($_SESSION['intentos']);
-    var_dump(substr($recaptcha, 0, 5));
 
     if ($usuari == -1) {
         $response .= '<p> No s\'ha trobat cap usuari amb aquest username</p>';
@@ -41,13 +39,19 @@ function login($username, $password, $recaptcha)
 
     // Verificar que no haya errores en $response ni códigos de error en el CAPTCHA
     if (empty($response)) {
-        var_dump($response);
+        ini_set('session.gc_maxlifetime', 40 * 60);
+
         // si no hay errores, se loguea al usuario
         $_SESSION['id'] = $usuari['id'];
         $_SESSION['username'] = $username;
-        ini_set('session.gc_maxlifetime', 40 * 60);
         $_SESSION['intentos'] = 3;
         $catcha = '';
+
+        if ($remember) {
+            $token = bin2hex(random_bytes(32));
+            guardar_cookie('remember', $token, time() + 3600 * 24 * 30);
+            guardar_rememberTK($token, $usuari['id']);
+        }
         header('Location: index.php?action=read');
         exit();
     } else {

@@ -160,6 +160,14 @@ function id_exists($id){
     }
 }
 
+/**
+ * Comprueba si el usuario con el id especificado es el autor del articulo con el id especificado.
+ *
+ * @param int $id_user Identificador del usuario a comprobar
+ * @param int $id_article Identificador del articulo a comprobar
+ *
+ * @return int el id si el usuario es el autor del articulo, 0 si no lo es, -1 si se ha producido un error
+ */
 function is_user_author($id_user,$id_article){
     global $conn;
 
@@ -179,6 +187,56 @@ function is_user_author($id_user,$id_article){
         return $result['id'];
     } catch (PDOException $e) {
         return -1;
+    }
+}
+
+/**
+ * Comprueba si existe un usuario con el token de recordatorio especificado.
+ *
+ * @param string $rememberTK Token de recordatorio a comprobar
+ *
+ * @return array Un array que contiene el id y el nombre de usuario si existe, un array vacio en caso de error
+ */
+function has_rememberTK($rememberTK){
+    global $conn;
+
+    if ($conn == null) {
+        return [];
+    };
+
+    try {
+        $sql = "SELECT id,usuario FROM usuaris WHERE rememberTK = :rememberTK";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':rememberTK' => $rememberTK));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return [];
+        }
+        return $result;
+    } catch (PDOException $e) {
+        return [];
+    }
+}
+
+
+
+/**
+ * Verifica si hay un token de recordatorio en una cookie y
+ *   si existe, inicia la sesion automaticamente con el usuario
+ *   relacionado con ese token.
+ *
+ *   Si no existe el token o no se ha iniciado la sesion,
+ *   no hace nada.
+ *
+ */
+function remember() {
+    $token = isset($_COOKIE['remember']) ? $_COOKIE['remember'] : null;
+    if ($token !== null) {
+        $result = has_rememberTK($token);
+        if (!empty($result)) {
+            $_SESSION['id'] = $result['id'];
+            $_SESSION['username'] = $result['usuario'];
+        }
     }
 }
 

@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     } else {
         $action = 'read';
     }
-    // var_dump($_SESSION);
+    remember();
 
-    if (isset($_SESSION['id'])) {
+    if (isset($_SESSION['id']) ) {
         switch ($action) {
             case 'create':
                 require_once 'controllers/insert.php';
@@ -98,7 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             break;
         case 'login':
             require_once 'controllers/login.php';
-            login($_POST['username'], $_POST['password'],isset($_POST['g-recaptcha-response'])?$_POST['g-recaptcha-response']:'');
+            login(
+                $_POST['username'],
+                $_POST['password'],
+                isset($_POST['remember']) ? $_POST['remember'] : '',
+                isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : ''
+            );
             break;
         case 'register':
             require_once 'controllers/register.php';

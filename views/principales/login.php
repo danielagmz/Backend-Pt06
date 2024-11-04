@@ -12,7 +12,9 @@
 
 <body>
     <div class="container">
-    <?php $accion = 'Enregistrar-se'; $url = 'register'; include('views/global/nav-anonimo.php') ?>
+        <?php $accion = 'Enregistrar-se';
+        $url = 'register';
+        include('views/global/nav-anonimo.php') ?>
         <main class="content">
             <div class="content__title">Logar-se</div>
             <div class="content__body content__body--40W">
@@ -25,8 +27,21 @@
                         <label class="form__label" for="password">Password</label>
                         <input class="form__input" value="<?= isset($password) ? $password : '' ?>" placeholder="••••••••" type="password" name="password" id="password" required />
                     </div>
-                    <?= isset($catcha) && $catcha!='default' ? $catcha : '' ?>
+                    <?= isset($catcha) && $catcha != 'default' ? $catcha : '' ?>
                     <?= isset($response) ? $response : ''   ?>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" name="remember" class="check" id="check1-61">
+                        <label for="check1-61" class="label">
+                            <svg width="45" height="45" viewBox="0 0 95 95">
+                                <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4" stroke="black" stroke-width="3" fill="none" class="path1"></path>
+                                </g>
+                            </svg>
+                            <span>Recordar-me</span>
+                        </label>
+
+                    </div>
                     <div class="form__group">
                         <input class="form__button form__button--mark" type="submit" value="Logar-se" />
                     </div>
