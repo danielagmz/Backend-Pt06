@@ -13,5 +13,6 @@ try {
 
 if ($conn == null) {
   echo '<script>alert("No hi ha cap BD conectada");</script>';
+  echo '<script>window.location="index.php?page=1";</script>';
 }
 ?>
