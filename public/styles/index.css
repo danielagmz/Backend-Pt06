@@ -71,7 +71,18 @@
     border-radius: 12px;
 }
 
+
 .menu__item:hover i {
+    color: white;
+}
+
+.link--active{
+    background-color: var(--accent);
+    color: white; 
+    border-radius: 12px;
+}
+
+.link--active i {
     color: white;
 }
 
