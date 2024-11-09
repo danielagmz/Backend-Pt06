@@ -1,8 +1,8 @@
 <?php
 // Daniela Gamez 
+require_once 'controllers/env.php';
 require_once 'controllers/verificaciones.php';
 require_once 'model/verificaciones.php';
-require_once 'controllers/env.php';
 require_once 'model/connect.php';
 require_once 'controllers/cookies.php';
 ini_set('session.gc_maxlifetime', 40 * 60);

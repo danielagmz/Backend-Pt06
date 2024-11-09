@@ -2,11 +2,11 @@
 <?php
 $servername = SERVER;
 $user_bd = USER_DB;
-$password = PASS_DB;
+$pass_bd = PASS_DB;
 $DB = DATABASE;
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$DB", $user_bd, $password);
+  $conn = new PDO("mysql:host=$servername;dbname=$DB;charset=utf8", $user_bd, $pass_bd);
 } catch(PDOException $e) {
   $conn = null;
 }
