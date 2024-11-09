@@ -2,7 +2,7 @@
 http_response_code(404); // Establece el código de respuesta a 404
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

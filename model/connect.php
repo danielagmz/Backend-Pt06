@@ -1,9 +1,9 @@
 <!-- Daniela Gamez -->
 <?php
-$servername = "localhost";
-$user_bd = "root";
-$password = "";
-$DB = "pt05_daniela_gamez";
+$servername = SERVER;
+$user_bd = USER_DB;
+$password = PASS_DB;
+$DB = DATABASE;
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$DB", $user_bd, $password);
