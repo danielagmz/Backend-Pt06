@@ -9,6 +9,7 @@
 
 .content {
     padding: 0rem 2rem 2rem;
+    gap: 1rem;
 }
 
 .content__title {

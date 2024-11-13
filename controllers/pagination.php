@@ -184,7 +184,7 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
             http_build_query($query_params)
         );
     }else{
-        $links .= '<a role="button" class="desactivado button--page"><i class="fi fi-rr-caret-right"></i></a>';
+        $links .= '<a role="button" class="desactivado button--page button--page--right"><i class="fi fi-rr-caret-right"></i></a>';
     }
 
     return $links;
