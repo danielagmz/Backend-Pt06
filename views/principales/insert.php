@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include('views/global/estilos.php') ?>
+    <?php include('views/global/scripts_logged.php') ?>
     <title>Insertar article</title>
 </head>
 

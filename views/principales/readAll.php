@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include('views/global/estilos.php') ?>
+    <?php include('views/global/scripts_logged.php') ?>
     <link rel="stylesheet" href="public\styles\select.css">
     <link rel="stylesheet" href="public\styles\read.css">
     <script type="module" src="public/javascripts/filter.js"></script>
