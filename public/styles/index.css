@@ -8,6 +8,8 @@
     --accent: #51459e;
     --fondo: #f2f7ff;
     --accent2: #c5d3f9;
+    --accent3: #cf919182;
+    --accent4: #f2cc5b;
 }
 
 /* ⭐ Css compartido entre las diferentes paginas */
@@ -103,6 +105,14 @@
     opacity: 1
 }
 
+.content--settings{
+    padding: unset;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
 .content__title {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: bold;
@@ -151,6 +161,150 @@
     min-width: 30%;
 }
 
+.content__body--bento{
+    width: 85%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+    'profile customize'
+    'profile change-password'
+    'profile delete-account'
+    ;
+    gap: 1rem;
+}
+
+.change-password{
+    grid-area: change-password;
+    display: grid;
+    place-content: center;
+}
+
+.profile{
+    grid-area: profile;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-evenly;
+}
+
+.bio{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 50%;
+}
+
+.delete-account{
+    grid-area: delete-account;
+    display: grid;
+    place-content: center;
+}
+.customize{
+    grid-area: customize;
+    display: grid;
+    place-content: center;
+}
+
+.customize__buttons{
+    display: flex;
+    flex-wrap: wrap;
+    /* width: max-content; */
+    gap: 1rem;
+}
+
+.banner{
+    border: 2px solid #000;
+    border-radius: 5px;
+    min-height: 20vh;
+    min-width: 85%;
+    position: relative;
+    background-color: var(--accent2);
+    /* background-image: url(https://picsum.photos/1024/119); */
+    background-image: url(https://fastly.picsum.photos/id/423/1024/119.jpg?hmac=71fYDms-cF0sDnYqVj21xpM-WRS4rcImKdvrmXWCQg4);
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.settings__element{
+    /* background-color: #c5e78e; */
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 2px 2px 0 #000;
+    font-family: "Arial", sans-serif;
+}
+
+.banner::after {
+    content: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 7.5em;
+    height: 7.5em;
+    border-radius: 50%;
+    border: 3.5px solid #000;
+    position: absolute;
+    bottom: -5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: gray;
+    background-image: var(--uploaded-profileImg, url(https://imgs.search.brave.com/3o4w3E8jt9sXYUaFRYfKGOlPeSKnn5oFIGYYiEMVN2w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTg3/MTMyOTczNS9waG90/by9jYXRzLW5vc2Uu/d2VicD9hPTEmYj0x/JnM9NjEyeDYxMiZ3/PTAmaz0yMCZjPTJ1/UDd2XzNhaWEza09I/WEdBbDk0SVJEZkZp/TnU4akdrcHhiYkNU/cm0xZEE9));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.banner__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.profile__info{
+    display: flex;
+    /* justify-content: space-evenly; */
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.profile__info-group{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.actions{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5%;
+}
+
+
+.profile__input, .profile__textarea{
+    border-radius: 5px;
+    border: 1.5px solid #000;
+    /* background-color: var(--accent2); */
+    /* box-shadow: 4px 4px 0 #000; */
+    font-size: 15px;
+    padding: 10px 10px;
+    outline: none;
+}
+
+.profile__textarea{
+    resize: none;
+    height: 100%;
+}
+
+
+
 .cursor--pointer {
     cursor: pointer;
 }
@@ -163,6 +317,7 @@
 
 .article {
     border: 4px solid #000;
+    border-radius: 10px;
     background-color: #fff;
     padding: 1.5rem;
     box-shadow: 10px 10px 0 #000;
@@ -241,7 +396,7 @@
 .form__textarea {
     resize: vertical;
     min-height: 10rem;
-    min-width: 20rem;
+    min-width: 25vw;
     padding: 0.5rem;
 }
 
@@ -302,6 +457,26 @@
     border-color: #54349f;
     color: #fff;
     box-shadow: 7px 7px 0 #290080;
+}
+
+.banner__button {
+    margin-bottom: unset;
+    font-size: 0.65rem;
+    border: 2px solid #000;
+    padding: 0.75rem 1.5rem;
+    width: auto;
+    border-radius: 50px;
+    box-shadow: 2px 2px 0 black;
+    background-color: var(--accent2); ;
+}
+.banner__button--red{
+    background-color: var(--accent3);
+}
+
+.banner__button i{
+    font-size: 1.2em;
+    vertical-align: bottom;
+    line-height: 0;
 }
 
 /* separador de area del formulario */
@@ -516,6 +691,26 @@
     .busqueda__resultados {
         width: 100%;
     }
+
+    .banner {
+        width: 100%;
+    }
+    .content__body--bento{
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        'customize'
+        'profile' 
+        'change-password'
+        'delete-account'
+        ;
+    }
+    .customize__buttons{
+        display: flex;
+        flex-direction: column;
+        width: max-content;
+        gap: 0.5rem;
+    }
 }
 
 img {
@@ -592,4 +787,9 @@ img {
 .checkbox-wrapper .check:checked+label svg g path {
     stroke-dashoffset: 0;
     opacity: 1;
+}
+
+.profile-info--error{
+    flex-grow: 1;
+    padding: 1rem;
 }

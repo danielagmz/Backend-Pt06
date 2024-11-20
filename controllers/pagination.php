@@ -106,6 +106,12 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
 function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
 {
     $total = obtener_total($filter);
+    $links = '';
+    if ($total == -1) {
+        $links .= '<a role="button" class="desactivado button--page"><i class="fi fi-rr-caret-left"></i></a>';
+        $links .= '<a role="button" class="desactivado button--page button--page--right"><i class="fi fi-rr-caret-right"></i></a>';
+        return $links;
+    }
 
     // guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
     
@@ -124,7 +130,7 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
         guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30);
     }
     $totalpages = ceil($total / $limit);
-    $links = '';
+    
 
     // Obtener la URL actual y sus componentes
     $url = $_SERVER['REQUEST_URI'];
@@ -135,10 +141,7 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
 
     if ($page < 1 || $page > $totalpages) {
         // Redirigir a la primera página
-        $query_params['limit'] = $limit;
-        $query_params['page'] = 1;
-        $query_params['filter'] = $filter;
-        header("Location: " . $url_parts['path'] . '?' . http_build_query($query_params));
+        header("Location: index.php?page=1");
         exit();
     }
     

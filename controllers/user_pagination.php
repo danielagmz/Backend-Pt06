@@ -110,6 +110,12 @@ function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
 function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
 {
     $total = obtener_total_user(USER_ID);
+    $links = '';
+    if ($total == -1) {
+        $links .= '<a role="button" class="desactivado button--page"><i class="fi fi-rr-caret-left"></i></a>';
+        $links .= '<a role="button" class="desactivado button--page button--page--right"><i class="fi fi-rr-caret-right"></i></a>';
+        return $links;
+    }
     // Validar que el límite esté entre 2 y el total de artículos
     $limit = (is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total) ? $limit : LIMIT;
     
