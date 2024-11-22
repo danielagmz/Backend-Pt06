@@ -1,12 +1,14 @@
 <?php 
 
 
+
 /**
- * Comprueba si existe un usuario con el nombre proporcionado.
+ * Comprueba si existe un usuario con el nombre de usuario especificado.
  *
- * @param string $username Nombre del usuario a comprobar
+ * @param string $username El nombre de usuario a comprobar
  *
- * @return array Un array que contiene el id y la contrasena del usuario si existe, -1 en caso de error
+ * @return array Un array que contiene todos los campos del usuario si existe, 
+ * -1 si no existe o si se ha producido un error
  */
 function login_from_username($username) {
     global $conn;
@@ -15,7 +17,7 @@ function login_from_username($username) {
         return -1;
     }
     try {
-        $sql = "SELECT id,pass FROM usuaris WHERE usuario = :value";
+        $sql = "SELECT * FROM usuaris WHERE usuario = :value";
         $stmt = $conn->prepare($sql);
         $stmt->execute(array(':value' => $username));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);

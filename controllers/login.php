@@ -44,6 +44,8 @@ function login($username, $password,$remember ,$recaptcha)
         // si no hay errores, se loguea al usuario
         $_SESSION['id'] = $usuari['id'];
         $_SESSION['username'] = $username;
+        $_SESSION['email'] = $usuari['email'];
+        $_SESSION['bio'] = $usuari['bio'];
         $_SESSION['intentos'] = 3;
         $catcha = '';
 

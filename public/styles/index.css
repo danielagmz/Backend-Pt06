@@ -1,6 +1,5 @@
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
-@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
 /* Daniela gamez */
 
 
@@ -125,6 +124,20 @@
 
 }
 
+.settings__element-title,.profile__label{
+    font-size: 1.2rem;
+    width: fit-content;
+    margin-bottom: unset;
+    border-radius: 2px;
+    background-color: unset;
+    color: unset;
+    padding: unset;
+}
+.settings__element-title i,.profile__label i{
+    vertical-align: middle;
+    color: var(--accent);
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -178,6 +191,7 @@
     grid-area: change-password;
     display: grid;
     place-content: center;
+    gap: 10%;
 }
 
 .profile{
@@ -199,18 +213,32 @@
     grid-area: delete-account;
     display: grid;
     place-content: center;
+    gap: 10%;
 }
 .customize{
     grid-area: customize;
     display: grid;
     place-content: center;
+    text-align: center;
+    gap: 10%;
 }
+
+.customize__title{
+    text-align: center;
+    justify-self: center;
+}
+
 
 .customize__buttons{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     /* width: max-content; */
-    gap: 1rem;
+    gap: 0.5rem;
+}
+
+.text__align--center{
+    text-align: center;
 }
 
 .banner{
@@ -711,6 +739,12 @@
         width: max-content;
         gap: 0.5rem;
     }
+    .banner__button{
+        width: fit-content;
+        height: fit-content;
+        align-self: center;
+        justify-self: center;
+    }
 }
 
 img {
@@ -789,7 +823,7 @@ img {
     opacity: 1;
 }
 
-.profile-info--error{
+.profile-info{
     flex-grow: 1;
     padding: 1rem;
 }

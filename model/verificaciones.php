@@ -205,7 +205,7 @@ function has_rememberTK($rememberTK){
     };
 
     try {
-        $sql = "SELECT id,usuario FROM usuaris WHERE rememberTK = :rememberTK";
+        $sql = "SELECT * FROM usuaris WHERE rememberTK = :rememberTK";
         $stmt = $conn->prepare($sql);
         $stmt->execute(array(':rememberTK' => $rememberTK));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -236,6 +236,8 @@ function remember() {
         if (!empty($result)) {
             $_SESSION['id'] = $result['id'];
             $_SESSION['username'] = $result['usuario'];
+            $_SESSION['email'] = $result['email'];
+            $_SESSION['bio'] = $result['bio'];
         }
     }
 }

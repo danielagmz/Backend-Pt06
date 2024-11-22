@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     remember();
 
-    if (isset($_SESSION['id']) ) {
+    if (isset($_SESSION['id'])) {
         switch ($action) {
             case 'create':
                 require_once 'controllers/insert.php';
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 include 'views/principales/readAll.php';
                 break;
             case 'change_password':
-                include 'views/secundarias/change_password.php';
+                include 'views/secundarias/settings.php';
                 break;
             default:
                 require_once 'controllers/read.php';
@@ -113,8 +113,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             require_once 'controllers/logout.php';
             logout();
             break;
+        case 'update_info':
+            require_once 'controllers/change_info.php';
+            change_info($_POST['username'], $_POST['email'], $_POST['bio']);
+            break;
         case 'change_password':
-            require_once 'controllers/change_password.php';
+            require_once 'controllers/change_info.php';
             change_password($_POST['oldPassword'], $_POST['newPassword'], $_POST['verifyPassword']);
             break;
         case 'addusers':
