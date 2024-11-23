@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <?php include('views/global/estilos.php') ?>
+    <script type="module" src="public/javascripts/dialog.js"></script>
 </head>
 
 <body>
     <div class="container">
         <?php include('views/global/nav.php') ?>
-
+        <?php include('views/global/dialog.php') ?>
         <main class="content content--settings">
             <div class="banner">
             </div>
@@ -55,9 +56,8 @@
                 </div>
                 <div class="settings__element delete-account text__align--center">
                     <div class="settings__element-title delete-account__title content__title"><i class="fi fi-rr-user-xmark"></i> Eliminar compte</div>
-                    <button id="delete-account" class="form__button banner__button banner__button--red">Eliminar compte</button>
+                    <button id="delete-account" class="form__button banner__button banner__button--red delete-account__button">Eliminar compte</button>
                 </div>
-
             </div>
         </main>
     </div>

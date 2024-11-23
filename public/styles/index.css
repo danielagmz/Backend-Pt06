@@ -389,7 +389,7 @@
     color: #000;
     font-size: 1.5rem;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
 }
 
 .article__body {
@@ -826,4 +826,33 @@ img {
 .profile-info{
     flex-grow: 1;
     padding: 1rem;
+}
+
+.dialog{
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: unset;
+    border:  unset;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog[open]{
+    display: flex;
+}
+.dialog__content{
+    display: flex;
+    flex-direction: column;
+}
+.dialog__close{
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0.5rem 0.6rem;
+    max-width: fit-content;
+    align-self: flex-end;
 }

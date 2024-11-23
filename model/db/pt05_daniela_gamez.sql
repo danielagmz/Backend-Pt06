@@ -164,7 +164,7 @@ ALTER TABLE `usuaris`
 -- Filtros para la tabla `articles`
 --
 ALTER TABLE `articles`
-  ADD CONSTRAINT `fk_articles_usuaris` FOREIGN KEY (`autor`) REFERENCES `usuaris` (`id`);
+  ADD CONSTRAINT `fk_articles_usuaris` FOREIGN KEY (`autor`) REFERENCES `usuaris` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

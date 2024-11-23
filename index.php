@@ -118,8 +118,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             change_info($_POST['username'], $_POST['email'], $_POST['bio']);
             break;
         case 'change_password':
-            require_once 'controllers/change_info.php';
+            require_once 'controllers/change_password.php';
             change_password($_POST['oldPassword'], $_POST['newPassword'], $_POST['verifyPassword']);
+            break;
+        case 'delete__account':
+            require_once 'controllers/delete.php';
+            delete_account($_POST['password']);
             break;
         case 'addusers':
             addusers();

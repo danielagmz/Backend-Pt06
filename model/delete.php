@@ -23,4 +23,28 @@ function delete_article($id)
         return false;
     }
 }
+
+/**
+ * Esborra un usuari de la base de dades.
+ *
+ * @param int $id ID del usuari a esborrar
+ *
+ * @return bool true si s'ha pogut esborrar, false si s'ha produit un error
+ */
+
+function delete_user($id){
+    global $conn;
+    try {
+        $sql = "DELETE FROM usuaris WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':id' => $id));
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            throw new PDOException('No se ha podido esborrar l\'usuari');
+        }
+    } catch (PDOException $e) {
+        return false;
+    }
+}
 ?>

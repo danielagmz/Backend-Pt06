@@ -61,6 +61,13 @@ function username_exists($value){
     }
 }
 
+/**
+ * Obtiene el id de un usuario por su username.
+ *
+ * @param string $value El nombre de usuario 
+ *
+ * @return int El id del usuario si existe, -1 si no existe o si se ha producido un error.
+ */
 function id_from_username($value){
     global $conn;
 
@@ -82,11 +89,18 @@ function id_from_username($value){
     }
 }
 
+/**
+ * Obtiene el nombre de usuario de un usuario por su id.
+ *
+ * @param int $value El id del usuario.
+ *
+ * @return string El nombre de usuario si existe, "Usuari eliminat" si el usuario ha sido eliminado, cadena vacia si se ha producido un error.
+ */
 function username_from_id($value){
     global $conn;
 
     if ($conn == null) {
-        return -1;
+        return '';
     };
 
     try {
@@ -95,11 +109,11 @@ function username_from_id($value){
         $stmt->execute(array(':value' => $value));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if($result == null){
-            return -1;
+            return 'Usuari eliminat';
         }
         return $result['usuario'];
     } catch (PDOException $e) {
-        return -1;
+        return '';
     }
 }
 
