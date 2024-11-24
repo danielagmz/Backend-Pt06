@@ -46,6 +46,9 @@ function login($username, $password,$remember ,$recaptcha)
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $usuari['email'];
         $_SESSION['bio'] = $usuari['bio'];
+        $_SESSION['admin'] = $usuari['admin'];
+        $_SESSION['avatar'] = $usuari['avatar'];
+        $_SESSION['banner'] = $usuari['banner'];
         $_SESSION['intentos'] = 3;
         $catcha = '';
 
@@ -54,7 +57,7 @@ function login($username, $password,$remember ,$recaptcha)
             guardar_cookie('remember', $token, time() + 3600 * 24 * 30);
             guardar_rememberTK($token, $usuari['id']);
         }
-        header('Location: index.php?action=read');
+        header('Location: index.php?action=read&page=1');
         exit();
     } else {
         // Si hay errores, se muestran en el formulario

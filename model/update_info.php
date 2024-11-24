@@ -57,3 +57,35 @@ function update_info($id, $username, $email, $bio)
         return -1;
     }
 }
+
+function update_avatar($id, $avatar) {
+    global $conn;
+    if ($conn == null) {
+        return false;
+    }
+    try {
+        $sql = "UPDATE usuaris SET avatar = :avatar WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':avatar' => $avatar, ':id' => $id));
+        return true;
+        
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function update_banner($id, $banner) {
+    global $conn;
+    if ($conn == null) {
+        return false;
+    }
+    try {
+        $sql = "UPDATE usuaris SET banner = :banner WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':banner' => $banner, ':id' => $id));
+        return true;
+        
+    } catch (PDOException $e) {
+        return false;
+    }
+}

@@ -13,7 +13,7 @@
     <div class="container">
         <?php include('views/global/nav.php') ?>
         <main class="content">
-            <div class="content__title">Segur que vols esborrar aquest article?</div>
+            <div class="content__title">Estas segur?</div>
             <div class="content__body--row">
                 <!-- formulario con campos deshabilitados -->
                 <form action="index.php?action=deleting&id=<?= $_GET['id']?>" method="post" class="form article">

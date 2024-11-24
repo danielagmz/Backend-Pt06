@@ -125,8 +125,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             require_once 'controllers/delete.php';
             delete_account($_POST['password']);
             break;
-        case 'addusers':
-            addusers();
-            break;
+        case 'upload__avatar':
+            require_once 'controllers/uploads.php';
+            upload_avatar($_FILES['imagen']);
+        break;
+        case 'upload__banner':
+            require_once 'controllers/uploads.php';
+            upload_banner($_FILES['imagen']);
+        break;
     }
 }

@@ -256,5 +256,24 @@ function remember() {
     }
 }
 
+function getOldImagespath($id){
+    global $conn;
+    if ($conn == null) {
+        return '';
+    };
+    try {
+        $sql = "SELECT avatar,banner FROM usuaris WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':id' => $id));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return '';
+        }
+        return $result;
+    } catch (PDOException $e) {
+        return '';
+    }
+}
+
 
 ?>

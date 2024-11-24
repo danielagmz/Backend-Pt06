@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <?php include('views/global/estilos.php') ?>
+    <?php include('public/styles/uploads.php') ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
     <script type="module" src="public/javascripts/dialog.js"></script>
+    <script type="module" src="public/javascripts/uploadDialogs.js"></script>
+
 </head>
 
 <body>
@@ -46,8 +51,8 @@
                 <div class="settings__element customize">
                     <p class="settings__element-title customize__title content__title"><i class="fi fi-rr-palette"></i> Personalitzar</p>
                     <div class="customize__buttons">
-                        <button class="form__button banner__button"><i class="fi fi-rr-pen-square"></i> Editar imatge</button>
-                        <button class="form__button banner__button"><i class="fi fi-rr-pen-square"></i> Editar portada</button>
+                        <button class="form__button banner__button edit-avatar__button"><i class="fi fi-rr-pen-square"></i> Editar imatge</button>
+                        <button class="form__button banner__button edit-banner__button"><i class="fi fi-rr-pen-square"></i> Editar portada</button>
                     </div>
                 </div>
                 <div class="settings__element change-password text__align--center">
