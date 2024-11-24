@@ -6,15 +6,24 @@
                 <div class="content__title">Canviar contrasenya</div>
                 <div class="form__group">
                     <label for="oldPassword" class="form__label">Contrasenya actual</label>
-                    <input type="password" id="oldPassword" name="oldPassword" class="form__input" value="<?= isset($oldPassword) ? $oldPassword : '' ?>">
+                    <div class="input__group--pass">
+                        <input type="password" id="oldPassword" name="oldPassword" class="form__input">
+                        <i class="fi fi-rr-eye showme"></i>
+                    </div>
                 </div>
                 <div class="form__group">
                     <label for="newPassword" class="form__label">Contrasenya nova</label>
-                    <input type="password" id="newPassword" name="newPassword" class="form__input" value="<?= isset($oldPassword) ? $oldPassword : '' ?>">
+                    <div class="input__group--pass">
+                        <input type="password" id="newPassword" name="newPassword" class="form__input">
+                        <i class="fi fi-rr-eye showme"></i>
+                    </div>
                 </div>
                 <div class="form__group">
                     <label for="verifyPassword" class="form__label">Confirmar contrasenya</label>
-                    <input type="password" id="verifyPassword" name="verifyPassword" class="form__input" value="<?= isset($oldPassword) ? $oldPassword : '' ?>">
+                    <div class="input__group--pass">
+                        <input type="password" id="verifyPassword" name="verifyPassword" class="form__input">
+                        <i class="fi fi-rr-eye showme"></i>
+                    </div>
                 </div>
                 <div id="responseContainer" class="response-container"></div>
                 <input type="submit" value="Cambiar contrasenya" class="form__button form__button--mark">
@@ -52,7 +61,7 @@
                     <input type="file" id="banner" name="banner" class="form__input" accept="image/*">
                     <div id="bannerPreviewContainer"></div>
                 </div>
-                
+
                 <div id="uploadBannerResponse" class="response-container"></div>
                 <input type="submit" value="Cargar imatge" class="form__button form__button--mark">
                 <hr>

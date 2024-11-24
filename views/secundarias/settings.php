@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
     <script type="module" src="public/javascripts/dialog.js"></script>
     <script type="module" src="public/javascripts/uploadDialogs.js"></script>
+    <script type="module" src="public/javascripts/showme.js"></script>
 
 </head>
 

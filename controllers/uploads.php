@@ -10,11 +10,13 @@ function upload_avatar($avatar)
 
     $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (!in_array($fileType, $allowedFileTypes)) {
+        http_response_code(400);
         echo '<div class="form-info form-info--error">Els formats acceptats són JPG, PNG i GIF</div>';
         return;
     }
 
     if ($fileSize > 2 * 1024 * 1024) {
+        http_response_code(400);
         echo '<div class="form-info form-info--error">La imatge es massa gran. Máxim permitit: 2MB</div>';
         return;
     }
@@ -24,6 +26,7 @@ function upload_avatar($avatar)
     $destination = $uploadFolder . $newFileName;
 
     if (!move_uploaded_file($fileTmpPath, $destination)) {
+        http_response_code(500);
         echo '<div class="form-info form-info--error">Error al carregar l\'imatge</div>';
         return;
     }
@@ -36,10 +39,11 @@ function upload_avatar($avatar)
                 }
     }
     if (update_avatar($id, $destination)) {
-        
+        http_response_code(200);
         echo '<div class="form-info form-info--success profile-info">L\'imatge s\'ha carregat correctament</div>';
         $_SESSION['avatar'] = $destination;
     } else {
+        http_response_code(500);
         echo '<div class="form-info form-info--error">Error al carregar l\'imatge</div>';
     }
 }
@@ -56,11 +60,13 @@ function upload_banner($banner)
     
     $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (!in_array($fileType, $allowedFileTypes)) {
+        http_response_code(400);
         echo '<div class="form-info form-info--error">Els formats acceptats són JPG, PNG i GIF</div>';
         return;
     }
     
     if ($fileSize > 2 * 1024 * 1024) {
+        http_response_code(400);
         echo '<div class="form-info form-info--error">La imatge es massa gran. Máxim permitit: 2MB</div>';
         return;
     }
@@ -73,6 +79,7 @@ function upload_banner($banner)
     $destination = $uploadFolder . $newFileName;
 
     if (!move_uploaded_file($fileTmpPath, $destination)) {
+        http_response_code(500);
         echo '<div class="form-info form-info--error">Error al carregar l\'imatge</div>';
         return;
     }
@@ -83,9 +90,11 @@ function upload_banner($banner)
         unlink($oldBanner);
     }
     if (update_banner($id, $destination)) {
+        http_response_code(200);
         echo '<div class="form-info form-info--success profile-info">L\'imatge s\'ha carregat correctament</div>';
         $_SESSION['banner'] = $destination;
     } else {
+        http_response_code(500);
         echo '<div class="form-info form-info--error">Error al carregar l\'imatge</div>';
     }
 }

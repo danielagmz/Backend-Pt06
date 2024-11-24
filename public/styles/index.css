@@ -845,9 +845,6 @@ img {
 }
 
 .dialog{
-    position: fixed;
-    top: 0;
-    left: 0;
     min-width: 100vw;
     min-height: 100vh;
     background-color: unset;
@@ -855,7 +852,6 @@ img {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 3;
     justify-content: center;
-    align-items: center;
 }
 
 .dialog[open]{
@@ -864,8 +860,7 @@ img {
 .dialog__content{
     display: flex;
     flex-direction: column;
-    max-width: 30%;
-    min-width: min-content;
+    max-width: 35%;
 }
 .dialog__close{
     cursor: pointer;
