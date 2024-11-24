@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: proxysql-01.dd.scip.local
--- Tiempo de generación: 20-11-2024 a las 18:53:02
--- Versión del servidor: 10.10.2-MariaDB-1:10.10.2+maria~deb11
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 24-11-2024 a las 02:27:02
+-- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,18 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `ddb237155`
+-- Base de datos: `pt05_daniela_gamez`
 --
-CREATE DATABASE IF NOT EXISTS `pt05_daniela_gamez` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `pt05_daniela_gamez` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `pt05_daniela_gamez`;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `articles`
---
--- Creación: 09-11-2024 a las 02:06:26
--- Última actualización: 20-11-2024 a las 10:03:54
 --
 
 DROP TABLE IF EXISTS `articles`;
@@ -41,12 +38,6 @@ CREATE TABLE `articles` (
   `data_modificacio` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `autor` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- RELACIONES PARA LA TABLA `articles`:
---   `autor`
---       `usuaris` -> `id`
---
 
 --
 -- Truncar tablas antes de insertar `articles`
@@ -77,15 +68,13 @@ INSERT INTO `articles` (`id`, `titol`, `cos`, `data_creacio`, `data_modificacio`
 (18, 'Los Secretos del ADN', 'El ADN es el manual de instrucciones de la vida.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 3),
 (19, 'La Impresión 3D en la Arquitectura', 'La impresión 3D está comenzando a revolucionar la forma en que construimos edificios. Esta tecnología permite la creación de estructuras más rápidas, baratas y sostenibles que los métodos tradicionales. Además, está facilitando el diseño de formas arquitectónicas complejas que antes eran imposibles de realizar. Aunque todavía en sus primeras etapas, la impresión 3D promete transformar radicalmente la industria de la construcción en las próximas décadas.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 4),
 (20, 'El Futuro de la Agricultura con IA', 'La inteligencia artificial está siendo aplicada en la agricultura para optimizar el uso de recursos como el agua y los fertilizantes. Con drones y sensores, los agricultores pueden monitorear sus cultivos de manera más eficiente, lo que reduce costos y aumenta la productividad. Además, la IA está ayudando a predecir plagas y enfermedades, lo que permite tomar decisiones más informadas y mejorar la calidad de los alimentos que consumimos.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 5),
-(23, 'Importancia de la IA en la Medicina', 'La inteligencia artificial está revolucionando la medicina de maneras sorprendentes y muy valiosas. En primer lugar, la IA permite el análisis de grandes volúmenes de datos médicos, lo que ayuda a los profesionales de la salud a identificar patrones y tendencias que podrían pasar desapercibidos. Esto es especialmente útil en la detección temprana de enfermedades como el cáncer, donde la IA puede analizar imágenes médicas con una precisión asombrosa.\r\n\r\nAdemás, la IA está mejorando la personalización de los tratamientos. A través del análisis de datos genéticos y clínicos, es posible adaptar terapias específicas a las necesidades individuales de cada paciente. Esto no solo aumenta la eficacia del tratamiento, sino que también reduce los efectos secundarios.\r\n\r\nOtro aspecto clave es el uso de chatbots y asistentes virtuales en la atención al paciente. Estos sistemas pueden proporcionar información médica básica, gestionar citas e incluso ofrecer apoyo emocional, permitiendo que los profesionales de la salud se concentren en casos más complejos.\r\n\r\nFinalmente, la IA también juega un papel importante en la investigación médica. Con su capacidad para procesar y analizar datos rápidamente, puede acelerar el desarrollo de nuevos medicamentos y tratamientos.', '2024-11-10 17:53:47', '2024-11-10 17:53:47', 8);
+(23, 'Importancia de la IA en la Medicina', 'La inteligencia artificial está revolucionando la medicina de maneras sorprendentes y muy valiosas. En primer lugar, la IA permite el análisis de grandes volúmenes de datos médicos, lo que ayuda a los profesionales de la salud a identificar patrones y tendencias que podrían pasar desapercibidos. Esto es especialmente útil en la detección temprana de enfermedades como el cáncer, donde la IA puede analizar imágenes médicas con una precisión asombrosa.\r\n\r\nAdemás, la IA está mejorando la personalización de los tratamientos. A través del análisis de datos genéticos y clínicos, es posible adaptar terapias específicas a las necesidades individuales de cada paciente. Esto no solo aumenta la eficacia del tratamiento, sino que también reduce los efectos secundarios.\r\n\r\nOtro aspecto clave es el uso de chatbots y asistentes virtuales en la atención al paciente. Estos sistemas pueden proporcionar información médica básica, gestionar citas e incluso ofrecer apoyo emocional, permitiendo que los profesionales de la salud se concentren en casos más complejos.\r\n\r\nFinalmente, la IA también juega un papel importante en la investigación médica. Con su capacidad para procesar y analizar datos rápidamente, puede acelerar el desarrollo de nuevos medicamentos y tratamientos.', '2024-11-10 17:53:47', '2024-11-10 17:53:47', 8),
+(24, 'a', 'a', '2024-11-23 22:47:17', '2024-11-23 22:47:17', 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuaris`
---
--- Creación: 17-11-2024 a las 22:44:02
--- Última actualización: 17-11-2024 a las 22:44:02
 --
 
 DROP TABLE IF EXISTS `usuaris`;
@@ -95,13 +84,13 @@ CREATE TABLE `usuaris` (
   `email` varchar(254) NOT NULL,
   `pass` varchar(255) NOT NULL,
   `bio` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `banner` varchar(255) DEFAULT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT 0,
   `rememberTK` varchar(255) DEFAULT NULL,
-  `recoverTK` varchar(255) DEFAULT NULL
+  `recoverTK` varchar(255) DEFAULT NULL,
+  `socialProv` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- RELACIONES PARA LA TABLA `usuaris`:
---
 
 --
 -- Truncar tablas antes de insertar `usuaris`
@@ -112,15 +101,15 @@ TRUNCATE TABLE `usuaris`;
 -- Volcado de datos para la tabla `usuaris`
 --
 
-INSERT INTO `usuaris` (`id`, `usuario`, `email`, `pass`, `bio`, `rememberTK`, `recoverTK`) VALUES
-(1, 'admin', 'admin@admin.com', '$2y$10$BIleDgvtDHkssNv53xw2aO13VwBTYJ1FZmKD4GlQrMCUbk1rtDcBe', NULL, NULL, NULL),
-(2, 'roger_51', '4hogrlwp4@talk21.com', '$2y$10$hJ5Vz8XeYuSfBfbOihK95.jkcSDeI1FX4ECIj3Y5IBUTwOsNfBzaW', NULL, NULL, NULL),
-(3, 'luisangel_72', 'ivl77yaca@lycos.es', '$2y$10$TO3VRIrEOBFVnshlgG0oYOzfdZFMJ9A1OjnpQ7tIeBLeU1CYshZCS', NULL, NULL, NULL),
-(4, 'martin_71', '47vjms9v@talk21.com', '$2y$10$R2aFxfkatEfZn3.Z3hsRJeDlaZWb6syKgfDK/04R1LqT3SwDnmYqO', NULL, NULL, NULL),
-(5, 'anaisabel_82', '661y5fmif@witty.com', '$2y$10$tW6cDQgrP2zI3xxeVpbxj.4S.s/7eb.kHeJ0nGSpwQzQEcv4EGJRu', NULL, NULL, NULL),
-(6, 'ariadna_82', 'qp31jzyc3r@aol.com', '$2y$10$JlmbnTbgibv43CU15geRsOYm9IlD7RoDaVLHWy6E.gqQax63RZZ6a', NULL, NULL, NULL),
-(7, 'Pepito', 'pepito@gmail.com', '$2y$10$T9di5.n3/phlX9MMRJnUNe7uXZZ2BN25GLgm8u4tHZpr0mZ8v50kC', NULL, NULL, NULL),
-(8, 'Yisustex', 'yisustex@gmail.com', '$2y$10$OCmFowAE2ZM0QAU/v2WV7u9J463A6KcMLtBo8Ov9352ZHwgMrRh5q', NULL, NULL, NULL);
+INSERT INTO `usuaris` (`id`, `usuario`, `email`, `pass`, `bio`, `avatar`, `banner`, `admin`, `rememberTK`, `recoverTK`, `socialProv`) VALUES
+(1, 'admin', 'admin@admin.com', '$2y$10$BIleDgvtDHkssNv53xw2aO13VwBTYJ1FZmKD4GlQrMCUbk1rtDcBe', 'bio', 'uploads/67427e7c743b6-image.jpg', 'uploads/6742762cd54da-image.jpg', 1, NULL, NULL, NULL),
+(2, 'roger_51', '4hogrlwp4@talk21.com', '$2y$10$hJ5Vz8XeYuSfBfbOihK95.jkcSDeI1FX4ECIj3Y5IBUTwOsNfBzaW', NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(3, 'luisangel_72', 'ivl77yaca@lycos.es', '$2y$10$TO3VRIrEOBFVnshlgG0oYOzfdZFMJ9A1OjnpQ7tIeBLeU1CYshZCS', NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(4, 'martin_71', '47vjms9v@talk21.com', '$2y$10$R2aFxfkatEfZn3.Z3hsRJeDlaZWb6syKgfDK/04R1LqT3SwDnmYqO', NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(5, 'anaisabel_82', '661y5fmif@witty.com', '$2y$10$tW6cDQgrP2zI3xxeVpbxj.4S.s/7eb.kHeJ0nGSpwQzQEcv4EGJRu', NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(6, 'ariadna_82', 'qp31jzyc3r@aol.com', '$2y$10$JlmbnTbgibv43CU15geRsOYm9IlD7RoDaVLHWy6E.gqQax63RZZ6a', NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(7, 'Pepito', 'pepito@gmail.com', '$2y$10$T9di5.n3/phlX9MMRJnUNe7uXZZ2BN25GLgm8u4tHZpr0mZ8v50kC', NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(8, 'Yisustex', 'yisustex@gmail.com', '$2y$10$OCmFowAE2ZM0QAU/v2WV7u9J463A6KcMLtBo8Ov9352ZHwgMrRh5q', NULL, NULL, NULL, 0, NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -148,7 +137,7 @@ ALTER TABLE `usuaris`
 -- AUTO_INCREMENT de la tabla `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `usuaris`
