@@ -124,6 +124,7 @@ initDialog({
     formId: 'uploadAvatarForm', 
     submitUrl: 'index.php?action=upload__avatar', 
     responseContainerId: 'uploadAvatarResponse',
+    redirect: 'index.php?action=update_info',
     cropWidth: 120,
     cropHeight: 120,
     previewContainerId: 'avatarPreviewContainer'
@@ -133,7 +134,8 @@ initDialog({
     dialogSelector: '.dialog__upload--banner', 
     buttonClass: 'edit-banner__button', 
     formId: 'uploadBannerForm', 
-    submitUrl: 'index.php?action=upload__banner', 
+    submitUrl: 'index.php?action=upload__banner',
+    redirect: 'index.php?action=update_info', 
     responseContainerId: 'uploadBannerResponse',
     cropWidth: 1024,
     cropHeight: 119,

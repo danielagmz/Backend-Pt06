@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             case 'all':
                 include 'views/principales/readAll.php';
                 break;
-            case 'change_password':
+            case 'update_info':
                 include 'views/secundarias/settings.php';
                 break;
             default:

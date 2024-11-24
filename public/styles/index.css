@@ -430,7 +430,23 @@
 
 .form__input {
     padding: 0.5rem;
+    flex-grow: 1;
 }
+.input__group--pass {
+    display: flex;
+    gap: 0.5rem;
+    position: relative;
+}
+.input__group--pass i{
+    vertical-align: middle;
+    align-self: center;
+    font-size: 1.5rem;
+    line-height: 0rem;
+    cursor: pointer;
+    position: absolute;
+    right: 0.5rem;
+}
+
 
 .form__button {
     display: block;

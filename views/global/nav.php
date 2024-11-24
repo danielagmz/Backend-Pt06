@@ -25,7 +25,7 @@
                 <i class="fi fi-rr-edit"></i>
             </div>
         </a>
-        <a id="change_password" class="menu__item" href="index.php?action=change_password">
+        <a id="change_password" class="menu__item" href="index.php?action=update_info">
             <div class="menu__item-link">
                 <i class="fi fi-rr-settings"></i>
             </div>

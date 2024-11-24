@@ -8,6 +8,7 @@
     <?php include('views/global/scripts_logged.php') ?>
     <link rel="stylesheet" href="public\styles\anonimo.css">
     <script src="https://www.google.com/recaptcha/api.js?hl=es" async defer></script>
+    <script type="module" src="public/javascripts/showme.js"></script>
     <title>Logar-se</title>
 </head>
 
@@ -26,7 +27,11 @@
                     </div>
                     <div class="form__group">
                         <label class="form__label" for="password">Password</label>
-                        <input class="form__input" value="<?= isset($password) ? $password : '' ?>" placeholder="••••••••" type="password" name="password" id="password" required />
+                        <div class="input__group--pass">
+                            <input class="form__input" value="<?= isset($password) ? $password : '' ?>" placeholder="••••••••" type="password" name="password" id="password" required />
+                            <i class="fi fi-rr-eye showme"></i>
+                        </div>
+
                     </div>
                     <?= isset($catcha) && $catcha != 'default' ? $catcha : '' ?>
                     <?= isset($response) ? $response : ''   ?>

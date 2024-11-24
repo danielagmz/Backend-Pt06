@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include('views/global/estilos.php') ?>
     <link rel="stylesheet" href="public\styles\anonimo.css">
+    <script type="module" src="public/javascripts/showme.js"></script>
     <title>Logar-se</title>
 </head>
 
 <body>
     <div class="container">
-    <?php $accion = 'Logar-se'; $url = 'login'; include('views/global/nav-anonimo.php') ?>
+        <?php $accion = 'Logar-se';
+        $url = 'login';
+        include('views/global/nav-anonimo.php') ?>
         <main class="content">
             <div class="content__title">Enregistrar-se</div>
             <div class="content__body content__body--40W">
@@ -26,17 +29,23 @@
                     </div>
                     <div class="form__group">
                         <label class="form__label" for="password">Contrasenya</label>
-                        <input class="form__input" value="<?= isset($password) ? $password : '' ?>" placeholder="••••••••" type="password" name="password" id="password" required />
+                        <div class="input__group--pass">
+                            <input class="form__input" value="<?= isset($password) ? $password : '' ?>" placeholder="••••••••" type="password" name="password" id="password" required />
+                            <i class="fi fi-rr-eye showme"></i>
+                        </div>
                     </div>
                     <div class="form__group">
                         <label class="form__label" for="verifypassword">Confirma la contrasenya</label>
-                        <input class="form__input" placeholder="••••••••" type="password" name="verifypassword" id="verifypassword" required />
+                        <div class="input__group--pass">
+                            <input class="form__input" placeholder="••••••••" type="password" name="verifypassword" id="verifypassword" required />
+                            <i class="fi fi-rr-eye showme"></i>
+                        </div>
                     </div>
                     <?= isset($response) ? $response : ''   ?>
                     <div class="form__group">
                         <input class="form__button form__button--mark" type="submit" value="Engistrar-se" />
                     </div>
-                    
+
                 </form>
             </div>
         </main>
