@@ -1,9 +1,10 @@
 <?php
 require_once 'model/update_info.php';
 require_once 'controllers/login.php';
-define('USER_ID', $_SESSION['id']);
+define('USER_ID', isset($_SESSION['id']) ? $_SESSION['id'] : '');
 
-function change_password($currentPassword, $newPassword, $verifyPassword) {
+function change_password($currentPassword, $newPassword, $verifyPassword)
+{
     $currentPassword = test_input($currentPassword);
     $newPassword = test_input($newPassword);
     $verifyPassword = test_input($verifyPassword);
@@ -42,3 +43,41 @@ function change_password($currentPassword, $newPassword, $verifyPassword) {
     }
 }
 
+
+
+function recover_password($token, $newPassword, $verifyPassword)
+{
+    $response = '';
+    $newPassword = test_input($newPassword);
+    $verifyPassword = test_input($verifyPassword);
+
+    if (is_empty($newPassword)) {
+        $response .= '<p>Introdueix una nova contrasenya</p>';
+    }else if (is_empty($verifyPassword)) {
+        $response .= '<p>Confirma la nova contrasenya!</p>';
+    }
+    // comprobar que la contraseña cumpla la fortaleza y coincida con $verifyPassword
+    if (is_empty($response)) {
+        $response .= validate_password($newPassword, $verifyPassword);
+    }
+
+    if (is_empty($response)) {
+        $id=has_token('recoverTK', $token);
+        if ($id != -1) {
+            $hashed_pass = password_hash($newPassword, PASSWORD_DEFAULT);
+            if (update_password($id, $hashed_pass)) {
+                borrar_token('recoverTK', $id);
+                $response = '<p class="form-info form-info--success">Contrasenya modificada, ja pots logar-te</p>';
+
+            } else {
+                $response = '<p class="form-info form-info--error">No se ha podido modificar la contrasenya </p>';
+            }
+        }else{
+            $response = '<p class="form-info form-info--error">Token invalid o expirat</p>';
+        }
+    } else {
+        $response = '<div class="form-info form-info--error">' . $response . '</div>';
+    }
+
+    include_once 'views/secundarias/change_password.php';
+}

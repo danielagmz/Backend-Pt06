@@ -49,7 +49,10 @@
 
                     </div>
                     <div class="form__group">
-                        <input class="form__button form__button--mark" type="submit" value="Logar-se" />
+                        <input class="form__button form__button--mark margin0" type="submit" value="Logar-se" />
+                    </div>
+                    <div class="form__group center ">
+                        <a class="recover" href="index.php?action=recover_account">He oblidat la contrasenya</a>
                     </div>
                 </form>
             </div>

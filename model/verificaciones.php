@@ -118,6 +118,34 @@ function username_from_id($value){
 }
 
 /**
+ * Obtiene el nombre de usuario de un usuario por su email.
+ *
+ * @param string $email El email 
+ *
+ * @return string El nombre de usuario si existe, cadena vacia si se ha producido un error.
+ */
+function username_from_email($email){
+    global $conn;
+
+    if ($conn == null) {
+        return '';
+    };
+
+    try {
+        $sql = "SELECT usuario FROM usuaris WHERE email = :email";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':email' => $email));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return '';
+        }
+        return $result['usuario'];
+    } catch (PDOException $e) {
+        return '';
+    }
+}
+
+/**
  * Comprueba si existe un usuario con el email proporcionado.
  *
  * @param string $email Email del usuario a comprobar
@@ -204,55 +232,34 @@ function is_user_author($id_user,$id_article){
     }
 }
 
+
+
 /**
- * Comprueba si existe un usuario con el token de recordatorio especificado.
+ * Comprueba si existe un token con el tipo y valor especificados.
  *
- * @param string $rememberTK Token de recordatorio a comprobar
+ * @param string $type Tipo de token.
+ * @param string $token Valor del token.
  *
- * @return array Un array que contiene el id y el nombre de usuario si existe, un array vacio en caso de error
+ * @return int El id del usuario al que pertenece el token, -1 si no existe o si se ha producido un error.
  */
-function has_rememberTK($rememberTK){
+function has_token($type,$token) {
     global $conn;
 
     if ($conn == null) {
-        return [];
+        return -1;
     };
 
     try {
-        $sql = "SELECT * FROM usuaris WHERE rememberTK = :rememberTK";
+        $sql = "SELECT user_id FROM tokens WHERE type = :type AND token = :token";
         $stmt = $conn->prepare($sql);
-        $stmt->execute(array(':rememberTK' => $rememberTK));
+        $stmt->execute(array(':type' => $type,':token' => $token));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($result == null){
-            return [];
+        if ($result == null) {
+            return ;
         }
-        return $result;
+        return $result['user_id'];
     } catch (PDOException $e) {
-        return [];
-    }
-}
-
-
-
-/**
- * Verifica si hay un token de recordatorio en una cookie y
- *   si existe, inicia la sesion automaticamente con el usuario
- *   relacionado con ese token.
- *
- *   Si no existe el token o no se ha iniciado la sesion,
- *   no hace nada.
- *
- */
-function remember() {
-    $token = isset($_COOKIE['remember']) ? $_COOKIE['remember'] : null;
-    if ($token !== null) {
-        $result = has_rememberTK($token);
-        if (!empty($result)) {
-            $_SESSION['id'] = $result['id'];
-            $_SESSION['username'] = $result['usuario'];
-            $_SESSION['email'] = $result['email'];
-            $_SESSION['bio'] = $result['bio'];
-        }
+        return -1;
     }
 }
 
@@ -272,6 +279,118 @@ function getOldImagespath($id){
         return $result;
     } catch (PDOException $e) {
         return '';
+    }
+}
+
+/**
+ * Guarda un token en la base de datos.
+ *
+ * @param string $type El tipo de token ('rememberTK' o 'recoverTK')
+ * @param string $token El valor del token
+ * @param int $id El id del usuario al que se asocia el token
+ * @param string $exp La fecha de expiracion del token en formato 'Y-m-d H:i:s'
+ *
+ * @return bool true si se ha guardado correctamente, false si se ha producido un error
+ */
+function guardar_token($type, $token, $id,$exp) {
+    global $conn;
+
+    if ($conn == null) {
+        return false;
+    }
+    try {
+        $sql = "INSERT INTO tokens (user_id, token, type,tokenExp) VALUES (:id, :token, :type, :exp)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':id' => $id, ':token' => $token, ':type' => $type, ':exp' => $exp));
+        if ($stmt->rowCount() == 0) {
+            return false;
+        }
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+/**
+ * Borra un token de un usuario.
+ *
+ * @param string $type El tipo de token ('rememberTK' o 'recoverTK')
+ * @param int $user_id El id del usuario
+ *
+ * @return bool true si se ha borrado correctamente, false si se ha producido un error
+ */
+function borrar_token($type, $user_id) {
+    global $conn;
+
+    if ($conn == null) {
+        return false;
+    }
+
+    try {
+        $sql = "DELETE FROM tokens WHERE user_id = :id AND type = :type";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':id' => $user_id, ':type' => $type));
+        if ($stmt->rowCount() == 0) {
+            return false;
+        }
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+
+/**
+ * Retorna el token de un usuario.
+ *
+ * @param string $tokentype El tipo de token (rememberTK o recoverTK)
+ * @param int $user_id El id del usuario
+ *
+ * @return string El token del usuario si existe, cadena vacia si se ha producido un error
+ */
+function get_token($tokentype, $user_id) {
+    global $conn;
+
+    if ($conn == null) {
+        return '';
+    }
+    try {
+        $sql = "SELECT token FROM tokens WHERE user_id = :id AND type = :type";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':id' => $user_id, ':type' => $tokentype));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // retorna el token si existe
+        if ($result == null) {
+            return '';
+        }
+        return $result['token'];
+    } catch (PDOException $e) {
+        return '';
+    }
+}
+
+function is_token_valid($token){
+    global $conn;
+    if ($conn == null) {
+        return false;
+    };
+    try {
+        $sql = "SELECT tokenExp FROM tokens WHERE token = :token";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':token' => $token));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result == null){
+            return false;
+        }
+        $exp = $result['tokenExp'];
+        $now = new DateTime();
+        $exp = new DateTime($exp);
+        if($now > $exp){
+            return false;
+        }
+        return true;
+    } catch (PDOException $e) {
+        return false;
     }
 }
 

@@ -63,3 +63,12 @@
     max-width: 400px;
     word-break: break-word;
 }
+
+.link--active{
+    background-color: var(--accent);
+    color: white; 
+}
+
+.link--active i {
+    color: white;
+}

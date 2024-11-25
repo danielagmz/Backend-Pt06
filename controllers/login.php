@@ -8,7 +8,7 @@ require_once 'model/login.php';
  * @param string $password La contrasenya
  * @return void
  */
-function login($username, $password,$remember ,$recaptcha)
+function login($username, $password, $remember, $recaptcha)
 {
     $response = '';
     $username = test_input($username);
@@ -20,18 +20,17 @@ function login($username, $password,$remember ,$recaptcha)
     }
 
     if ($_SESSION['intentos'] <= 0) {
-            $catcha = '<div class="form__group">
+        $catcha = '<div class="form__group">
                 <div class="g-recaptcha" data-sitekey="' . CATCHAKEYSITEWEB . '"></div>
                 </div>';
-                if (empty($recaptcha)) {
-                    $response .= '<p>Verifiqui el CAPTCHA per continuar.</p>';
-                } else {
-                    // Verificar el CAPTCHA 
-                    $response .= login_captcha($recaptcha);
-                }
-    
+        if (empty($recaptcha)) {
+            $response .= '<p>Verifiqui el CAPTCHA per continuar.</p>';
+        } else {
+            // Verificar el CAPTCHA 
+            $response .= login_captcha($recaptcha);
+        }
     }
-    
+
     if (empty($response) && password_verify($password, $usuari['pass']) === false) {
         $response .= '<p>La contraseña no es correcta.</p>';
         $_SESSION['intentos']--;
@@ -55,7 +54,8 @@ function login($username, $password,$remember ,$recaptcha)
         if ($remember) {
             $token = bin2hex(random_bytes(32));
             guardar_cookie('remember', $token, time() + 3600 * 24 * 30);
-            guardar_rememberTK($token, $usuari['id']);
+            $exp = date('Y-m-d H:i:s', strtotime('+30 days'));
+            guardar_token('rememberTK', $token, $usuari['id'], $exp);
         }
         header('Location: index.php?action=read&page=1');
         exit();
@@ -92,4 +92,32 @@ function login_captcha($recaptcha)
         }
     }
     return $response;
+}
+
+/**
+ * Verifica si hay un token de recordatorio y
+ *   si existe, inicia la sesion automaticamente con el usuario
+ *   relacionado a ese token.
+ *
+ *   Si no existe el token o no se ha iniciado la sesion,
+ *   no hace nada.
+ *
+ */
+function remember()
+{
+    $token = isset($_COOKIE['remember']) ? $_COOKIE['remember'] : null;
+    if ($token !== null) {
+        $id_user = has_token('rememberTK', $token);
+        if ($id_user !== -1) {
+            $result = login_from_id($id_user);
+
+            $_SESSION['id'] = $result['id'];
+            $_SESSION['username'] = $result['usuario'];
+            $_SESSION['email'] = $result['email'];
+            $_SESSION['bio'] = $result['bio'];
+            $_SESSION['admin'] = $result['admin'];
+            $_SESSION['avatar'] = $result['avatar'];
+            $_SESSION['banner'] = $result['banner'];
+        }
+    }
 }

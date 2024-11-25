@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div id="responseContainer" class="response-container"></div>
-                <input type="submit" value="Cambiar contrasenya" class="form__button form__button--mark">
+                <input type="submit" value="Canviar contrasenya" class="form__button form__button--mark">
             </form>
         </div>
     </div>
