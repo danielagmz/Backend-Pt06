@@ -1,8 +1,8 @@
 <?php
 // importar phpmailer
-require_once 'phpmailer/src/PHPMailer.php';
-require_once 'phpmailer/src/SMTP.php';
-require_once 'phpmailer/src/Exception.php';
+require_once 'lib/phpmailer/src/PHPMailer.php';
+require_once 'lib/phpmailer/src/SMTP.php';
+require_once 'lib/phpmailer/src/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
