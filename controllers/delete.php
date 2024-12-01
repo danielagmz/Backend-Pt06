@@ -41,13 +41,14 @@ function delete_account($password)
     }
 
     $id = $_SESSION['id'];
-    $response = delete_user($id);
+    $response = delete_user_by_id($id);
     if ($response) {
         guardar_cookie('remember', '', time() - 3600);
 
         session_unset();
         session_destroy();
         http_response_code(200);
+        echo '<div class="form-info form-info--success"> Usuari esborrat correctament 🥳</div>';
         return;
     } else {
         http_response_code(500);

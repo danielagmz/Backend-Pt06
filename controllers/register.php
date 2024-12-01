@@ -32,10 +32,16 @@ function register($username, $email, $password, $verifypassword)
     if (is_empty($response)) {
         $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
         $id = register_user($username, $email, $hashed_pass);
+        $usuari = login_from_id($id);
         
-        if ($id != -1) {
+        if ($id != -1 && $usuari != -1) {
             $_SESSION['id'] = $id;
             $_SESSION['username'] = $username;
+            $_SESSION['email'] = $usuari['email'];
+            $_SESSION['bio'] = $usuari['bio'];
+            $_SESSION['admin'] = $usuari['admin'];
+            $_SESSION['avatar'] = $usuari['avatar'];
+            $_SESSION['banner'] = $usuari['banner'];
             header('Location: index.php?action=read');
             exit();
         } else {
