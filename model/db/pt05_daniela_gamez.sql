@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2024 a las 02:27:02
+-- Tiempo de generación: 01-12-2024 a las 04:49:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -74,6 +74,33 @@ INSERT INTO `articles` (`id`, `titol`, `cos`, `data_creacio`, `data_modificacio`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tokens`
+--
+
+DROP TABLE IF EXISTS `tokens`;
+CREATE TABLE `tokens` (
+  `id` int(11) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `type` enum('rememberTK','recoverTK') NOT NULL,
+  `tokenExp` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Truncar tablas antes de insertar `tokens`
+--
+
+TRUNCATE TABLE `tokens`;
+--
+-- Volcado de datos para la tabla `tokens`
+--
+
+INSERT INTO `tokens` (`id`, `user_id`, `token`, `type`, `tokenExp`) VALUES
+(60, 9, 'f668a1054bbd9760cb18455ee6d3d7f0', 'recoverTK', '2024-11-29 15:19:29');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuaris`
 --
 
@@ -87,9 +114,9 @@ CREATE TABLE `usuaris` (
   `avatar` varchar(255) DEFAULT NULL,
   `banner` varchar(255) DEFAULT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT 0,
-  `rememberTK` varchar(255) DEFAULT NULL,
-  `recoverTK` varchar(255) DEFAULT NULL,
-  `socialProv` varchar(255) DEFAULT NULL
+  `socialProv` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -101,26 +128,27 @@ TRUNCATE TABLE `usuaris`;
 -- Volcado de datos para la tabla `usuaris`
 --
 
-INSERT INTO `usuaris` (`id`, `usuario`, `email`, `pass`, `bio`, `avatar`, `banner`, `admin`, `rememberTK`, `recoverTK`, `socialProv`) VALUES
-(1, 'admin', 'admin@admin.com', '$2y$10$BIleDgvtDHkssNv53xw2aO13VwBTYJ1FZmKD4GlQrMCUbk1rtDcBe', 'bio', 'uploads/67427e7c743b6-image.jpg', 'uploads/6742762cd54da-image.jpg', 1, NULL, NULL, NULL),
-(2, 'roger_51', '4hogrlwp4@talk21.com', '$2y$10$hJ5Vz8XeYuSfBfbOihK95.jkcSDeI1FX4ECIj3Y5IBUTwOsNfBzaW', NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(3, 'luisangel_72', 'ivl77yaca@lycos.es', '$2y$10$TO3VRIrEOBFVnshlgG0oYOzfdZFMJ9A1OjnpQ7tIeBLeU1CYshZCS', NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(4, 'martin_71', '47vjms9v@talk21.com', '$2y$10$R2aFxfkatEfZn3.Z3hsRJeDlaZWb6syKgfDK/04R1LqT3SwDnmYqO', NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(5, 'anaisabel_82', '661y5fmif@witty.com', '$2y$10$tW6cDQgrP2zI3xxeVpbxj.4S.s/7eb.kHeJ0nGSpwQzQEcv4EGJRu', NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(6, 'ariadna_82', 'qp31jzyc3r@aol.com', '$2y$10$JlmbnTbgibv43CU15geRsOYm9IlD7RoDaVLHWy6E.gqQax63RZZ6a', NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(7, 'Pepito', 'pepito@gmail.com', '$2y$10$T9di5.n3/phlX9MMRJnUNe7uXZZ2BN25GLgm8u4tHZpr0mZ8v50kC', NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(8, 'Yisustex', 'yisustex@gmail.com', '$2y$10$OCmFowAE2ZM0QAU/v2WV7u9J463A6KcMLtBo8Ov9352ZHwgMrRh5q', NULL, NULL, NULL, 0, NULL, NULL, NULL);
+INSERT INTO `usuaris` (`id`, `usuario`, `email`, `pass`, `bio`, `avatar`, `banner`, `admin`, `socialProv`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@admin.com', '$2y$10$BIleDgvtDHkssNv53xw2aO13VwBTYJ1FZmKD4GlQrMCUbk1rtDcBe', 'bio', 'uploads/674284b86fc29-image.jpg', 'uploads/6742762cd54da-image.jpg', 1, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(2, 'roger_51', '4hogrlwp4@talk21.com', '$2y$10$hJ5Vz8XeYuSfBfbOihK95.jkcSDeI1FX4ECIj3Y5IBUTwOsNfBzaW', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(3, 'luisangel_72', 'ivl77yaca@lycos.es', '$2y$10$TO3VRIrEOBFVnshlgG0oYOzfdZFMJ9A1OjnpQ7tIeBLeU1CYshZCS', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(4, 'martin_71', '47vjms9v@talk21.com', '$2y$10$R2aFxfkatEfZn3.Z3hsRJeDlaZWb6syKgfDK/04R1LqT3SwDnmYqO', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(5, 'anaisabel_82', '661y5fmif@witty.com', '$2y$10$tW6cDQgrP2zI3xxeVpbxj.4S.s/7eb.kHeJ0nGSpwQzQEcv4EGJRu', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(6, 'ariadna_82', 'qp31jzyc3r@aol.com', '$2y$10$JlmbnTbgibv43CU15geRsOYm9IlD7RoDaVLHWy6E.gqQax63RZZ6a', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(8, 'Yisustex', 'yisustex@gmail.com', '$2y$10$OCmFowAE2ZM0QAU/v2WV7u9J463A6KcMLtBo8Ov9352ZHwgMrRh5q', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(9, 'dgamez', 'd.gamez@sapalomera.cat', '$2y$10$2ZljDyJL4ILyfSD0/I.OYOX7iv2AFEpGqvBS8WqzLcF2wB2kydLVa', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(10, 'Pepito', 'pepito@gmail.com', '$2y$10$T9di5.n3/phlX9MMRJnUNe7uXZZ2BN25GLgm8u4tHZpr0mZ8v50kC', NULL, NULL, NULL, 0, NULL, '2024-12-01 03:46:09', '2024-12-01 03:46:09');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `articles`
+-- Indices de la tabla `tokens`
 --
-ALTER TABLE `articles`
+ALTER TABLE `tokens`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_articles_usuaris` (`autor`);
+  ADD KEY `fk_tokens_users` (`user_id`);
 
 --
 -- Indices de la tabla `usuaris`
@@ -134,26 +162,36 @@ ALTER TABLE `usuaris`
 --
 
 --
--- AUTO_INCREMENT de la tabla `articles`
+-- AUTO_INCREMENT de la tabla `tokens`
 --
-ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+ALTER TABLE `tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `usuaris`
 --
 ALTER TABLE `usuaris`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `articles`
+-- Filtros para la tabla `tokens`
 --
-ALTER TABLE `articles`
-  ADD CONSTRAINT `fk_articles_usuaris` FOREIGN KEY (`autor`) REFERENCES `usuaris` (`id`) ON DELETE SET NULL;
+ALTER TABLE `tokens`
+  ADD CONSTRAINT `fk_tokens_users` FOREIGN KEY (`user_id`) REFERENCES `usuaris` (`id`) ON DELETE CASCADE;
+
+DELIMITER $$
+--
+-- Eventos
+--
+DROP EVENT IF EXISTS `delete_expired_tokens`$$
+CREATE DEFINER=`root`@`localhost` EVENT `delete_expired_tokens` ON SCHEDULE EVERY 1 DAY STARTS '2024-11-26 18:02:35' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM tokens
+WHERE tokenExp < NOW()$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

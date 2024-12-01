@@ -32,7 +32,7 @@ function delete_article($id)
  * @return bool true si s'ha pogut esborrar, false si s'ha produit un error
  */
 
-function delete_user($id){
+function delete_user_by_id($id){
     global $conn;
     try {
         $sql = "DELETE FROM usuaris WHERE id = :id";

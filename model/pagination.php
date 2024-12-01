@@ -31,13 +31,13 @@ function obtener_total($filter = FILTER){
     }
 }
 
+
 /**
- * Returns the total number of articles for a specific user with an optional filter.
+ * Retorna el numero total de articulos de un usuario en la base de datos.
  *
- * @param string $filter Optional filter to search articles by title.
- * @param int $id_user The ID of the user whose articles are to be counted.
+ * @param int $id_user Identificador del usuario
  *
- * @return int Total number of articles found. Returns -1 if an error occurs or if no articles match.
+ * @return int Numero total de articulos del usuario.
  */
 function obtener_total_user($id_user){
     global $conn;

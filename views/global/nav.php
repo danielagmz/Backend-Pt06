@@ -5,6 +5,13 @@
                 <i class="fi fi-rr-home"></i>
             </div>
         </a>
+        <?php if($_SESSION['admin']): ?>
+            <a id="admin" class="menu__item" href="index.php?action=admin">
+                <div class="menu__item-link">
+                <i class="fi fi-rr-users-gear"></i>
+                </div>
+            </a>
+        <?php endif; ?>
         <a id="all" class="menu__item" href="index.php?action=all">
             <div class="menu__item-link">
                 <i class="fi fi-rr-book-alt"></i>

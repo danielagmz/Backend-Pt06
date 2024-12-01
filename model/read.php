@@ -57,4 +57,27 @@ function read_article($id){
         echo "Error: " . $e->getMessage();
     }
 }
+function obtener_usuarios($filter = '',$desc = ORDER,$id_user){
+    global $conn;
+
+    if ($conn == null) {
+        return [];
+    };
+    $order = $desc == "desc" ? "DESC" : "ASC";
+    try {
+        $sql = "SELECT * FROM usuaris WHERE usuario RLIKE :filter AND id != :id_user ORDER BY usuario $order";
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bindValue(':filter', $filter, PDO::PARAM_STR);
+        $stmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        
+        $stmt->execute();
+        $total = $stmt->rowCount();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return ['users' => $result, 'total' => $total];
+    } catch (PDOException $e) {
+        return [];
+    }
+
+}
 ?>

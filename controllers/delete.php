@@ -55,3 +55,13 @@ function delete_account($password)
         return;
     }
 }
+
+function delete_user($id){
+    if(delete_user_by_id($id)){
+        http_response_code(200);
+        echo '<div class="form-info form-info--success"> Usuari esborrat correctament 🥳</div>';
+    }else{
+        http_response_code(500);
+        echo '<div class="form-info form-info--error"> No s\'ha pogut esborrar l\'usuari</div>';
+    }
+}
