@@ -1,4 +1,16 @@
 
+/**
+ * Inicializa un dialogo modal con un formulario y un contenedor para mostrar
+ * respuestas.
+ *
+ * @param {Object} options - Opciones para inicializar el dialogo.
+ * @param {string} options.dialogSelector - Selector para el dialogo.
+ * @param {string} options.buttonIdentifier - Selector para el boton que abrir  el dialogo.
+ * @param {string} options.formId - ID del formulario.
+ * @param {string} options.submitUrl - URL a la que se enviar  el formulario.
+ * @param {string} options.responseContainerId - ID del contenedor para mostrar respuestas.
+ * @param {string} [options.redirect] - URL a la que se redirigir  si el formulario se envia correctamente.
+ */
 function initDialog({ dialogSelector, buttonIdentifier, formId, submitUrl, responseContainerId, redirect }) {
     const dialog = document.querySelector(dialogSelector);
     const dialogClose = dialog.querySelector('.dialog__close');
