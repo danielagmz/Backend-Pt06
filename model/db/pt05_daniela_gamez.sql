@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2024 a las 04:49:16
--- Versión del servidor: 10.4.32-MariaDB
+-- Servidor: proxysql-01.dd.scip.local
+-- Tiempo de generación: 03-12-2024 a las 15:06:59
+-- Versión del servidor: 10.10.2-MariaDB-1:10.10.2+maria~deb11
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,15 +18,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `pt05_daniela_gamez`
+-- Base de datos: `ddb237155`
 --
-CREATE DATABASE IF NOT EXISTS `pt05_daniela_gamez` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `pt05_daniela_gamez` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `pt05_daniela_gamez`;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `articles`
+--
+-- Creación: 02-12-2024 a las 19:20:41
 --
 
 DROP TABLE IF EXISTS `articles`;
@@ -38,6 +40,10 @@ CREATE TABLE `articles` (
   `data_modificacio` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `autor` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELACIONES PARA LA TABLA `articles`:
+--
 
 --
 -- Truncar tablas antes de insertar `articles`
@@ -69,12 +75,17 @@ INSERT INTO `articles` (`id`, `titol`, `cos`, `data_creacio`, `data_modificacio`
 (19, 'La Impresión 3D en la Arquitectura', 'La impresión 3D está comenzando a revolucionar la forma en que construimos edificios. Esta tecnología permite la creación de estructuras más rápidas, baratas y sostenibles que los métodos tradicionales. Además, está facilitando el diseño de formas arquitectónicas complejas que antes eran imposibles de realizar. Aunque todavía en sus primeras etapas, la impresión 3D promete transformar radicalmente la industria de la construcción en las próximas décadas.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 4),
 (20, 'El Futuro de la Agricultura con IA', 'La inteligencia artificial está siendo aplicada en la agricultura para optimizar el uso de recursos como el agua y los fertilizantes. Con drones y sensores, los agricultores pueden monitorear sus cultivos de manera más eficiente, lo que reduce costos y aumenta la productividad. Además, la IA está ayudando a predecir plagas y enfermedades, lo que permite tomar decisiones más informadas y mejorar la calidad de los alimentos que consumimos.', '2024-10-13 17:56:20', '2024-10-13 17:56:20', 5),
 (23, 'Importancia de la IA en la Medicina', 'La inteligencia artificial está revolucionando la medicina de maneras sorprendentes y muy valiosas. En primer lugar, la IA permite el análisis de grandes volúmenes de datos médicos, lo que ayuda a los profesionales de la salud a identificar patrones y tendencias que podrían pasar desapercibidos. Esto es especialmente útil en la detección temprana de enfermedades como el cáncer, donde la IA puede analizar imágenes médicas con una precisión asombrosa.\r\n\r\nAdemás, la IA está mejorando la personalización de los tratamientos. A través del análisis de datos genéticos y clínicos, es posible adaptar terapias específicas a las necesidades individuales de cada paciente. Esto no solo aumenta la eficacia del tratamiento, sino que también reduce los efectos secundarios.\r\n\r\nOtro aspecto clave es el uso de chatbots y asistentes virtuales en la atención al paciente. Estos sistemas pueden proporcionar información médica básica, gestionar citas e incluso ofrecer apoyo emocional, permitiendo que los profesionales de la salud se concentren en casos más complejos.\r\n\r\nFinalmente, la IA también juega un papel importante en la investigación médica. Con su capacidad para procesar y analizar datos rápidamente, puede acelerar el desarrollo de nuevos medicamentos y tratamientos.', '2024-11-10 17:53:47', '2024-11-10 17:53:47', 8),
-(24, 'a', 'a', '2024-11-23 22:47:17', '2024-11-23 22:47:17', 1);
+(24, 'ඞ', 'ඞ', '2024-12-02 15:36:50', '2024-12-02 15:36:50', 18),
+(25, 'Articulo tothalemnte normal', 'No hay amongus', '2024-12-02 19:18:39', '2024-12-02 19:18:39', 18),
+(26, '&lt;c&lt;c&lt;c', '&lt;zc&lt;fWDFZYFKSJETHJET', '2024-12-02 19:19:37', '2024-12-02 19:19:37', 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tokens`
+--
+-- Creación: 01-12-2024 a las 03:53:11
+-- Última actualización: 01-12-2024 a las 19:01:56
 --
 
 DROP TABLE IF EXISTS `tokens`;
@@ -87,6 +98,12 @@ CREATE TABLE `tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- RELACIONES PARA LA TABLA `tokens`:
+--   `user_id`
+--       `usuaris` -> `id`
+--
+
+--
 -- Truncar tablas antes de insertar `tokens`
 --
 
@@ -96,12 +113,15 @@ TRUNCATE TABLE `tokens`;
 --
 
 INSERT INTO `tokens` (`id`, `user_id`, `token`, `type`, `tokenExp`) VALUES
-(60, 9, 'f668a1054bbd9760cb18455ee6d3d7f0', 'recoverTK', '2024-11-29 15:19:29');
+(63, 9, 'c4db82db3e056e33799d5235a998dfaa', 'recoverTK', '2024-12-02 18:37:46');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuaris`
+--
+-- Creación: 01-12-2024 a las 03:53:11
+-- Última actualización: 02-12-2024 a las 15:36:35
 --
 
 DROP TABLE IF EXISTS `usuaris`;
@@ -120,6 +140,10 @@ CREATE TABLE `usuaris` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- RELACIONES PARA LA TABLA `usuaris`:
+--
+
+--
 -- Truncar tablas antes de insertar `usuaris`
 --
 
@@ -129,7 +153,7 @@ TRUNCATE TABLE `usuaris`;
 --
 
 INSERT INTO `usuaris` (`id`, `usuario`, `email`, `pass`, `bio`, `avatar`, `banner`, `admin`, `socialProv`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin.com', '$2y$10$BIleDgvtDHkssNv53xw2aO13VwBTYJ1FZmKD4GlQrMCUbk1rtDcBe', 'bio', 'uploads/674284b86fc29-image.jpg', 'uploads/6742762cd54da-image.jpg', 1, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
+(1, 'admin', 'admin@admin.com', '$2y$10$BIleDgvtDHkssNv53xw2aO13VwBTYJ1FZmKD4GlQrMCUbk1rtDcBe', 'bio', 'uploads/674284b86fc29-image.jpg', 'uploads/6742762cd54da-image.jpg', 1, NULL, '2024-11-29 16:33:15', '2024-11-29 16:33:15'),
 (2, 'roger_51', '4hogrlwp4@talk21.com', '$2y$10$hJ5Vz8XeYuSfBfbOihK95.jkcSDeI1FX4ECIj3Y5IBUTwOsNfBzaW', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
 (3, 'luisangel_72', 'ivl77yaca@lycos.es', '$2y$10$TO3VRIrEOBFVnshlgG0oYOzfdZFMJ9A1OjnpQ7tIeBLeU1CYshZCS', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
 (4, 'martin_71', '47vjms9v@talk21.com', '$2y$10$R2aFxfkatEfZn3.Z3hsRJeDlaZWb6syKgfDK/04R1LqT3SwDnmYqO', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
@@ -137,11 +161,19 @@ INSERT INTO `usuaris` (`id`, `usuario`, `email`, `pass`, `bio`, `avatar`, `banne
 (6, 'ariadna_82', 'qp31jzyc3r@aol.com', '$2y$10$JlmbnTbgibv43CU15geRsOYm9IlD7RoDaVLHWy6E.gqQax63RZZ6a', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
 (8, 'Yisustex', 'yisustex@gmail.com', '$2y$10$OCmFowAE2ZM0QAU/v2WV7u9J463A6KcMLtBo8Ov9352ZHwgMrRh5q', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
 (9, 'dgamez', 'd.gamez@sapalomera.cat', '$2y$10$2ZljDyJL4ILyfSD0/I.OYOX7iv2AFEpGqvBS8WqzLcF2wB2kydLVa', NULL, NULL, NULL, 0, NULL, '2024-11-29 17:33:15', '2024-11-29 17:33:15'),
-(10, 'Pepito', 'pepito@gmail.com', '$2y$10$T9di5.n3/phlX9MMRJnUNe7uXZZ2BN25GLgm8u4tHZpr0mZ8v50kC', NULL, NULL, NULL, 0, NULL, '2024-12-01 03:46:09', '2024-12-01 03:46:09');
+(16, 'Mony6YoRespirareTodosLoVereis', 'kurumichan491@gmail.com', '$2y$10$ZImbgS6XaaPRwNHveWnfW.Py2QPxXB4rHUYoDP6KfxQ5CY/QdQBL2', NULL, NULL, NULL, 0, NULL, '2024-12-01 19:00:49', '2024-12-01 19:09:55'),
+(17, 'ADMlN', 'a.gomez9@sapalomera.cat', '$2y$10$HZ8a1UmUkdfUB/NcLFN5PuLXvweZANdge.QDvnTZYVVU34D7eJ1Sq', NULL, 'uploads/674dd403cd611-image.jpg', NULL, 0, NULL, '2024-12-02 15:35:47', '2024-12-02 15:36:35'),
+(18, 'Pancracio', 'ravirubio2621@gmail.com', '$2y$10$RNf4oip9KZPzDgD4iXuMYuYkU4XjOirODK/iH8RYgxmQiOKCqarnq', NULL, NULL, NULL, 0, NULL, '2024-12-02 15:36:26', '2024-12-02 15:36:26');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `articles`
+--
+ALTER TABLE `articles`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tokens`
@@ -162,16 +194,22 @@ ALTER TABLE `usuaris`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT de la tabla `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `usuaris`
 --
 ALTER TABLE `usuaris`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
@@ -188,7 +226,7 @@ DELIMITER $$
 -- Eventos
 --
 DROP EVENT IF EXISTS `delete_expired_tokens`$$
-CREATE DEFINER=`root`@`localhost` EVENT `delete_expired_tokens` ON SCHEDULE EVERY 1 DAY STARTS '2024-11-26 18:02:35' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM tokens
+CREATE DEFINER=`ddb237155`@`172.21.0.%` EVENT `delete_expired_tokens` ON SCHEDULE EVERY 1 DAY STARTS '2024-11-26 18:02:35' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM tokens
 WHERE tokenExp < NOW()$$
 
 DELIMITER ;
