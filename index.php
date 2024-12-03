@@ -6,6 +6,7 @@ require_once 'model/verificaciones.php';
 require_once 'model/connect.php';
 require_once 'controllers/cookies.php';
 require_once 'controllers/login.php';
+require_once 'controllers/sesion.php';
 
 ini_set('session.gc_maxlifetime', 40 * 60);
 session_start();
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 break;
             case 'admin':
                 if ($_SESSION['admin']) {
-                    include 'views/secundarias/admin.php'; 
+                    include 'views/secundarias/admin.php';
                     break;
                 }
             default:
@@ -77,10 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             case 'login':
                 require_once 'controllers/login.php';
+                require_once 'controllers/socialAuth.php';
                 include 'views/principales/login.php';
                 break;
             case 'register':
                 require_once 'controllers/register.php';
+                require_once 'controllers/socialAuth.php';
                 include 'views/principales/register.php';
                 break;
             case 'reading-anonimo':
@@ -98,6 +101,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     include_once 'views/error/498.php';
                 }
                 break;
+            case 'GoogleAuth':
+                if (isset($_GET['code'])) {
+                    require_once 'controllers/socialAuth.php';
+                    google_redirect(isset($_GET['code']) ? $_GET['code'] : '');
+                    break;
+                } else {
+                    header('Location: index.php?action=login');
+                    break;
+                }
+            case 'GitHubAuth':
+                    require_once 'controllers/socialAuth.php';
+                    github_redirect();
+                    break;
             default:
                 require_once 'controllers/read.php';
                 include 'views/principales/read-anonimo.php';

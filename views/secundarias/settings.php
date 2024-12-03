@@ -32,7 +32,12 @@
                         </div>
                         <div class="profile__info-group">
                             <label class="profile__label content__title" for="email"><i class="fi fi-rr-at"></i> Email</label>
-                            <input class="profile__input" type="email" value="<?= isset($_SESSION['email']) ? $_SESSION['email'] : '' ?>" name="email" id="email">
+                            <?php if (!isset($_SESSION['SocialProvider'])) : ?>
+                                <input class="profile__input" type="email" value="<?= isset($_SESSION['email']) ? $_SESSION['email'] : '' ?>" name="email" id="email">
+                            <?php endif; ?>
+                            <?php if (isset($_SESSION['SocialProvider'])) : ?>
+                                <input class="profile__input disabled--opacity" type="email" value="<?= isset($_SESSION['email']) ? $_SESSION['email'] : '' ?>" name="email" id="email" readonly>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -46,7 +51,7 @@
 
                     </div>
                     <div class="actions">
-                        <?= isset($response) ? $response : ''?>
+                        <?= isset($response) ? $response : '' ?>
                         <input type="submit" value="Guardar" class="form__button banner__button banner__button--save">
                     </div>
                 </form>
@@ -57,13 +62,27 @@
                         <button class="form__button banner__button edit-banner__button"><i class="fi fi-rr-pen-square"></i> Editar portada</button>
                     </div>
                 </div>
-                <div class="settings__element change-password text__align--center">
-                    <div class="settings__element-title change-password__title content__title"><i class="fi fi-rr-password-lock"></i> Canviar contrasenya</div>
-                    <button class="form__button banner__button change-password__button">Canviar contrasenya</button>
+                <div class="settings__element change-password text__align--center <?= isset($_SESSION['SocialProvider']) ? 'disabled disabled--opacity' : '' ?>">
+                    <?php if (!isset($_SESSION['SocialProvider'])) : ?>
+                        <div class="settings__element-title change-password__title content__title"><i class="fi fi-rr-password-lock"></i> Canviar contrasenya</div>
+                        <button class="form__button banner__button change-password__button">Canviar contrasenya</button>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['SocialProvider'])) : ?>
+                        <div class="settings__element-title change-password__title content__title"><i class="fi fi-rr-password-lock"></i> t'has logat amb una compte social</div>
+                        <button class="form__button banner__button change-password__button">No pots canviar la contrasenya</button>
+                    <?php endif; ?>
                 </div>
                 <div class="settings__element delete-account text__align--center">
                     <div class="settings__element-title delete-account__title content__title"><i class="fi fi-rr-user-xmark"></i> Eliminar compte</div>
-                    <button id="delete-account" class="form__button banner__button banner__button--red delete-account__button">Eliminar compte</button>
+                    <?php if (!isset($_SESSION['SocialProvider'])) : ?>
+                        <button id="delete-account" class="form__button banner__button banner__button--red delete-account__button">Eliminar compte</button>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['SocialProvider'])) : ?>
+                        <button class="form__button banner__button banner__button--red delete-SocialUser__button"
+                            onclick="location.href='mailto:admin@dgamez.cat?subject=Consulta sobre la eliminació del compte&body=Hola, necessito ajuda amb la meva compte...'">
+                            Contacta amb l'admin
+                        </button>
+                    <?php endif; ?>
                 </div>
             </div>
         </main>

@@ -48,6 +48,7 @@ function login($username, $password, $remember, $recaptcha)
         $_SESSION['admin'] = $usuari['admin'];
         $_SESSION['avatar'] = $usuari['avatar'];
         $_SESSION['banner'] = $usuari['banner'];
+        $_SESSION['SocialProvider'] = $usuari['socialProv'];
         $_SESSION['intentos'] = 3;
         $catcha = '';
 

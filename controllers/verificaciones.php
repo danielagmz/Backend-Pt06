@@ -87,6 +87,28 @@ function validate_username($username)
     return '';
 }
 
+/**
+ * Genera un nombre de usuario único y aleatorio.
+ *
+ * Combinando un adjetivo y un sustantivo aleatorio, y un hash único basado en el tiempo actual,
+ * se genera un nombre de usuario único y aleatorio.
+ *
+ * @return string Un nombre de usuario único y aleatorio.
+ */
+
+function generate_unique_username(){
+    $adjectives = ['Mystic', 'Daring', 'Electric', 'Lunar', 'Velvet', 'Cosmic'];
+    $nouns = ['Comet', 'Raven', 'Blaze', 'Shadow', 'Eclipse', 'Wanderer'];
+
+    // Escoge un adjetivo y un sustantivo aleatorio
+    $adjective = $adjectives[array_rand($adjectives)];
+    $noun = $nouns[array_rand($nouns)];
+
+    // Genera un hash único basado en el tiempo actual
+    $unique_id = substr(md5(uniqid(mt_rand(), true)), 0, 6); // Recorta el hash a 6 caracteres
+
+    return "{$adjective}{$noun}_{$unique_id}";
+}
 
 /**
  * Valida un email.

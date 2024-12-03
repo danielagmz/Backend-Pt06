@@ -42,6 +42,7 @@ function register($username, $email, $password, $verifypassword)
             $_SESSION['admin'] = $usuari['admin'];
             $_SESSION['avatar'] = $usuari['avatar'];
             $_SESSION['banner'] = $usuari['banner'];
+            $_SESSION['SocialProvider'] = $usuari['socialProv'];
             header('Location: index.php?action=read');
             exit();
         } else {

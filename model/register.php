@@ -29,4 +29,25 @@ function register_user($username,$email, $password) {
         return -1;
     }
 }
+function register_social_user($username,$email, $password, $provider) {
+    global $conn;
+
+    if ($conn == null) {
+        return -1;
+    }
+
+    try {
+        $sql = "INSERT INTO usuaris (usuario, email, pass, socialProv) VALUES (:username, :email, :password, :provider)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':username' => $username, ':email' => $email, ':password' => $password, ':provider' => $provider));
+        $result = $conn->lastInsertId();
+        if($result == null) {
+            return -1;
+        }
+        return $result;
+
+    } catch (PDOException $e) {
+        return -1;
+    }
+}
 ?>

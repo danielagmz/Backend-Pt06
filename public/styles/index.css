@@ -1,5 +1,6 @@
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css');
 /* Daniela gamez */
 
 
@@ -531,6 +532,18 @@
     gap: 0.5rem;
 }
 
+.socialAuthOptions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.socialAuth {
+    flex-grow: 1;
+}
+.socialAuth:hover i{
+    color: white;
+}
+
 /* area de mensajes del formulario */
 .form-info {
     display: flex;
@@ -887,6 +900,9 @@ img {
 .disabled {
     pointer-events: none;
     cursor: none;
+}
+.disabled--opacity{
+    opacity: 0.6;
 }
 
 .checkbox-wrapper {

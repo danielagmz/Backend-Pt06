@@ -44,6 +44,10 @@
                     <?= isset($response) ? $response : ''   ?>
                     <div class="form__group">
                         <input class="form__button form__button--mark" type="submit" value="Engistrar-se" />
+                        <div class="socialAuthOptions">
+                            <a class="form__button form__button--mark socialAuth socialAuth__google" href="<?= google_social_login_url() ?>"><i class="fi fi-brands-google"></i></a>
+                            <a class="form__button form__button--mark socialAuth socialAuth__github" href="<?= github_social_login_url() ?>"><i class="fi fi-brands-github"></i></a>
+                        </div>
                     </div>
 
                 </form>
