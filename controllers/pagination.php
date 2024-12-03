@@ -103,7 +103,7 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
  *
  * @return string El HTML con los enlaces de las páginas.
  */
-function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
+function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER, $action)
 {
     $total = obtener_total($filter);
     $links = '';
@@ -123,14 +123,13 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
     
     $page = is_number($page) ? $page : 1;
     $limit = is_number($limit) ? $limit : 5;
-    
-    // se registran loc cambios en las cookies
-    if (isset($_SESSION['id'])) {
-        guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
-        guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30);
-    }
+
     $totalpages = ceil($total / $limit);
-    
+    if ($page < 1 || $page > $totalpages) {
+        $page = 1;
+        $redirect = sprintf('index.php?action=%s&page=%d&filter=%s', $action, $page,$filter);
+        echo '<script>window.location.href = "' . $redirect . '";</script>';
+    }
 
     // Obtener la URL actual y sus componentes
     $url = $_SERVER['REQUEST_URI'];
@@ -139,11 +138,6 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
     // Si hay query params, parsearlos; si no, iniciar como vacío
     parse_str($url_parts['query'] ?? '', $query_params);
 
-    if ($page < 1 || $page > $totalpages) {
-        // Redirigir a la primera página
-        header("Location: index.php?page=1");
-        exit();
-    }
     
     // enlace de la página anterior
     if ($page > 1) {
@@ -188,6 +182,11 @@ function crear_links($limit = LIMIT, $page = PAGE, $filter = FILTER)
         );
     }else{
         $links .= '<a role="button" class="desactivado button--page button--page--right"><i class="fi fi-rr-caret-right"></i></a>';
+    }
+    // se registran loc cambios en las cookies
+    if (isset($_SESSION['id'])) {
+        guardar_cookie('pagina', $page, time() + 3600 * 24 * 30);
+        guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30);
     }
 
     return $links;

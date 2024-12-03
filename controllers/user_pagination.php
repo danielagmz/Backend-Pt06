@@ -23,7 +23,7 @@ define('ORDER', isset($_COOKIE['order_usuario']) ? obtener_cookie('order_usuario
  */
 function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
 {
-    $total = obtener_total_user(USER_ID);
+    $total = obtener_total_user(USER_ID, $filter);
     // Validar que el límite esté entre 2 y el total de artículos
     $limit = (is_number($limit) && $limit >= MIN_LIMIT && $limit <= $total) ? $limit : LIMIT;
 
@@ -46,7 +46,7 @@ function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
         $page = PAGE;
     }
     $offset = ($page - 1) * $limit;
-    $articulos = obtener_articulos_usuario($limit, $offset, $filter, USER_ID);
+    $articulos = obtener_articulos_usuario($limit, $offset, $filter, USER_ID, ORDER);
     if (!$articulos && $total == -1) {
         $art = '<article class="article disabled">  
         <div class="article__header">
@@ -107,9 +107,9 @@ function paginate_user($page = PAGE, $limit = LIMIT, $filter = FILTER)
  *
  * @return string El HTML con los enlaces de las páginas.
  */
-function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
+function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER, $action)
 {
-    $total = obtener_total_user(USER_ID);
+    $total = obtener_total_user(USER_ID, $filter);
     $links = '';
     if ($total == -1) {
         $links .= '<a role="button" class="desactivado button--page"><i class="fi fi-rr-caret-left"></i></a>';
@@ -124,17 +124,14 @@ function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
     
     $totalpages = ceil($total / $limit);
     
-    if($page > $totalpages) {
-        $page = $totalpages;
-    }else if($page < 1) {
-        $page = PAGE;
+    if ($page < 1 || $page > $totalpages) {
+        $page = 1;
+        $redirect = sprintf('index.php?action=%s&page=%d&filter=%s', $action, $page,$filter);
+        echo '<script>window.location.href = "' . $redirect . '";</script>';
     }
     
     $page = is_number($page) ? $page : 1;
     $limit = is_number($limit) ? $limit : 5;
-    
-    guardar_cookie('pagina_usuario', $page, time() + 3600 * 24 * 30); 
-    guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30); 
     
     $links = '';
 
@@ -189,7 +186,8 @@ function crear_links_user($limit = LIMIT, $page = PAGE, $filter = FILTER)
     } else {
         $links .= '<a role="button" class="desactivado button--page button--page--right"><i class="fi fi-rr-caret-right"></i></a>';
     }
-
+    guardar_cookie('pagina_usuario', $page, time() + 3600 * 24 * 30); 
+    guardar_cookie('limite_usuario', $limit, time() + 3600 * 24 * 30); 
     return $links;
 }
 

@@ -39,7 +39,7 @@ function obtener_total($filter = FILTER){
  *
  * @return int Numero total de articulos del usuario.
  */
-function obtener_total_user($id_user){
+function obtener_total_user($id_user,$filter = FILTER){
     global $conn;
 
     if ($conn == null) {
@@ -47,9 +47,9 @@ function obtener_total_user($id_user){
     }
 
     try {
-        $sql = "SELECT count(*) as total FROM articles WHERE autor = :id_user";
+        $sql = "SELECT count(*) as total FROM articles WHERE autor = :id_user AND titol RLIKE :filter";
         $stmt = $conn->prepare($sql);
-        $stmt->execute((['id_user' => $id_user]));
+        $stmt->execute((['id_user' => $id_user, 'filter' => $filter]));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result['total'] == null) {

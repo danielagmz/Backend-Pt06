@@ -15,6 +15,7 @@
                     isset($_GET['limit']) ? $_GET['limit'] : LIMIT, // Si no hay límite usa 4
                     isset($_GET['page']) ? $_GET['page'] : PAGE,// Si no hay página, usa 1
                     isset($_GET['filter']) ? $_GET['filter'] : '', // Si hay filtro usa el filtro vacio
+                    isset($_GET['action']) ? $_GET['action'] : 'read',
                     isset($_GET['order']) ? $_GET['order'] : ORDER
                 ) ?>
                 
