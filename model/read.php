@@ -65,7 +65,7 @@ function obtener_usuarios($filter = '',$desc = ORDER,$id_user){
     };
     $order = $desc == "desc" ? "DESC" : "ASC";
     try {
-        $sql = "SELECT * FROM usuaris WHERE usuario RLIKE :filter AND id != :id_user ORDER BY usuario $order";
+        $sql = "SELECT * FROM usuaris WHERE usuario RLIKE :filter AND id != :id_user AND admin = 0 ORDER BY usuario $order";
         $stmt = $conn->prepare($sql);
         
         $stmt->bindValue(':filter', $filter, PDO::PARAM_STR);

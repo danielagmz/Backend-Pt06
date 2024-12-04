@@ -15,6 +15,10 @@ function change_info($username, $email, $bio) {
         $response .= '<p>El nom d\'usuari no pot estar buit</p>';
         $username = $usuari['usuario'];
     }
+    if(username_exists($username) && $username != $usuari['usuario']){
+        $response .= '<p>El nom d\'usuari ja existeix</p>';
+        $username = $usuari['usuario'];
+    }
     if (is_empty($email)) {
         $response .= '<p>L\'email no pot estar buit</p>';
         $email = $usuari['email'];

@@ -7,6 +7,7 @@ require_once 'model/connect.php';
 require_once 'controllers/cookies.php';
 require_once 'controllers/login.php';
 require_once 'controllers/sesion.php';
+require_once 'controllers/socialAuth.php';
 
 ini_set('session.gc_maxlifetime', 40 * 60);
 session_start();
@@ -27,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     remember();
 
     if (isset($_SESSION['id'])) {
-
         switch ($action) {
             case 'create':
                 require_once 'controllers/insert.php';
@@ -78,12 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             case 'login':
                 require_once 'controllers/login.php';
-                require_once 'controllers/socialAuth.php';
+                $socialLogged = false;
                 include 'views/principales/login.php';
                 break;
             case 'register':
                 require_once 'controllers/register.php';
-                require_once 'controllers/socialAuth.php';
                 include 'views/principales/register.php';
                 break;
             case 'reading-anonimo':

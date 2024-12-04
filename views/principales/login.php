@@ -46,8 +46,8 @@
                             <span>Recordar-me</span>
                         </label>
                         
-                    <?= isset($response) ? $response : ''   ?>
                     </div>
+                    <?= isset($response) ? $response : ''   ?>
                     <div class="form__group">
                         <input class="form__button form__button--mark margin0" type="submit" value="Logar-se" />
                         <div class="socialAuthOptions">
@@ -55,9 +55,11 @@
                             <a class="form__button form__button--mark socialAuth socialAuth__github" href="<?= github_social_login_url() ?>"><i class="fi fi-brands-github"></i></a>
                         </div>
                     </div>
-                    <div class="form__group center ">
+                    <?php if(isset($socialLogged) && !$socialLogged):?>
+                    <div class="form__group center">
                         <a class="recover" href="index.php?action=recover_account">He oblidat la contrasenya</a>
                     </div>
+                    <?php endif; ?>
                 </form>
             </div>
         </main>

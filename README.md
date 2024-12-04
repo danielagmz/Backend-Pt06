@@ -213,3 +213,6 @@ Como usuario logueado puedes crear, editar o eliminar articulos que sean de tu a
 Para el login y el logout he usado session porque a la hora de manejar credenciales sensibles es mas seguro almacenarlas en el servidor, ademas de que tienen persistencia aun si se redirecciona.
 
 He usado cookies para guardar el limit o la pagina en la que se quedo el usuario porque son datos que puedo obtener desde javascript, son especificos de cada usuario y ademas no necesitan seguridad extra.
+
+## ➡️Cambios con respecto a la version anterior en la nueva pt05
+

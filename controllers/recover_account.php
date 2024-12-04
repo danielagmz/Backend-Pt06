@@ -7,7 +7,7 @@ function recover_account($email) {
     if(email_exists($email)){
         $user = login_from_username(username_from_email($email));
 
-        if($user){
+        if($user && $user['socialProv'] == null){
             $token = bin2hex(random_bytes(16));
             $exp = date('Y-m-d H:i:s', strtotime('+1 day'));
             if(get_token('recoverTK', $user['id'])){
@@ -21,6 +21,9 @@ function recover_account($email) {
                     $response = '<p class="form-info form-info--error"> No s\'ha pogut enviar el correu</p>';
                 }; 
 
+        }else {
+            $response = '<p>Has iniciat sessió amb ' . $user['socialProv'] . '. Prova a logar-te</p>';
+            $response = '<div class="form-info form-info--error">' . $response . '</div>';
         }
         
     }else{

@@ -48,10 +48,16 @@ function google_redirect($token)
             } else if (email_exists($userinfo->email)) {
                 $usuari = username_from_email($userinfo->email);
                 $usuari = login_from_username($usuari);
-                if ($usuari['socialProv'] != 'google') {
+                if ($usuari['socialProv'] != 'google' && $usuari['socialProv'] != null) {
                     $provider = $usuari['socialProv'];
                     http_response_code(400);
                     $response= sprintf('<div class="form-info form-info--error">No has iniciat sessio amb Google prova amb %s</div>', ucfirst($provider));
+                    include_once 'views/principales/login.php';
+                    echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
+                    exit();
+                }else if ($usuari['socialProv'] == null) {
+                    http_response_code(400);
+                    $response= '<div class="form-info form-info--error">Has iniciat sessio amb usuari i contrasenya</div>';
                     include_once 'views/principales/login.php';
                     echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
                     exit();
@@ -106,10 +112,16 @@ function github_redirect()
         } else if (email_exists($userProfile->email)) {
             $usuari = username_from_email($userProfile->email);
             $usuari = login_from_username($usuari);
-            if ($usuari['socialProv'] != 'github') {
+            if ($usuari['socialProv'] != 'github' && $usuari['socialProv'] != null) {
                 $provider = $usuari['socialProv'];
                 http_response_code(400);
                 $response= sprintf('<div class="form-info form-info--error">No has iniciat sessio amb GitHub prova amb %s</div>', ucfirst($provider));
+                include_once 'views/principales/login.php';
+                echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
+                exit();
+            }else if ($usuari['socialProv'] == null) {
+                http_response_code(400);
+                $response= '<div class="form-info form-info--error">Has iniciat sessio amb usuari i contrasenya</div>';
                 include_once 'views/principales/login.php';
                 echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
                 exit();

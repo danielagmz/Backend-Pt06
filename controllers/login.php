@@ -19,6 +19,15 @@ function login($username, $password, $remember, $recaptcha)
         $response .= '<p> No s\'ha trobat cap usuari amb aquest username</p>';
     }
 
+    if($usuari['socialProv'] != null){
+        $socialLogged = true;
+        $response .= '<p> Has iniciat sessio amb ' . $usuari['socialProv'] . '</p>';
+        $response = '<div class="form-info form-info--error">' . $response . '</div>';
+        include_once 'views/principales/login.php';
+        echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
+        exit();
+    }
+
     if ($_SESSION['intentos'] <= 0) {
         $catcha = '<div class="form__group">
                 <div class="g-recaptcha" data-sitekey="' . CATCHAKEYSITEWEB . '"></div>
