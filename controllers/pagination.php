@@ -205,6 +205,13 @@ function max_articles()
     return $total;
 }
 
+/**
+ * Devuelve un input de tipo number que permite al usuario
+ * cambiar el numero de articulos que se mostraran en
+ * cada pagina.
+ *
+ * @return string Codigo html del input.
+ */
 function articles_pagina_user()
 {
     if (isset($_SESSION['id'])) {

@@ -3,7 +3,7 @@
 
 
 /**
- * Comprueba si existe un usuario con el nombre de usuario especificado.
+ * Intenta loguear el usuario con el nombre de usuario y la contraseña especificados.
  *
  * @param string $username El nombre de usuario a comprobar
  *
@@ -31,7 +31,7 @@ function login_from_username($username) {
 }
 
 /**
- * Comprueba si existe un usuario con el id especificado.
+ * Intenta loguear el usuario con el id especificado.
  *
  * @param int $id El id del usuario a comprobar
  *

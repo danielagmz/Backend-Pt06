@@ -369,6 +369,13 @@ function get_token($tokentype, $user_id) {
     }
 }
 
+/**
+ * Comprueba si un token es valido.
+ *
+ * @param string $token El token a comprobar
+ *
+ * @return bool true si el token es valido, false si no existe o si se ha producido un error
+ */
 function is_token_valid($token){
     global $conn;
     if ($conn == null) {

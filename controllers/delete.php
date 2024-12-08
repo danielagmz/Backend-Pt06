@@ -2,10 +2,19 @@
 require_once 'model/delete.php';
 require_once 'model/login.php';
 require_once 'controllers/logout.php';
+
 /**
- * Funcion que se encarga de eliminar un articulo de la base de datos
- * y mostrar el resultado de la operacion
- * @param int $id Identificador del articulo a eliminar
+ * Funcion que se encarga de eliminar un articulo
+ *
+ * Primero comprueba si el id existe en la base de datos, si no existe
+ * se muestra la pagina de error 404
+ *
+ * Si existe el id, se llama al modelo para borrar el articulo, si se
+ * borra correctamente se muestra un mensaje de exito y un boton para
+ * regresar a la pagina principal, si no se puede borrar se muestra un
+ * mensaje de error
+ *
+ * @param int $id id del articulo a eliminar
  */
 function delete($id)
 {
@@ -26,6 +35,17 @@ function delete($id)
     }
 }
 
+/**
+ * Funcion que se encarga de eliminar la cuenta del usuario logueado
+ *
+ * Primero verifica que la contraseña introducida coincida con la de la sesion
+ * si no es correcta se muestra un mensaje de error, si es correcta se llama
+ * al modelo para borrar el usuario, si se borra correctamente se muestra un
+ * mensaje de exito y se cierra la sesion, si no se puede borrar se muestra un
+ * mensaje de error
+ *
+ * @param string $password Contraseña actual del usuario
+ */
 function delete_account($password)
 {
     $password = test_input($password);
@@ -57,6 +77,15 @@ function delete_account($password)
     }
 }
 
+/**
+ * Elimina un usuario por su ID.
+ *
+ * Verifica si el usuario se ha podido eliminar correctamente,
+ * si es así muestra un mensaje de éxito y devuelve un estado 200,
+ * si no se puede eliminar muestra un mensaje de error y devuelve un estado 500.
+ *
+ * @param int $id ID del usuario que se va a eliminar.
+ */
 function delete_user($id){
     if(delete_user_by_id($id)){
         http_response_code(200);

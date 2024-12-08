@@ -32,12 +32,14 @@ function obtener_total($filter = FILTER){
 }
 
 
+
 /**
- * Retorna el numero total de articulos de un usuario en la base de datos.
+ * Retorna el numero total de articulos en la base de datos para un usuario en particular.
  *
- * @param int $id_user Identificador del usuario
+ * @param int $id_user Identificador del usuario.
+ * @param string $filter Filtro opcional para buscar articulos
  *
- * @return int Numero total de articulos del usuario.
+ * @return int Numero total de articulos.
  */
 function obtener_total_user($id_user,$filter = FILTER){
     global $conn;

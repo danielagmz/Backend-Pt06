@@ -1,11 +1,14 @@
 <?php
 require_once 'model/login.php';
+
 /**
- * Comprueba si el usuario y la contrasenya son correctos, 
- * si es asi, loguea al usuario y redirige a la pagina principal
- * 
- * @param string $username El nombre de usuario
- * @param string $password La contrasenya
+ * Funcion para loguear a un usuario
+ *
+ * @param string $username Username del usuario
+ * @param string $password Contraseña del usuario
+ * @param string $remember Si se desea recordar la sesion
+ * @param string $recaptcha Codigo de verificacion de CAPTCHA
+ *
  * @return void
  */
 function login($username, $password, $remember, $recaptcha)

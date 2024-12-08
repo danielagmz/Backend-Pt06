@@ -1,14 +1,14 @@
 <?php
 require_once 'model/register.php';
 /**
- * Registra un nuevo usuario en la base de datos.
+ * Registra un nuevo usuario en la base de datos y todo es correcto redirecciona a la pagina principal 
  *
- * @param string $username Nombre de usuario del nuevo usuario
+ * @param string $username Nombre de usuario 
  * @param string $email Email del nuevo usuario
  * @param string $password Contraseña del nuevo usuario
  * @param string $verifypassword Verificación de la contraseña
  *
- * @return string Un string vacío si el registro ha sido exitoso, un string con errores en caso contrario
+ * @return string un string con errores en caso contrario
  */
 function register($username, $email, $password, $verifypassword)
 {

@@ -3,6 +3,19 @@ require_once 'model/update_info.php';
 require_once 'controllers/login.php';
 define('USER_ID', isset($_SESSION['id']) ? $_SESSION['id'] : '');
 
+/**
+ * Cambia la contrasenya del usuario logueado.
+ *
+ * Valida que la contrasenya actual sea correcta y que la nueva cumpla las
+ * condiciones de fortaleza. Si todo es correcto actualiza la contrasenya del
+ * usuario.
+ *
+ * @param string $currentPassword Contraseña actual del usuario.
+ * @param string $newPassword Nueva contraseña del usuario.
+ * @param string $verifyPassword Verificación de la contraseña.
+ *
+ * @return string Un string con el resultado de la operación que recibe el cliente.
+ */
 function change_password($currentPassword, $newPassword, $verifyPassword)
 {
     $currentPassword = test_input($currentPassword);
@@ -45,6 +58,18 @@ function change_password($currentPassword, $newPassword, $verifyPassword)
 
 
 
+/**
+ * Recupera la contraseña del usuario. Valida que el token sea correcto, 
+ * que la contraseña nueva cumpla las condiciones de fortaleza y que 
+ * coincida con la verificación. Si todo es correcto actualiza la contraseña 
+ * del usuario y borra el token.
+ *
+ * @param string $token Token de recuperación de contraseña.
+ * @param string $newPassword Nueva contraseña del usuario.
+ * @param string $verifyPassword Verificación de la contraseña.
+ *
+ * @return string Un string con el resultado de la operación que se retorna en vista.
+ */
 function recover_password($token, $newPassword, $verifyPassword)
 {
     $response = '';

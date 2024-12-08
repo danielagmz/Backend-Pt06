@@ -1,5 +1,21 @@
 <?php
 require_once 'model/update_info.php';
+/**
+ * Sube una imagen de avatar al servidor y actualiza la ruta en la base de datos.
+ *
+ * @param array $avatar Información de la imagen de avatar subida, con los siguientes
+ *                      índices:
+ *
+ *                      - name: nombre de la imagen
+ *                      - type: tipo MIME de la imagen
+ *                      - tmp_name: ruta temporal en el servidor donde se ha guardado
+ *                                  la imagen
+ *                      - error: cero si no hay errores, distinto de cero si hay
+ *                              errores
+ *                      - size: tamaño en bytes de la imagen
+ *
+ * @return string mensaje de respuesta 
+ */
 function upload_avatar($avatar)
 {
     $id = $_SESSION['id'];
@@ -48,6 +64,16 @@ function upload_avatar($avatar)
     }
 }
 
+/**
+ * Sube una imagen de banner al servidor y actualiza la ruta en la base de datos.
+ *
+ * @param array $banner Información de la imagen de banner subida, con los siguientes índices:
+ *                      - tmp_name: path temporal de la imagen en el servidor.
+ *                      - size: tamaño de la imagen en bytes.
+ *                      - type: tipo MIME de la imagen.
+ *                      - name: nombre de la imagen.
+ *
+ */
 function upload_banner($banner)
 {   
     if ($banner['size'] == 0) {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Actualiza la contrase a de un usuario en la base de datos.
+ * Actualiza la contraseña de un usuario en la base de datos.
  *
  * @param int $id El id del usuario a actualizar.
  * @param string $password La nueva contraseña del usuario.
@@ -74,6 +74,14 @@ function update_avatar($id, $avatar) {
     }
 }
 
+/**
+ * Actualiza la imagen de banner de un usuario en la base de datos.
+ *
+ * @param int $id El id del usuario a actualizar.
+ * @param string $banner La ruta del banner del usuario.
+ *
+ * @return bool true si se ha actualizado correctamente, false si se ha producido un error.
+ */
 function update_banner($id, $banner) {
     global $conn;
     if ($conn == null) {

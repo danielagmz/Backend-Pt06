@@ -1,5 +1,12 @@
 <?php 
 require_once 'controllers/enviar_correu.php';
+/**
+ * Funcion para recuperar la contraseña de un usuario
+ * 
+ * @param string $email email del usuario
+ * 
+ * @return string un string con el resultado de la operacion que se retorna en vista
+ */
 function recover_account($email) {
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $response='';

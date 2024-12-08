@@ -3,6 +3,17 @@ require_once 'model/update_info.php';
 require_once 'controllers/login.php';
 define('USER_ID', $_SESSION['id']);
 
+/**
+ * Modifica la informacion del usuario que esta  logueado.
+ *
+ * Valida los datos de entrada y, si son correctos, los actualiza en la base de datos.
+ *
+ * @param string $username Nuevo nombre de usuario
+ * @param string $email Nuevo email del usuario
+ * @param string $bio Nueva bio del usuario
+ *
+ * @return string Un string con success  si la modificacion ha sido exitosa, un string con errores en caso contrario
+ */
 function change_info($username, $email, $bio) {
     $response = '';
     $username = test_input($username);

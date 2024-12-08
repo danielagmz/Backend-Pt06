@@ -216,3 +216,37 @@ He usado cookies para guardar el limit o la pagina en la que se quedo el usuario
 
 ## ➡️Cambios con respecto a la version anterior en la nueva pt05
 
+-> Se ha agregado el dashboard del usuario, se pueden cambiar los siguientes datos:
+  - portada
+  - imagen
+  - correo
+  - contraseña
+  - biografia
+  - username
+
+-> los usuarios se pueden autenticar con google, github o contraseña
+
+-> Se guardan las 5 busquedas mas recientes de los usuarios
+
+-> se guardan en una cookie el limite y la pagina en la que se quedo el usuario, de manera global.
+
+-> se puede recuperar la contraseña desde la vista del login
+
+-> El usuario admin tiene permisos para eliminar otros usuarios.
+
+-> En el htaccess del dominio se activan opciones para evitar que se vean los errores por defecto de 404 y 403, se evita el acceso a archivos delicados como el propio htaccess o el env, ademas de forzar el https.
+
+-> La pagina en la que esta el usuario esta resaltada 
+
+-> los usuarios pueden ver sus contraseñas cuando las escriben
+
+
+### 🧐👆Justificacion de los cambios
+
+La recuperacion de contraseña se hace con un enlace que se envia al usuario al correo registrado en la base de datos, para verificar que es el usuario quien la solicita.
+
+Cuando se elimina un usuario se mantienen los articulos pero aparece que se ha eliminado el autor. En la base de datos estos articulos tienen el campo de autor nulo. Esto para no perder la informacion y los admins pueden ponerse como autores si lo desean desde la base de datos
+
+Los popups del dashboard del usuario se hacen mediante ajax porque si se recarga la pagina desaparece el popup.
+
+se ha usado composer para el manejo de paquetes de dependencias como hybridauth y OAuth. 

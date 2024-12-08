@@ -4,6 +4,11 @@ require_once 'model/register.php';
 
 //⭐  GOOGLE
 
+/**
+ * Inicializa el cliente de Google para el inicio de sesion
+ *
+ * @return Google_Client
+ */
 function initialize_google_client()
 {
     $client = new Google\Client;
@@ -12,6 +17,11 @@ function initialize_google_client()
     return $client;
 }
 
+/**
+ * Genera la url para el inicio de sesion de Google
+ *
+ * @return string
+ */
 function google_social_login_url()
 {
     $client = initialize_google_client();
@@ -22,6 +32,11 @@ function google_social_login_url()
     return $client->createAuthUrl();
 }
 
+/**
+ * Realiza el redireccionamiento despues de la autenticacion con Google
+ *
+ * @param string $token El token de autenticacion
+ */
 function google_redirect($token)
 {
     if ($token) {
@@ -48,6 +63,7 @@ function google_redirect($token)
             } else if (email_exists($userinfo->email)) {
                 $usuari = username_from_email($userinfo->email);
                 $usuari = login_from_username($usuari);
+                // Si el usuario no ha iniciado sesion con Google
                 if ($usuari['socialProv'] != 'google' && $usuari['socialProv'] != null) {
                     $provider = $usuari['socialProv'];
                     http_response_code(400);
@@ -56,12 +72,14 @@ function google_redirect($token)
                     echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
                     exit();
                 }else if ($usuari['socialProv'] == null) {
+                    // Si el usuario ha iniciado con contraseña
                     http_response_code(400);
                     $response= '<div class="form-info form-info--error">Has iniciat sessio amb usuari i contrasenya</div>';
                     include_once 'views/principales/login.php';
                     echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
                     exit();
                 }
+                // Si el usuario ha iniciado sesion con Google
                 set_user_session($usuari);
                 header('Location: index.php?action=read');
                 exit();
@@ -84,12 +102,25 @@ function google_redirect($token)
 
 //⭐  GITHUB
 
+/**
+ * Genera la url para el inicio de sesion de GitHub
+ *
+ * @return string la url para el inicio de sesion
+ */
 function github_social_login_url()
 {
     return BASE_URL . 'index.php?action=GitHubAuth';
 }
 
 
+/**
+ * Funcion para la autenticacion con GitHub
+ *
+ * Se encarga de autenticar al usuario con GitHub y de
+ * crearlo o loguearlo en la aplicacion dependiendo de si
+ * ya existe o no.
+ *
+ */
 function github_redirect()
 {
     $config = require_once 'lib/hybridauth.php';
@@ -112,6 +143,7 @@ function github_redirect()
         } else if (email_exists($userProfile->email)) {
             $usuari = username_from_email($userProfile->email);
             $usuari = login_from_username($usuari);
+            // si el email existe en la base de datos y no ha iniciado sesion por GitHub 
             if ($usuari['socialProv'] != 'github' && $usuari['socialProv'] != null) {
                 $provider = $usuari['socialProv'];
                 http_response_code(400);
@@ -120,12 +152,14 @@ function github_redirect()
                 echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
                 exit();
             }else if ($usuari['socialProv'] == null) {
+                // si el email existe en la base de datos y ha iniciado sesion por contraseña
                 http_response_code(400);
                 $response= '<div class="form-info form-info--error">Has iniciat sessio amb usuari i contrasenya</div>';
                 include_once 'views/principales/login.php';
                 echo '<script>history.replaceState(null, null, "index.php?action=login");</script>';
                 exit();
             }
+            // si el email existe en la base de datos y ha iniciado sesion por GitHub
             set_user_session($usuari);
             header('Location: index.php?action=read');
             exit();

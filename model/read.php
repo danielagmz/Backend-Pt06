@@ -57,6 +57,17 @@ function read_article($id){
         echo "Error: " . $e->getMessage();
     }
 }
+/**
+ * Lleva a cabo una consulta a la base de datos para obtener una lista de usuarios
+ * que coinciden con el filtro de busqueda especificado, excluyendo a los administradores.
+ *
+ * @param string $filter Filtro de busqueda para los nombres de usuario.
+ * @param string $desc El orden de los resultados, asc para ascendente o desc para descendente.
+ * @param int $id_user El identificador del admin actual que se debe excluir.
+ *
+ * @return array Un array que contiene los usuarios que coinciden con el filtro
+ * y el numero total de resultados.
+ */
 function obtener_usuarios($filter = '',$desc = ORDER,$id_user){
     global $conn;
 

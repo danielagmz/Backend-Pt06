@@ -8,6 +8,19 @@ define('MIN_LIMIT', 2);
 define('ORDER', isset($_COOKIE['order_usuario']) ? obtener_cookie('order_usuario') : "desc");
 define('USER_ID', $_SESSION['id']);
 
+/**
+ * Genera la paginacion para el administrador, recibe como parametros
+ * la pagina actual, el limite de registros por pagina, el filtro de
+ * busqueda y el orden de los registros.
+ *
+ * @param int $page pagina actual
+ * @param int $limit limite de registros por pagina
+ * @param string $filter filtro de busqueda
+ * @param string $order orden de los registros
+ *
+ * @return array con los usuarios formateados, los enlaces de paginacion
+ * y el total de usuarios
+ */
 function admin_pagination($page = PAGE, $limit = LIMIT, $filter = FILTER, $order = ORDER)
 {
     $filter = test_texto($filter);
@@ -33,6 +46,16 @@ function admin_pagination($page = PAGE, $limit = LIMIT, $filter = FILTER, $order
     return ['Allusers' => $formated, 'links' => $links, 'total' => $totalUsers];
 }
 
+/**
+ * Genera los enlaces de paginación para el administrador.
+ *
+ * @param int $limit Número de registros a mostrar por página.
+ * @param int $page Número de página actual.
+ * @param int $total Número total de registros.
+ * @param int $totalpages Número total de páginas.
+ *
+ * @return string El HTML con los enlaces de las páginas.
+ */
 function crear_links_admin($limit = LIMIT, $page = PAGE, $total, $totalpages)
 {
     $links = '';
@@ -115,6 +138,13 @@ function crear_links_admin($limit = LIMIT, $page = PAGE, $total, $totalpages)
     return $links;
 }
 
+/**
+ * Función que formatea los usuarios para mostrarlos en la tabla de usuarios
+ *
+ * @param array $users Los usuarios a mostrar
+ *
+ * @return string El HTML con los usuarios formateados
+ */
 function format_users($users)
 {
     $formated = '';

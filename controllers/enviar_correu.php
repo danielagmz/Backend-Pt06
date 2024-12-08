@@ -5,15 +5,20 @@ require_once 'lib/PHPMailer/src/SMTP.php';
 require_once 'lib/PHPMailer/src/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 
+
 /**
- * Envia un correu electrònic a una adreça amb un contingut determinat.
+ * Funcion para enviar un email de recuperacion de cuenta
  *
- * @param string $nom      Nom del destinatari.
- * @param string $correu   Adreça de correu electrònic del destinatari.
- * @param string $missatge Contingut del correu electrònic.
- * @param string $assumpte Assumpte del correu electrònic.
+ * La funcion instanciara un objeto PHPMailer, configurara los datos de envio
+ * y el contenido del email y lo enviara. Si se produce un error al enviar el
+ * email, se lanzara una excepcion.
  *
- * @return bool true si s'ha pogut enviar el correu electrònic, false en cas contrari.
+ * @param string $nom nombre del usuario
+ * @param string $correu email del usuario
+ * @param string $token token de recuperacion
+ * @param string $assumpte asunto del email
+ *
+ * @return bool true si se ha podido enviar el email, false en caso contrario
  */
 function enviar_email($nom, $correu, $token, $assumpte)
 {
