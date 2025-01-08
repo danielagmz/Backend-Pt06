@@ -19,8 +19,6 @@ function test_input($data)
 {
     //elimina espacios 
     $data = trim($data);
-    //elimina caracteres especiales
-    $data = stripslashes($data);
     //convierte caracteres especiales
     $data = htmlspecialchars($data);
     return $data;

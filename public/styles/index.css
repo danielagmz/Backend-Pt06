@@ -1,5 +1,6 @@
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-chubby/css/uicons-thin-chubby.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css');
 /* Daniela gamez */
 
@@ -123,7 +124,6 @@
     border-radius: 10px;
     padding: 0rem 3rem;
     text-align: center;
-
 }
 
 .settings__element-title,.profile__label{
@@ -172,7 +172,7 @@
     gap: 1rem;
 }
 
-.content__body--40W {
+.content__body--30W {
     min-width: 30%;
 }
 
@@ -320,8 +320,6 @@
 .profile__input, .profile__textarea{
     border-radius: 5px;
     border: 1.5px solid #000;
-    /* background-color: var(--accent2); */
-    /* box-shadow: 4px 4px 0 #000; */
     font-size: 15px;
     padding: 10px 10px;
     outline: none;
@@ -338,7 +336,7 @@
     cursor: pointer;
 }
 
-.content__body--40W .form-info--error {
+.content__body--30W .form-info--error {
     text-align: center;
 }
 
@@ -668,7 +666,7 @@
 .num--pages:active,
 .num--pages:visited,
 .num--pages:focus {
-    color: rgb(85, 26, 139);
+    color: #551a8b;
 }
 
 .page--active.num--pages {

@@ -17,7 +17,7 @@
         include('views/global/nav-anonimo.php') ?>
         <main class="content">
             <div class="content__title">Enregistrar-se</div>
-            <div class="content__body content__body--40W">
+            <div class="content__body content__body--30W">
                 <form class="form article" action="index.php?action=register" method="POST">
                     <div class="form__group">
                         <label class="form__label" for="username">Nom d'usuari</label>
