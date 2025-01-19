@@ -1,6 +1,6 @@
 <?php 
-namespace Models\entities;
-require_once 'server/models/Usuaris.php';
+namespace api\Models\entities;
+require_once 'api\models\Usuaris.php';
 
 use Models\Usuari;
 use Models\Usuaris;

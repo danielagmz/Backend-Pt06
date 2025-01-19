@@ -14,4 +14,4 @@ env.php
 .htaccess
 canviInfo.html
 lib/
-.http
+*.http

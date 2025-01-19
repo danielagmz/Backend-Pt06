@@ -1,5 +1,5 @@
 <?php 
-namespace Models;
+namespace api\models;
 use Models\core\Database;
 class Usuari {
     private static $conn = null;
@@ -16,7 +16,6 @@ class Usuari {
     private $updated_at;
 
     public function __construct($id, $username, $email, $password, $bio=null, $avatar=null, $banner=null, $admin=false, $socialProv=null, $created_at, $updated_at) {
-        self::$conn = Database::getConnection();
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;

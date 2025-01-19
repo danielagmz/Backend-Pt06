@@ -1,6 +1,6 @@
 <?php
 
-namespace api\controllers\core;
+namespace api\core;
 
 trait BaseTrait
 {
@@ -17,5 +17,10 @@ trait BaseTrait
         $data = htmlspecialchars($data);
         return $data;
     }
-    
+    public static function checkOption($option, $validOptions){
+        if(!in_array($option, $validOptions)){
+            return false;
+        }
+        return true;
+    }
 }

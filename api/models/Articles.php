@@ -1,9 +1,9 @@
 <?php
 
-namespace Models;
-require_once 'server/models/core/Database.php';
-use Models\core\Database;
-use Models\entities\Article;
+namespace models;
+require_once 'core/Database.php';
+use api\models\core\Database;
+use api\models\entities\Article;
 
 class Articles
 {
@@ -46,6 +46,7 @@ class Articles
 
     public static function getArticle($id)
     {
+        self::initializeConnection();
         try {
             $sql = "SELECT * FROM articles WHERE id = :id";
             $stmt = self::$conn->prepare($sql);
@@ -70,15 +71,14 @@ class Articles
         }
     }
 
-    public static function getUserArticles($limit, $offset, $filter, $id_user, $order)
+    public static function getUserArticles($filter, $id_user, $order)
     {
+        self::initializeConnection();
         try {
-            $sql = "SELECT * FROM articles WHERE titol RLIKE :filter AND autor = :user  ORDER BY titol $order LIMIT :limit OFFSET :offset";
+            $sql = "SELECT * FROM articles WHERE titol RLIKE :filter AND autor = :user  ORDER BY titol $order";
             $stmt = self::$conn->prepare($sql);
 
             // Usamos bindValue para asegurarnos de que estos parámetros sean tratados como enteros
-            $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
-            $stmt->bindValue(':offset', (int)$offset, \PDO::PARAM_INT);
             $stmt->bindValue(':filter', $filter, \PDO::PARAM_STR);
             $stmt->bindValue(':user', $id_user, \PDO::PARAM_INT);
             $stmt->execute();
@@ -100,4 +100,6 @@ class Articles
             return [];
         }
     }
+
+
 }
