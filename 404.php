@@ -13,7 +13,7 @@ http_response_code(404); // Establece el código de respuesta a 404
 <main class="content">
     <div class="content__body">
         <img class="article img" style="height: 76vh;" src="public/assets/404.jpg" alt="not found">
-        <a href="index.php" class="form__button form__button--mark">Tornar</a>
+        <a href="./index.php" class="form__button form__button--mark">Tornar</a>
     </div>
 </main>
 </body>
