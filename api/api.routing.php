@@ -18,19 +18,18 @@ $router = new Router();
 
 $router->addRoute('GET','/api/articles', function() {
     $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
-    echo ArticlesController::getAllArticles($filter);
+    $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
+    echo ArticlesController::getAllArticles($filter, $order);
 });
-
-$router->addRoute('GET','/api/articles/user/{id}', function($userId) {
-    echo ArticlesController::getUserArticles($userId);
+// id de usuario o username
+$router->addRoute('GET','/api/articles/user/{identifier}', function($identifier) {
+    $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+    $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
+    echo ArticlesController::getUserArticles($identifier, $filter, $order);
 });
 
 $router->addRoute('GET','/api/article/{id}', function($id) {
     echo ArticlesController::getArticle($id);
-});
-
-$router->addRoute('GET','/api/articles/user/{username}', function($username) {
-    
 });
 
 $router->matchRoute($relativeUri);

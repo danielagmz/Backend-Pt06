@@ -3,10 +3,10 @@
 namespace api\Controllers\Core;
 
 class BaseController{
-    public static function jsonResponse(array $data, $status = 200) {
+    public static function jsonResponse(array $data, $status = 200,$internalStatus = null) {
         http_response_code($status);
         header('Content-Type: application/json');
-        $data = array_merge(['status' => $status], self::decodeHtmlEntities($data));
+        $data = array_merge(['internalStatus' => $internalStatus ?? $status], self::decodeHtmlEntities($data));
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         exit;
     }
