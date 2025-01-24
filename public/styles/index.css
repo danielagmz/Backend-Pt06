@@ -807,6 +807,18 @@
     pointer-events: none;
 }
 
+.qr__button{
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+}
+.qr__container.header{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: baseline;
+}
+
 @media (max-width: 765px) {
 
     .busqueda__resultados,
