@@ -1,5 +1,6 @@
 <?php
 require_once 'controllers/env.php';
+$requestMethod = $_SERVER['REQUEST_METHOD'];
 $relativeUri = str_replace(ROOT, '', $_SERVER['REQUEST_URI']);
 $relativeUri = strtok($relativeUri, '?');
 

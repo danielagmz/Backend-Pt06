@@ -77,6 +77,7 @@ function read_one($id, $action)
         $article = read_article($id);
         $title = $article['titol'];
         $content = $article['cos'];
+        $shared = $article['shared'];
 
         switch ($action) {
             case 'update':

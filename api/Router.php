@@ -15,19 +15,27 @@ class Router extends ErrorController {
     }
 
     // Método para hacer el match y ejecutar la ruta correspondiente
-    public function matchRoute($request) {
+    public function matchRoute($requestMethod, $request) {
         foreach ($this->routes as $route) {
+            if ($route['method'] !== strtoupper($requestMethod)) {
+                continue;
+            }
+    
             $params = $this->matchPattern($request, $route['pattern']);
             if ($params !== false) {
-                // Llamar al callback de la ruta y pasar los parámetros
-                call_user_func_array($route['callback'], $params);
+                if (is_callable($route['callback'])) {
+                    call_user_func_array($route['callback'], $params);
+                } else {
+                    echo "Error: El callback no es válido.";
+                }
                 return;
             }
         }
-
+    
         // Si no se encuentra la ruta
-        echo ErrorController::notFound();
+        $this->notFound();
     }
+    
 
     // Método para hacer el match de un patrón con la ruta solicitada
     private function matchPattern($request, $pattern) {
