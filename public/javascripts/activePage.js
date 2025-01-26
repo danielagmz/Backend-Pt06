@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const action = urlParams.get('action');
+    let action = urlParams.get('action');
+    if(action === 'upload__qr'){
+        action = 'create';
+    }
     if (!action || action === 'read') {
         const link = document.querySelector('a[href="index.php"]');
         if (link) {

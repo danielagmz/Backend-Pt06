@@ -10,13 +10,13 @@
  *
  * @return int 1 si se ha modificado correctamente, 0 si no se ha podido modificar porque el articulo tiene el mismo contenido y -1 si se ha producido un error
  */
-function update_article($id, $title, $content)
+function update_article($id, $title, $content, $shared)
 {
     global $conn;
     try {
-        $sql = "update articles set titol = :titol, cos = :cos WHERE id = :id";
+        $sql = "update articles set titol = :titol, cos = :cos, shared = :shared WHERE id = :id";
         $stmt = $conn->prepare($sql);
-        $stmt->execute(array(':titol' => $title, ':cos' => $content, ':id' => $id));
+        $stmt->execute(array(':titol' => $title, ':cos' => $content, ':id' => $id, ':shared' => $shared));
 
         if ($stmt->rowCount() > 0) {
             // si se ha modificado

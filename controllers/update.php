@@ -8,7 +8,7 @@ require_once 'model/update.php';
  * @param string $title Titulo del articulo
  * @param string $content Contenido del articulo
  */
-function update($id, $title, $content)
+function update($id, $title, $content,$shared)
 {
     $id = id_exists($id);
     // si el id no existe se redirige a la vista de 404
@@ -33,7 +33,7 @@ function update($id, $title, $content)
     }
     // si no hay errores se intenta updatear el articulo
     if (is_empty($response)) {
-        $updated = update_article($id, $title, $content);
+        $updated = update_article($id, $title, $content,$shared);
         // si se ha insertado se limpian los campos y se muestra un mensaje en funcion de la situacion
         if ($updated == 1) {
             $response = '<p class="form-info form-info--success"> Article actualitzat correctament 🥳</p>';

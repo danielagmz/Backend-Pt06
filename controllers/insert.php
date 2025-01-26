@@ -7,7 +7,7 @@ define('USER_ID', $_SESSION['id']);
  * @param string $title Titulo del articulo
  * @param string $content Contenido del articulo
  */
-function create($title, $content)
+function create($title, $content, $shared, $fromQR)
 {
     $response = '';
     // sanitizar los datos
@@ -18,15 +18,22 @@ function create($title, $content)
     if (is_empty($title)) {
         $response .= '<p>El <span class="campo">Titol</span> no pot estar buit<p>';
     }
-    if (article_exists($title) != -1) {
-        $response .= '<p>El Ja tenim un article amb aquest <span class="campo">Titol</span><p>';
+    if(!$fromQR){
+        if (article_exists($title) != -1) {
+            $response .= '<p>Ja tenim un article amb aquest <span class="campo">Titol</span><p>';
+        }
+    }else{
+        if (article_exists($title) != -1) {
+            $response .= '<p>Recorda canviar el <span class="campo">Titol</span><p>';
+        }
     }
+    
     if (is_empty($content)) {
         $response .= '<p>El <span class="campo">Contingut</span> no pot estar buit<p>';
     }
     // si no hay errores se intenta insertar el articulo
     if (is_empty($response)) {
-        $id = create_article($title, $content, USER_ID);
+        $id = create_article($title, $content, USER_ID, $shared);
         if ($id == -1) {
             $response =  '<p class="form-info form-info--error">No hem pogut inserir l\'article</p>';
         } else {

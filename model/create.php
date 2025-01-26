@@ -12,7 +12,7 @@
  *
  * @return int Identificador del articulo creado. Devuelve -1 si ha habido un error.
  */
-function create_article($title, $content,$user_id)
+function create_article($title, $content,$user_id, $shared)
 {
     global $conn;
     if ($conn == null) {
@@ -20,9 +20,9 @@ function create_article($title, $content,$user_id)
     };
 
     try {
-        $sql = "INSERT INTO articles (titol, cos,autor) VALUES (:titol, :cos, :autor)";
+        $sql = "INSERT INTO articles (titol, cos,autor,shared) VALUES (:titol, :cos, :autor, :shared)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute(array(':titol' => $title, ':cos' => $content, ':autor' => $user_id));
+        $stmt->execute(array(':titol' => $title, ':cos' => $content, ':autor' => $user_id, ':shared' => $shared));
         $result = $conn->lastInsertId();
         if ($result == null) {
             return -1;

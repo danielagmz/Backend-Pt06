@@ -6,9 +6,9 @@
 
 
 :root {
-    --accent: #51459e;
+    --accent: rgb(81, 69, 158);
     --fondo: #f2f7ff;
-    --accent2: #c5d3f9;
+    --accent2: rgb(197, 211, 249);
     --accent3: #cf919182;
     --accent4: #f2cc5b;
 }
@@ -360,7 +360,14 @@
     border-bottom: 2px solid #000;
     padding-bottom: 1rem;
 }
-
+.article__header--shared::after{
+    content: url(../assets/qrIcono.svg);
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 .article__footer {
     position: absolute;
     bottom: 0;
@@ -805,18 +812,6 @@
 .span2c {
     grid-column: span 2;
     pointer-events: none;
-}
-
-.qr__button{
-    border: none;
-    background-color: unset;
-    cursor: pointer;
-}
-.qr__container.header{
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    align-items: baseline;
 }
 
 @media (max-width: 765px) {

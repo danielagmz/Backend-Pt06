@@ -71,7 +71,7 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
         $art .= sprintf(
             '
             <article class="article" data-id="%d"> 
-                <div class="article__header">
+                <div class="article__header %s">
                     <div class="article__icon"></div>
                     <div class="article__title">%s</div>
                 </div>
@@ -82,6 +82,7 @@ function paginate($page = PAGE, $limit = LIMIT, $filter = FILTER)
                 </div>
             </article>',
             $article['id'],
+            $article['shared'] == 1 ? 'article__header--shared' : '',
             $article['titol'],
             substr($article['cos'], 0, 200),
             $article['data_creacio'],

@@ -7,6 +7,9 @@ require_once 'controllers/cookies.php';
 require_once 'controllers/login.php';
 require_once 'controllers/sesion.php';
 require_once 'controllers/socialAuth.php';
+require_once 'api/core/BaseController.php';
+require_once 'api/controllers/ErrorController.php';
+require_once 'api/Router.php';
 
 ini_set('session.gc_maxlifetime', 40 * 60);
 session_start();
@@ -126,11 +129,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     switch ($action) {
         case 'create':
             require_once 'controllers/insert.php';
-            create($_POST['title'], $_POST['content']);
+            create($_POST['title'], $_POST['content'],isset($_POST['shared']) ? 1 : 0,
+            isset($_POST['fromQR']) ? true : false);
             break;
         case 'updating':
             require_once 'controllers/update.php';
-            update($_GET['id'], $_POST['title'], $_POST['content']);
+            update($_GET['id'], $_POST['title'], $_POST['content'],isset($_POST['shared']) ? 1 : 0);
             break;
         case 'deleting':
             require_once 'controllers/delete.php';
@@ -184,6 +188,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'upload__banner':
             require_once 'controllers/uploads.php';
             upload_banner($_FILES['imagen']);
+            break;
+        case 'upload__qr':
+            require_once 'controllers/qrController.php';
+            qrController::readQr($_FILES);
+            break;
+        case 'create__qr':
+            require_once 'controllers/qrController.php';
+            qrController::createQr(file_get_contents('php://input'));
             break;
     }
 }

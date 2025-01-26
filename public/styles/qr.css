@@ -1,5 +1,76 @@
+.qr__button {
+    cursor: pointer;
+    width: fit-content;
+    padding: 0.4rem;
+}
+.qrImage__container {
+    border: 1px solid #000;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 200px;
+    border-radius: 0.5rem;
+}
+
+
+.st0 {
+    fill: none;
+    stroke: #000000;
+    stroke-width: 1;
+    stroke-miterlimit: 10;
+}
+
+.qr__container {
+    display: flex;
+    gap: 0.7rem;
+    width: auto;
+}
+
+.insert__button {
+    flex-grow: 1;
+}
+
+.qr__container>.form__button {
+    width: unset;
+}
+
 .qr__image{
-    max-width: 35%;
-    max-height: 35%;
+    width: 100%;
+    height: 100%;
     display: block;
+    max-width: 100%;
+}
+
+
+.qr__button>svg {
+    display: block;
+    line-height: 0;
+    font-size: 1.7rem;
+}
+
+.qr__button:hover>svg {
+    fill: var(--fondo);
+}
+
+.qr__button:hover .st0 {
+    stroke: var(--fondo);
+}
+
+#uploadqrForm {
+    width: fit-content;
+}
+
+.swing-right {
+    animation: swing-right 0.8s linear both
+}
+
+@keyframes swing-right {
+    0% {
+        transform: rotateY(0);
+        transform-origin: right bottom
+    }
+
+    100% {
+        transform: rotateY(-180deg);
+        transform-origin: right bottom
+    }
 }
