@@ -2,8 +2,10 @@
 require_once 'lib/vendor/autoload.php';
 
 use chillerlan\QRCode\{QRCode, QROptions};
+use chillerlan\QRCode\Data\QRMatrix;
 
-class qrController {
+class qrController
+{
     public static function readQr($files)
     {
         if (isset($files['qrImage'])) {
@@ -14,15 +16,19 @@ class qrController {
                 $tempPath = $uploadedFile['tmp_name'];
 
                 try {
-                    $qrCode = new QRCode();
                     $result = (new QRCode)->readFromFile($tempPath);
 
-                    $content = $result->data;
-                    $text = (string)$result;
+                    $cont = $result->data;
+                    $article = json_decode($cont, true)['article'];
 
-                    if ($text) {
+                    if ($article) {
+                        // separar el contenido del QR en un array asociativo con las keys title y content y devolver el array asociativo
                         http_response_code(200);
-                        echo "El contenido del QR es: <strong>$text</strong>";
+                        $title = $article['title'];
+                        $content = $article['content'];
+                        $fromQR = true;
+                        include_once 'views\principales\insert.php';
+                        
                     } else {
                         throw new Exception;
                     }
@@ -43,8 +49,18 @@ class qrController {
     public static function createQr($data)
     {
         $options = new QROptions([
-            'outputType' => QRCode::OUTPUT_IMAGE_PNG
+            'outputType' => QRCode::OUTPUT_IMAGE_PNG,
         ]);
+        $options->drawCircularModules = false;
+        $options->moduleValues        = [
+            QRMatrix::M_FINDER_DARK    => [81, 69, 158],
+            QRMatrix::M_FINDER_DOT     => [81, 69, 158],
+            QRMatrix::M_FINDER         => [197, 211, 249], 
+            QRMatrix::M_ALIGNMENT_DARK => [81, 69, 158],
+            QRMatrix::M_LOGO           => [81, 69, 158],
+        ];
+    
+        
 
         $qrCode = new QRCode($options);
         $pngImage = $qrCode->render($data);
