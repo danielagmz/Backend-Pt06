@@ -62,6 +62,7 @@
                             <label for="qrImage" class="form__label">Puja el QR de l'article:</label>
                             <input class="form__input" type="file" name="qrImage" id="qrImage" accept="image/png" required>
                         </div>
+                        <?= isset($QRresponse) ? $QRresponse : ''   ?>
                         <input type="submit" value="Pujar" class="form__button form__button--mark qrForm__button">
                         <hr>
                         <div class="content__subtitle"><i class="fi fi-rr-comment-info"></i> Pots generar el QR desde la vista de tots els articles</div>

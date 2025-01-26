@@ -1,6 +1,7 @@
 let qrFormC = document.getElementById('qrForm__container');
 let manualFormC = document.getElementById('manualForm__container');
 let swapButton = document.getElementById('swapForm');
+let QrError = document.querySelector('.qr__errors');
 
 function swapForm() {
     if (qrFormC.hasAttribute('hidden')) {
@@ -13,3 +14,7 @@ function swapForm() {
 }
 
 swapButton.addEventListener('click', swapForm);
+
+if (QrError) {
+    swapForm();
+}

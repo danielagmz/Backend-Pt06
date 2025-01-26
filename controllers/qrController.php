@@ -19,31 +19,42 @@ class qrController
                     $result = (new QRCode)->readFromFile($tempPath);
 
                     $cont = $result->data;
+                    if (!json_decode($cont, true)) {
+                        throw new Exception('No hem pogut llegir aquest QR. Asegurat que sigui valid.');
+                    }
+
                     $article = json_decode($cont, true)['article'];
 
                     if ($article) {
-                        // separar el contenido del QR en un array asociativo con las keys title y content y devolver el array asociativo
                         http_response_code(200);
                         $title = $article['title'];
                         $content = $article['content'];
+
+                        if (is_empty($title) && is_empty($content)) {
+                            throw new Exception('Aquest QR no te contingut');
+                        }
                         $fromQR = true;
                         include_once 'views\principales\insert.php';
                         
                     } else {
-                        throw new Exception;
+                        throw new Exception('No hem pogut llegir aquest QR. Asegurat que sigui valid.');
                     }
                 } catch (Throwable $e) {
                     http_response_code(400);
-                    echo "No se pudo leer el contenido del QR. Asegúrate de que sea válido.";
+                    $QRresponse = "<p>{$e->getMessage()}</p>";
                 }
             } else {
                 http_response_code(500);
-                echo "Error al subir el archivo. Código de error: " . $uploadedFile['error'];
+                $QRresponse .= "<p>No hem pogut pujar el QR </p>";
             }
         } else {
             http_response_code(400);
-            echo "Por favor sube una imagen de código QR.";
+            $QRresponse .= "Por favor sube una imagen de código QR.";
         }
+        if (!is_empty($QRresponse)) {
+            $QRresponse = '<div class="form-info form-info--error qr__errors">' . $QRresponse . '</div>';
+        }
+        include_once 'views/principales/insert.php';
     }
 
     public static function createQr($data)
