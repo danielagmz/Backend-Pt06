@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <?php include('views/global/nav.php') ?>
-        <?php include('views/global/dialog.php') ?>
+        <?php include('views/global/settings-dialogs.php') ?>
         <main class="content content--settings">
             <div class="banner">
             </div>
