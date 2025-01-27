@@ -250,3 +250,18 @@ Cuando se elimina un usuario se mantienen los articulos pero aparece que se ha e
 Los popups del dashboard del usuario se hacen mediante ajax porque si se recarga la pagina desaparece el popup.
 
 se ha usado composer para el manejo de paquetes de dependencias como hybridauth y OAuth. 
+
+## ➡️Cambios con respecto a la version anterior en la nueva pt06
+
+-> Se ha implementado una api para que los usuarios tecnicos puedan consultar los articulos y usarlos en sus propios proyectos
+
+-> se ha implementado un sistema de compartir articulos mediante QR
+
+
+  + los usuarios pueden escoger si quieren que los articulos sean replicables o no, esto funciona para articulos nuevos o editando los ya existentes.
+
+  + Cuando un articulo es replicable aparece un icono que lo indica y desde la vista de lectura se puede generar un QR incluyendo el contenido deseado(titulo,contenido o ambos). 
+  
+  En el caso del titulo se puede incluir a modo de plantilla pero tendra que ser modificado luego.
+
+  + Desde el panel de creación de articulos, hay un boton para poder subir el Qr generado y crear uno nuevo a partir de él. Será necesario que el titulo sea cambiado pues no pueden haber articulos con el mismo nombre.
