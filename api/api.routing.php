@@ -32,5 +32,5 @@ $router->addRoute('GET','/api/article/{id}', function($id) {
     echo ArticlesController::getArticle($id);
 });
 
-$router->matchRoute($relativeUri, $requestMethod);
+$router->matchRoute( $requestMethod,$relativeUri);
 
