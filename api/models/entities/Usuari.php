@@ -15,7 +15,7 @@ class Usuari {
     private $created_at;
     private $updated_at;
 
-    public function __construct($id, $username, $email, $password, $bio=null, $avatar=null, $banner=null, $admin=false, $socialProv=null, $created_at, $updated_at) {
+    public function __construct($id, $username, $email, $password, $created_at, $updated_at,$bio=null, $avatar=null, $banner=null, $admin=false, $socialProv=null) {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;

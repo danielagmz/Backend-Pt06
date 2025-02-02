@@ -9,7 +9,7 @@ require_once 'models/core/Database.php';
 require_once 'core/BaseController.php';
 require_once 'core/BaseTrait.php';
 require_once 'controllers/ArticlesController.php';
-require_once 'controllers/JWTController.php';
+require_once 'controllers/JWTcontroller.php';
 require_once 'controllers/ErrorController.php';
 require_once 'Router.php';
 

@@ -1,6 +1,6 @@
 <?php 
 namespace api\Models\entities;
-require_once 'api\models\Usuaris.php';
+require_once 'api/models/Usuaris.php';
 
 use Models\Usuari;
 use Models\Usuaris;
@@ -98,7 +98,7 @@ class Article {
             'data_creacio' => $this->data_creacio,
             'data_modificacio' => $this->data_modificacio,
             'autor' => $this->autor,
-            'autor_username' => Usuaris::getUser($this->autor)->getUsername(),
+            'autor_username' => Usuaris::getUser($this->autor) ? Usuaris::getUser($this->autor)->getUsername() : null,
         ];
     }
 }
