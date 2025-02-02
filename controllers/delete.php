@@ -64,6 +64,8 @@ function delete_account($password)
     $response = delete_user_by_id($id);
     if ($response) {
         guardar_cookie('remember', '', time() - 3600);
+        borrar_token('rememberTK', $_SESSION['id']);
+        borrar_token('refreshTK', $_SESSION['id']);
 
         session_unset();
         session_destroy();

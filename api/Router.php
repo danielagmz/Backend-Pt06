@@ -65,4 +65,13 @@ class Router extends ErrorController {
         return $body ?? [];
     }
 
+    public function validarProtocolo() {
+        $protocolo_actual = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    
+        if ($protocolo_actual !== PROTOCOL) {
+            self::jsonResponse(['error' => 'Invalid protocol'], 400);
+        }
+    }
+    
+
 }

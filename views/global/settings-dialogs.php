@@ -89,3 +89,29 @@
         </div>
     </div>
 </dialog>
+
+
+<dialog class="dialog dialog--apiAccess">
+    <div class="dialog__content">
+        <button class="dialog__close"><i class="fi fi-rr-cross"></i></button>
+        <div class="content__body">
+            <div class="form article" enctype="multipart/form-data">
+                <div class="content__title">API Access</div>
+                <div class="form__group">
+                    <div class="form__label">API Key (per accedir a la API)</div>
+                    <input type="text" id="apiKeyContainer" name="apiKeyContainer" class="form__input" readonly>
+
+                    <div class="form__group">
+                        <div class="form__label">Refresh key (per recuperar la API Key)</div>
+                        <input type="text" id="refreshKeyContainer" name="refreshKeyContainer" class="form__input" readonly>
+
+
+                        <div id="apiAccessResponse" class="response-container"></div>
+                        <button id="getApiKeys" value="Obtenir claus" class="form__button form__button--mark">Obtenir claus</button>
+                        <hr>
+                        <div class="content__subtitle "><i class="fi fi-rr-comment-info banner__button--red"></i> Asegura't de guardar aquestes claus, no podran ser consultades després</div>
+                    </div>
+
+                </div>
+            </div>
+</dialog>

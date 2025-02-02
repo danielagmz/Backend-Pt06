@@ -7,7 +7,7 @@ class BaseController{
         http_response_code($status);
         header('Content-Type: application/json');
         $data = array_merge(['internalStatus' => $internalStatus ?? $status], self::decodeHtmlEntities($data));
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         exit;
     }
     private static function decodeHtmlEntities(array $data): array {

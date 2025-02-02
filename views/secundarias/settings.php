@@ -7,6 +7,7 @@
     <title>Settings</title>
     <?php include('views/global/estilos.php') ?>
     <?php include('public/styles/uploads.php') ?>
+    <?php require_once('public/javascripts/ApiAccess.php') ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
     <script type="module" src="public/javascripts/dialog.js"></script>
@@ -55,6 +56,11 @@
                         <input type="submit" value="Guardar" class="form__button banner__button banner__button--save">
                     </div>
                 </form>
+
+                <div class="settings__element dev">
+                    <p class="settings__element-title dev__title content__title"><i class="fi fi-rr-square-code"></i> Developers</p>
+                    <button class="form__button banner__button dev__button">Acceder a la api</button>
+                </div>
                 <div class="settings__element customize">
                     <p class="settings__element-title customize__title content__title"><i class="fi fi-rr-palette"></i> Personalitzar</p>
                     <div class="customize__buttons">
